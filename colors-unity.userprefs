@@ -1,0 +1,16 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/HexInfo.cs">
+    <Files>
+      <File FileName="Assets/Scripts/MouseManager.cs" Line="28" Column="39" />
+      <File FileName="Assets/Scripts/HexInfo.cs" Line="120" Column="3" />
+      <File FileName="Assets/Scripts/ColorHUD.cs" Line="13" Column="8" />
+      <File FileName="Assets/Scripts/Pigment.cs" Line="8" Column="2" />
+      <File FileName="Assets/Scripts/Map.cs" Line="55" Column="31" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

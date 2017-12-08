@@ -8,6 +8,14 @@ public class MouseManager : MonoBehaviour {
 	int xHexPos;
 	int yHexPos;
 
+	public Texture2D CyanTex;
+	public Texture2D MagentaTex;
+	public Texture2D YellowTex;
+
+	public Texture2D RedTex;
+	public Texture2D BlueTex;
+	public Texture2D GreenTex;
+
 	void Update () {
 
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -51,67 +59,87 @@ public class MouseManager : MonoBehaviour {
 		}
 	}
 
-	void ColorsChangeCyan(MeshRenderer mr, HexInfo HexColors){
 
-		if (mr.material.color == Color.white) {
-		
-			mr.material.color = Color.cyan;
-			HexColors.HexColor = Color.cyan;
+	void ColorsChangeCyan(MeshRenderer mr, HexInfo hexInfo){
+
+		if (mr.material.mainTexture == null) {
+
+			hexInfo.HexColor = Color.cyan;
+			mr.material.mainTexture = CyanTex;
+
+
+		} else if (mr.material.mainTexture == CyanTex) {
+
+			hexInfo.ColorDensity++;
+		}
+		else if (mr.material.mainTexture == MagentaTex) {
+
+			hexInfo.HexColor = Color.cyan;
+			mr.material.mainTexture = BlueTex;
 
 		}
-		else if (mr.material.color == Color.magenta) {
+		else if (mr.material.mainTexture == YellowTex) {
 
-			mr.material.color = Color.blue;
-			HexColors.HexColor = Color.blue;
-
-		}
-		else if (mr.material.color == Color.yellow) {
-
-			mr.material.color = Color.green;
-			HexColors.HexColor = Color.green;
+			hexInfo.HexColor = Color.green;
+			mr.material.mainTexture = GreenTex;
 
 		}
 
 	}
-	void ColorsChangeMagenta(MeshRenderer mr , HexInfo HexColors){
-	
-		if (mr.material.color == Color.white) {
 
-			mr.material.color = Color.magenta;
+	void ColorsChangeMagenta(MeshRenderer mr, HexInfo hexInfo){
+
+		if (mr.material.mainTexture == null) {
+
+			hexInfo.HexColor = Color.magenta;
+			mr.material.mainTexture = MagentaTex;
+
+
+		} else if (mr.material.mainTexture == MagentaTex) {
+
+			hexInfo.ColorDensity++;
+		}
+		else if (mr.material.mainTexture == CyanTex) {
+
+			hexInfo.HexColor = Color.blue;
+			mr.material.mainTexture = BlueTex;
 
 		}
-		else if (mr.material.color == Color.cyan) {
+		else if (mr.material.mainTexture == YellowTex) {
 
-			mr.material.color = Color.blue;
-
-		}
-		else if (mr.material.color == Color.yellow) {
-
-			mr.material.color = Color.red;
+			hexInfo.HexColor = Color.red;
+			mr.material.mainTexture = RedTex;
 
 		}
 
-	
 	}
-	void ColorsChangeYellow(MeshRenderer mr , HexInfo HexColors){
 	
-	
-		if (mr.material.color == Color.white) {
 
-			mr.material.color = Color.yellow;
+	void ColorsChangeYellow(MeshRenderer mr, HexInfo hexInfo){
+
+		if (mr.material.mainTexture == null) {
+
+			hexInfo.HexColor = Color.yellow;
+			mr.material.mainTexture = YellowTex;
+
+
+		} else if (mr.material.mainTexture == YellowTex) {
+
+			hexInfo.ColorDensity++;
+		}
+		else if (mr.material.mainTexture == CyanTex) {
+
+			hexInfo.HexColor = Color.green;
+			mr.material.mainTexture = GreenTex;
 
 		}
-		else if (mr.material.color == Color.cyan) {
+		else if (mr.material.mainTexture == MagentaTex) {
 
-			mr.material.color = Color.green;
-
-		}
-		else if (mr.material.color == Color.magenta) {
-
-			mr.material.color = Color.red;
+			hexInfo.HexColor = Color.blue;
+			mr.material.mainTexture = BlueTex;
 
 		}
-	
+
 	}
 
 

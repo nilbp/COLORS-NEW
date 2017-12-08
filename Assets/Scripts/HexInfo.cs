@@ -16,15 +16,37 @@ public class HexInfo : MonoBehaviour {
 
     public Map map;
 
-	void Start(){
-	
-	
+	enum NeighbourPosition
+	{
+		Left,
+		UpLeft,
+		UpRight,
+		Right,
+		DownRight,
+		DownLeft,
+		NumPositions,
 	}
+	enum TwoStepsNeighbourPosition
+	{
+		TwoLeft,
+		TwoUpLeft,
+		TwoUpRight,
+		TwoRight,
+		TwoDownRight,
+		TwoDownLeft,
+		TwoNumPositions,
+
+	}
+
 
 	void Update()
 	{
 	
+		//La volem cridar a l'start i cada cop que es fasi un click
 		IsClickable ();
+
+		//Les volem cridar cada cop que es cliqui per comprovar si el color de l'hexagon que has apretat és igual al dels veins
+		combo1Check();
 
 	}
 
@@ -37,25 +59,37 @@ public class HexInfo : MonoBehaviour {
 
 			if (neighbour != null) {
 
-				if (neighbour.Nucli == true || neighbour.ColorDensity > 1) {
+				if (neighbour.Nucli == true || neighbour.ColorDensity > 0) {
 					Clickable = true;
 
 				}
 			}
+
+
+
 		}
 	}
 
-    enum NeighbourPosition
-    {
-        Left,
-		UpLeft,
-		UpRight,
-        Right,
-		DownRight,
-		DownLeft,
-        NumPositions,
-    }
+	//COMBOS
 
+	void combo1(){
+	//Combo1
+	}
+
+	void combo1Check(){
+
+		if (HexColor == GetNeighbourByPosition (NeighbourPosition.Left).HexColor && HexColor == GetNeighbourByPosition (NeighbourPosition.Right).HexColor) {
+			combo1 ();
+		} else if (HexColor == GetNeighbourByPosition (NeighbourPosition.UpLeft).HexColor && HexColor == GetNeighbourByPosition (NeighbourPosition.DownRight).HexColor) {
+			combo1 ();
+		} else if (HexColor == GetNeighbourByPosition (NeighbourPosition.DownLeft).HexColor && HexColor == GetNeighbourByPosition (NeighbourPosition.UpRight).HexColor) {
+			combo1 ();
+		} else if (/*HexColor == GetNeighbourByPosition (NeighbourPosition.Left) && HexColor == map.hexLines [y].columns [x - 2].HexColor*/ColorDensity==1) {
+			combo1 ();
+		} 
+	}
+
+   
     HexInfo GetNeighbourByPosition(NeighbourPosition position)
     {
         HexInfo retVal = null;
@@ -185,6 +219,25 @@ public class HexInfo : MonoBehaviour {
 		return retVal;
 	
 	}
+
+	/*HexInfo Get2LeftNeighbour(){
+	
+	}
+	HexInfo Get2UpLeftNeighbour(){
+
+	}
+	HexInfo Get2UpRightNeighbour(){
+
+	}
+	HexInfo Get2RightNeighbour(){
+
+	}
+	HexInfo Get2DownRightNeighbour(){
+
+	}
+	HexInfo Get2DownLeftNeighbour(){
+
+	}*/
 
     //Falta crear totes les funcions de GetNeigbour(left, down left...)
     //HexInfo GetRightNeighbour()

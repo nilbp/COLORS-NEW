@@ -56,7 +56,7 @@ public class Map : MonoBehaviour {
 				//Instantiate hex
 				GameObject Hex_go = (GameObject)Instantiate (hexprefab, new Vector3(xPos,0,y*zOffset), Quaternion.identity); 
 
-				HexInfo hexInfo = Hex_go.GetComponent<HexInfo> ();
+				HexInfo hexInfo = Hex_go.GetComponentInChildren<HexInfo> ();
 				hexInfo.x = x;
 				hexInfo.y = y;
 				hexInfo.Nucli = false;
@@ -82,31 +82,9 @@ public class Map : MonoBehaviour {
 
 	}
 
-	/*void Neighbours(GameObject Hex){
 
-		int x = Hex.GetComponent<HexInfo> ().x;
-		int y = Hex.GetComponent<HexInfo> ().y;
 
-		Hex.GetComponent<HexInfo>().HexNeighbours[0] =  GameObject.Find ("Hex_" + (x - 1) + "_" + y);
-		Hex.GetComponent<HexInfo>().HexNeighbours[3] = GameObject.Find ("Hex_" + (x + 1) + "_" + y);
 
-		//even row
-		if (y % 2 == 0) {
 
-			Hex.GetComponent<HexInfo>().HexNeighbours[1] =  GameObject.Find ("Hex_" + (x - 1) + "_" + (y + 1));
-			Hex.GetComponent<HexInfo>().HexNeighbours[2] =  GameObject.Find ("Hex_" + x + "_" + (y + 1));
-			Hex.GetComponent<HexInfo>().HexNeighbours[5] =  GameObject.Find ("Hex_" + (x - 1) + "_" + (y - 1));
-			Hex.GetComponent<HexInfo>().HexNeighbours[4] =  GameObject.Find ("Hex_" + x + "_" + (y - 1));
-		} 
-
-		//odd row
-		else if (y % 2 == 1) {
-
-			Hex.GetComponent<HexInfo>().HexNeighbours[1] =  GameObject.Find ("Hex_" + x + "_" + (y + 1));
-			Hex.GetComponent<HexInfo>().HexNeighbours[2] =  GameObject.Find ("Hex_" + (x + 1) + "_" + (y + 1));
-			Hex.GetComponent<HexInfo>().HexNeighbours[5] = GameObject.Find ("Hex_" + x + "_" + (y - 1));
-			Hex.GetComponent<HexInfo>().HexNeighbours[4] =  GameObject.Find ("Hex_" + (x + 1) + "_" + (y - 1));
-		}
-	}*/
 
 }

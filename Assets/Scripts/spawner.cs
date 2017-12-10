@@ -9,14 +9,18 @@
 		public GameObject[] minionspawn;
 		public Transform nucli;
 
-		public float speed = 1;
 
+		public float speed = 1;
+	private float startTime;
+	private float dist;
 
 
 		void Start(){
 
-			spawnminion ();
-
+		spawnminion ();
+		startTime = Time.time;
+		dist = Vector3.Distance (spawnLocation [1].position, nucli.position);
+			
 		}
 
 
@@ -29,9 +33,17 @@
 
 	void Update(){
 	
-		float step = speed * Time.deltaTime;
-		minionprefab[0].transform.position = Vector3.MoveTowards (transform.position, nucli.position, step);
+		//float step = speed * Time.deltaTime;
+		//transform.position = Vector3.MoveTowards (minionspawn[0].transform.position, nucli.position, step);
+
+		//Vector3 posicion = nucli.transform.position ;
+		//minionspawn[0].transform.position = new Vector3 (transform.position,nucli.position, step);
+		//minionspawn[0].transform.position = new Vector3(nucli.position.x, 0, nucli.position.z);
 	
+		float distCover = (Time.time - startTime) * speed;
+		float fracjourn = distCover / dist;
+		minionspawn [1].transform.position = Vector3.Lerp (spawnLocation [1].position, nucli.position, fracjourn);
+
 	}
 
 }

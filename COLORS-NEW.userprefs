@@ -1,31 +1,14 @@
-<<<<<<< HEAD
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\HexInfo.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MouseManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\spawner.cs" Line="24" Column="1" />
-      <File FileName="Assets\Scripts\Enemy.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\HexInfo.cs" Line="128" Column="1" />
+      <File FileName="Assets/Scripts/MouseManager.cs" Line="226" Column="27" />
+      <File FileName="Assets/Scripts/HexInfo.cs" Line="18" Column="5" />
+      <File FileName="Assets/Scripts/collisions/Blue.cs" Line="17" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-=======
-﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Map.cs">
-    <Files>
-      <File FileName="Assets/Scripts/Map.cs" Line="10" Column="2" />
-      <File FileName="Assets/Scripts/HexInfo.cs" Line="3" Column="12" />
-      <File FileName="Assets/Scripts/ColorHUD.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/IABehaviour.cs" Line="1" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
->>>>>>> master
 </Properties>

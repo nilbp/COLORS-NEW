@@ -27,6 +27,7 @@ public class Map : MonoBehaviour {
 
     public HexLine[] hexLines;
 
+
 	void Start () {
 
 		createMap ();
@@ -56,6 +57,8 @@ public class Map : MonoBehaviour {
 				//Instantiate hex
 				GameObject Hex_go = (GameObject)Instantiate (hexprefab, new Vector3(xPos,0,y*zOffset), Quaternion.identity); 
 
+
+				
 				HexInfo hexInfo = Hex_go.GetComponentInChildren<HexInfo> ();
 				hexInfo.x = x;
 				hexInfo.y = y;
@@ -63,7 +66,9 @@ public class Map : MonoBehaviour {
 				hexInfo.ColorDensity = 0;
 				hexInfo.Clickable = false;
                 hexInfo.map = this;
-				             
+
+				SpawnEnemies (Hex_go, x, y);
+
                 hexLines[y].columns[x] = hexInfo;
 
                 //Aray out of range!!!!	
@@ -76,7 +81,18 @@ public class Map : MonoBehaviour {
 				Hex_go.transform.SetParent (this.transform);
 
 				Hex_go.isStatic = true;
+
+
 			}
+		}
+	}
+
+	void SpawnEnemies(GameObject hexInfo, int x, int y){
+	
+		if(x == 0 && y == 2){
+
+			spawner.HexSpawn1 = hexInfo;
+
 		}
 
 

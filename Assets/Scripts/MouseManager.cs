@@ -44,6 +44,16 @@ public class MouseManager : MonoBehaviour {
 		TwoNumPositions,
 
 	}
+	void Start(){
+
+
+
+		HexInfo hex = GetComponentInChildren<HexInfo> ();
+
+	
+
+		}
+
 
 	void Update () {
 

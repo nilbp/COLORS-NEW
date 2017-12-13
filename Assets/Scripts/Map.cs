@@ -67,8 +67,13 @@ public class Map : MonoBehaviour {
 				hexInfo.Clickable = false;
                 hexInfo.map = this;
 
-				SpawnEnemies (Hex_go, x, y);
+				if(hexInfo.x==10 && hexInfo.y==2){
 
+					hexInfo.Nucli= true;
+				}
+
+				SpawnEnemies (Hex_go, x, y);
+				SpawnEnemies2 (Hex_go, x, y);
                 hexLines[y].columns[x] = hexInfo;
 
                 //Aray out of range!!!!	
@@ -95,6 +100,16 @@ public class Map : MonoBehaviour {
 
 		}
 
+
+			}
+	void SpawnEnemies2(GameObject hexInfo, int x, int y){
+
+		if(x == 0 && y == 4){
+
+			spawner.HexSpawn2 = hexInfo;
+
+		}
+			
 
 	}
 

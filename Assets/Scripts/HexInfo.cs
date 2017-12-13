@@ -15,5 +15,7 @@ public class HexInfo : MonoBehaviour {
 	public Color HexColor;
 	public Map map;
 
-    
+
 }
+
+

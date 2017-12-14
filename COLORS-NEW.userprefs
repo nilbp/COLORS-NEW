@@ -1,12 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MainMenu.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\collisions\Blue.cs">
     <Files>
-      <File FileName="Assets\Scripts\spawner.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\spawner.cs" Line="103" Column="3" />
       <File FileName="Assets\Scripts\Map.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\HexInfo.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\MouseManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MainMenu.cs" Line="9" Column="35" />
+      <File FileName="Assets\Scripts\MainMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\collisions\Blue.cs" Line="38" Column="2" />
+      <File FileName="Assets\Scripts\collisions\Cyan.cs" Line="30" Column="30" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

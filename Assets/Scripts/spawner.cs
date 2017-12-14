@@ -9,17 +9,17 @@ public class spawner : MonoBehaviour {
 	public static GameObject HexSpawn3;
 
 	public GameObject[] minionspawn;
-	GameObject minionPenis;
+
 	public Transform nucli;
 
 	HexInfo SpawnHex;
 	HexInfo SpawnHex2;
 	HexInfo SpawnHex3;
 
-	bool click = false;
-
 	int time2=0;
 	int time=0;
+
+	public float spawnTime = 5f;     
 
 	public float speed = 1;
 	private float startTime;
@@ -31,6 +31,8 @@ public class spawner : MonoBehaviour {
 	void Start()
 	{
 		//yield return new WaitForSeconds (1f);
+		//InvokeRepeating ("clicki", spawnTime, spawnTime);
+
 		startTime = Time.time;
 
 		SpawnHex = HexSpawn1.GetComponentInChildren<HexInfo> ();
@@ -54,28 +56,25 @@ public class spawner : MonoBehaviour {
 		//minionspawn [2] = Instantiate (minionprefab [2], spawnLocation [2].transform.position, Quaternion.Euler (0, 0, 0)) as GameObject;
 	}*/
 
-	void clicki(){
+/*	void clicki(){
 
-		if (Input.GetMouseButtonDown (0)) {
-			int i = 1;
-			minionPenis = Instantiate (minionspawn [i], SpawnHex2.transform.position, Quaternion.Euler (0, 0, 0)) as GameObject;
 
-			i++;
-			click = true;
-			//spawnminion ();
 
-		}
-	}
+		MinionsSpawejats[a] = Instantiate (minionspawn[a], SpawnHex2.transform.position, SpawnHex2.transform.rotation ) as GameObject;
+		IAMoveS (SpawnHex2 ,MinionsSpawejats, a);
+		a++;
+		}*/
+
 
 	void Update(){
 
-		clicki ();
+		//clicki ();
 		time2++;
 		time ++;
 
 
-		IAMoveForward (SpawnHex,minionPenis ,time);
-		IAMoveS (SpawnHex2,minionPenis, time2);
+		IAMoveForward (SpawnHex);
+		IAMoveS (SpawnHex2);
 
 		//float step = speed * Time.deltaTime;
 		//transform.position = Vector3.MoveTowards (minionspawn[0].transform.position, nucli.position, step);
@@ -88,43 +87,47 @@ public class spawner : MonoBehaviour {
 
 
 
-	void IAMoveForward(HexInfo SpawnHex, GameObject minion, int DelayTime){
+	void IAMoveForward(HexInfo SpawnHex){
 
 
-		if (SpawnHex.map.hexLines[SpawnHex.y].columns [SpawnHex.x].Nucli == false) {
+		if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].Nucli == false) {
 
-			if (DelayTime > 5 && DelayTime >= 50) {
-				minion.transform.position = Vector3.Lerp (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].transform.position, SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x + 1].transform.position, fracjourn); 
+			if (time > 50 && time < 100) {
+				minionspawn [0].transform.position = Vector3.Lerp (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].transform.position, SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x + 1].transform.position, fracjourn); 
 				//yield return new WaitForSeconds (2f);
 				SpawnHex.x++;
 				time = 0;
 			}
+		} 
+	else if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].HexColor == Color.cyan) {
+
+
 		}
 
 	}
 
-	void IAMoveS(HexInfo SpawnHex, GameObject minion, int DelayTime){
+	void IAMoveS(HexInfo SpawnHex){
 
 
 
-		if (DelayTime >= 50 || click==true) {
+		if (time2 > 100 && time2< 150 || time%100==0) {
 			if (SpawnHex.y%2==0) {
 
 
-				minion.transform.position = Vector3.Lerp (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].transform.position, SpawnHex.map.hexLines [SpawnHex.y+1].columns [SpawnHex.x].transform.position, fracjourn); 
+				minionspawn[1].transform.position = Vector3.Lerp (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].transform.position, SpawnHex.map.hexLines [SpawnHex.y+1].columns [SpawnHex.x].transform.position, fracjourn); 
 				//yield return new WaitForSeconds (2f);
 				SpawnHex.y++;
-				time2 = 0;
+				time2 = 50;
 			}
 		
 			else if (SpawnHex.y%2==1) {
 
 
-				minion.transform.position = Vector3.Lerp (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].transform.position, SpawnHex.map.hexLines [SpawnHex.y-1].columns [SpawnHex.x+1].transform.position, fracjourn); 
+				minionspawn[1].transform.position = Vector3.Lerp (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].transform.position, SpawnHex.map.hexLines [SpawnHex.y-1].columns [SpawnHex.x+1].transform.position, fracjourn); 
 				//yield return new WaitForSeconds (2f);
 				SpawnHex.y--;
 				SpawnHex.x++;
-				time2 = 0;
+				time2 = 50;
 			}
 		}
 

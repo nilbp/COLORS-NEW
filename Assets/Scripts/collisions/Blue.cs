@@ -15,8 +15,15 @@ public class Blue : MonoBehaviour {
 
 	private Renderer rend;
 	private Rigidbody rb;
+
+	HexInfo hexInfo;
+
+
 	// Use this for initialization
 	void Start () {
+
+		hexInfo.GetComponent<HexInfo> ();
+
 		rb = GetComponent<Rigidbody> ();
 		rend = GetComponent<Renderer> ();
 	}
@@ -50,22 +57,24 @@ public class Blue : MonoBehaviour {
 			rend.material.color = Color.grey;
 			Destroy (minionyellow);
 		}
-	/*	if(col.collider.name == "minionmagenta")
+		if(col.collider.name == "minionmagenta")
 		{
 			rend.material.color = Color.white;
-			//Destroy (minion);
+			Destroy (minionmagenta);
 			//Instantiate
 		}
 		if(col.collider.name == "minioncyan")
 		{
 			rend.material.color = Color.white;
-			//Destroy (minion);
+			Destroy (minioncyan);
 			//Instantiate
-		}*/
+		}
 		if(col.collider.name == "minionblue")
 		{
 			rend.material.color = Color.blue;
 			Destroy (minionblue);
+			hexInfo.ColorDensity++;
+			col.gameObject.GetComponent<HexInfo> ().ColorDensity++;
 		}
 
 	}

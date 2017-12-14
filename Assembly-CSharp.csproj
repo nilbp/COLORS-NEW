@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\HexInfo.cs" />
      <Compile Include="Assets\Scripts\IABehaviour.cs" />
+     <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Map.cs" />
      <Compile Include="Assets\Scripts\MouseManager.cs" />
      <Compile Include="Assets\Scripts\Pigment.cs" />

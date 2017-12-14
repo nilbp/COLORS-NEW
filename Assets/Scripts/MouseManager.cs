@@ -57,6 +57,10 @@ public class MouseManager : MonoBehaviour {
 
 	void Update () {
 
+		if (CurrentPigment < 10) {
+			CurrentPigment+=0.02f;
+		}
+
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
 		RaycastHit hitInfo;
@@ -118,11 +122,13 @@ public class MouseManager : MonoBehaviour {
 
 			hexInfo.HexColor = Color.cyan;
 			mr.material.mainTexture = CyanTex;
+			NeighbourDensityManager (hexInfo);
 
 
 		} else if (mr.material.mainTexture == CyanTex) {
 
 			hexInfo.ColorDensity++;
+			densityHigh (hexInfo);
 		}
 		else if (mr.material.mainTexture == MagentaTex) {
 
@@ -145,11 +151,13 @@ public class MouseManager : MonoBehaviour {
 
 			hexInfo.HexColor = Color.magenta;
 			mr.material.mainTexture = MagentaTex;
+			NeighbourDensityManager (hexInfo);
 
 
 		} else if (mr.material.mainTexture == MagentaTex) {
 
 			hexInfo.ColorDensity++;
+			densityHigh (hexInfo);
 		}
 		else if (mr.material.mainTexture == CyanTex) {
 
@@ -173,11 +181,14 @@ public class MouseManager : MonoBehaviour {
 
 			hexInfo.HexColor = Color.yellow;
 			mr.material.mainTexture = YellowTex;
+			NeighbourDensityManager (hexInfo);
 
 
 		} else if (mr.material.mainTexture == YellowTex) {
 
 			hexInfo.ColorDensity++;
+			densityHigh (hexInfo);
+
 		}
 		else if (mr.material.mainTexture == CyanTex) {
 
@@ -194,8 +205,26 @@ public class MouseManager : MonoBehaviour {
 
 	}
 
+	void densityHigh(HexInfo ActualHex){
+	
+		ActualHex.transform.localScale = new Vector3(1, 1, 3 * ActualHex.ColorDensity);
+	}
 
+	void NeighbourDensityManager(HexInfo ActualHex){
 
+		for (int i = (int)NeighbourPosition.Left; i < (int)NeighbourPosition.NumPositions; i++) {
+			HexInfo neighbour = GetNeighbourByPosition ((NeighbourPosition)i, ActualHex);
+
+			if (neighbour != null) {
+
+				if (neighbour.ColorDensity > 1) {
+					neighbour.ColorDensity--;
+					densityHigh (neighbour);
+					break;
+				}
+			}
+		}
+	}
 
 	void IsClickable(HexInfo ActualHex){
 

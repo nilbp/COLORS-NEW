@@ -90,7 +90,7 @@ public class spawner : MonoBehaviour {
 	void IAMoveForward(HexInfo SpawnHex){
 
 
-		if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].Nucli == false) {
+	if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].HexColor == Color.white) {
 
 			if (time > 50 && time < 100) {
 				minionspawn [0].transform.position = Vector3.Lerp (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].transform.position, SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x + 1].transform.position, fracjourn); 
@@ -99,8 +99,12 @@ public class spawner : MonoBehaviour {
 				time = 0;
 			}
 		} 
-	else if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].HexColor == Color.cyan) {
 
+	else if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].HexColor == Color.cyan) {
+			
+			Destroy (minionspawn [0]);
+			SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].GetComponent<MeshRenderer> ().material.mainTexture = null;
+			SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].transform.localScale = new Vector3(1, 1, 1);
 
 		}
 

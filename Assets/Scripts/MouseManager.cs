@@ -60,7 +60,7 @@ public class MouseManager : MonoBehaviour {
 		if (CurrentPigment < 10) {
 			CurrentPigment+=0.02f;
 		}
-
+		//densityHigh ();
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
 		RaycastHit hitInfo;

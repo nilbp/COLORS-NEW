@@ -5,7 +5,7 @@
       <File FileName="Assets\Scripts\MouseManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Map.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\HexInfo.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\spawner.cs" Line="19" Column="14" />
+      <File FileName="Assets\Scripts\spawner.cs" Line="123" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

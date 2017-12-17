@@ -137,7 +137,11 @@ public class spawner : MonoBehaviour {
 	void IAMoveForward(HexInfo SpawnHex, GameObject[] Minion, int i){
 		int LocalSpawnCounter= MinionSpawnCounter;
 
+<<<<<<< Updated upstream
 		if (time > 50) {
+=======
+			//GameObject MinionInstantiat = InstantiateInSpawn (SpawnHex, 0, 2, Minion, i);
+>>>>>>> Stashed changes
 
 			if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].HexColor == Color.white) {
 
@@ -159,8 +163,16 @@ public class spawner : MonoBehaviour {
 				if (LocalSpawnCounter != MinionSpawnCounter) {
 					ResetSpawn (SpawnHex, 0, 2);
 
+<<<<<<< Updated upstream
 				}
 			
+=======
+				ColisionColorDetection (SpawnHex.map.hexLines[SpawnHex.y].columns [SpawnHex.x], Minion, i);
+			
+				ResetSpawn (SpawnHex, 0, 2);
+				MinionSpawnCounter++;
+				Destroy (Minion[i]);
+>>>>>>> Stashed changes
 			}
 			time = 0;
 		}

@@ -15,6 +15,7 @@ public class spawner : MonoBehaviour {
 	int MinionSpawnSize = 10;
 	int MinionStorage = 0;
 
+	public int puntuacion=0;
 
 	public Transform nucli;
 
@@ -113,7 +114,7 @@ public class spawner : MonoBehaviour {
 
 				GameObject MinionChanged = (GameObject)Instantiate (Minion [i], new Vector3 (-4, 0, 2), Quaternion.identity);
 				MinionChanged.GetComponent<MeshRenderer> ().material.color = color;
-				MinionChanged.name = Color + "Minion";
+				MinionChanged.name = color + "Minion";
 
 				Minion [a] = MinionChanged;
 				break;
@@ -124,11 +125,10 @@ public class spawner : MonoBehaviour {
 	void IAMoveForward(HexInfo SpawnHex, GameObject[] Minion, int i){
 		int LocalSpawnCounter= MinionSpawnCounter;
 
-<<<<<<< Updated upstream
+
 		if (time > 50) {
-=======
+
 			//GameObject MinionInstantiat = InstantiateInSpawn (SpawnHex, 0, 2, Minion, i);
->>>>>>> Stashed changes
 
 			if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].HexColor == Color.white) {
 
@@ -150,19 +150,18 @@ public class spawner : MonoBehaviour {
 				if (LocalSpawnCounter != MinionSpawnCounter) {
 					ResetSpawn (SpawnHex, 0, 2);
 
-<<<<<<< Updated upstream
+
 				}
-			
-=======
-				ColisionColorDetection (SpawnHex.map.hexLines[SpawnHex.y].columns [SpawnHex.x], Minion, i);
+
+			ColisionColorDetection (SpawnHex.map.hexLines[SpawnHex.y].columns [SpawnHex.x], Minion, i);
 			
 				ResetSpawn (SpawnHex, 0, 2);
 				MinionSpawnCounter++;
 				Destroy (Minion[i]);
->>>>>>> Stashed changes
-			}
+
 			time = 0;
 		}
+	}
 	}
 
 	void IAMoveS(HexInfo SpawnHex, GameObject[] Minion, int i){
@@ -218,6 +217,7 @@ public class spawner : MonoBehaviour {
 				
 				SpawnHex.ColorDensity++;
 				densityHigh (SpawnHex);
+				puntuacion++;
 
 			} else if (SpawnHex.HexColor == Color.magenta) {
 
@@ -255,6 +255,8 @@ public class spawner : MonoBehaviour {
 
 				SpawnHex.ColorDensity++;
 				densityHigh (SpawnHex);
+				puntuacion++;
+
 
 			} else if (SpawnHex.HexColor == Color.yellow) {
 
@@ -289,6 +291,8 @@ public class spawner : MonoBehaviour {
 
 				SpawnHex.ColorDensity++;
 				densityHigh (SpawnHex);
+				puntuacion++;
+
 
 			} else {
 
@@ -323,7 +327,12 @@ public class spawner : MonoBehaviour {
 				SpawnHex.ColorDensity++;
 				MinionSpawnCounter++;
 				densityHigh (SpawnHex);
+<<<<<<< Updated upstream
 				Destroy (Minion[i]);
+=======
+				puntuacion++;
+
+>>>>>>> Stashed changes
 
 			} else if (SpawnHex.HexColor == Color.red){
 

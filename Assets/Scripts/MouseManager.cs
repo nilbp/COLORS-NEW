@@ -129,6 +129,7 @@ public class MouseManager : MonoBehaviour {
 
 			hexInfo.ColorDensity++;
 			densityHigh (hexInfo);
+			CurrentPigment--;
 		}
 		else if (mr.material.mainTexture == MagentaTex) {
 
@@ -220,6 +221,7 @@ public class MouseManager : MonoBehaviour {
 				if (neighbour.ColorDensity > 1) {
 					neighbour.ColorDensity--;
 					densityHigh (neighbour);
+					CurrentPigment++;
 					break;
 				}
 			}
@@ -246,7 +248,7 @@ public class MouseManager : MonoBehaviour {
 	//COMBOS
 
 	void combo1(){
-		Debug.Log ("COMBO1 Readyyyyy MDE CLICK N-Y en la casaaa preeem...");
+		
 	}
 
 	void combo1Check(HexInfo ActualHex){

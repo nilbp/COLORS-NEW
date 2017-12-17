@@ -68,7 +68,7 @@ public class Map : MonoBehaviour {
                 hexInfo.map = this;
 				hexInfo.HexColor = Color.white;
 
-				if(hexInfo.x==9 && hexInfo.y==2 || hexInfo.x==0 && hexInfo.y == 2){
+				if(hexInfo.x==6 && hexInfo.y==2){
 
 					hexInfo.Nucli= true;
 				}

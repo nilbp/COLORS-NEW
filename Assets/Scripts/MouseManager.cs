@@ -9,10 +9,12 @@ public class MouseManager : MonoBehaviour {
 	int xHexPos;
 	int yHexPos;
 
-	public int MaxPigment = 10;
-	public float CurrentPigment = 10;
+	public int MaxPigment = 6;
+	public float CurrentPigment = 6;
 	public float PigmentRatio;
 	public Image PigmentBar;
+
+	public Texture2D DefaultText;
 
 	public Texture2D CyanTex;
 	public Texture2D MagentaTex;
@@ -57,8 +59,8 @@ public class MouseManager : MonoBehaviour {
 
 	void Update () {
 
-		if (CurrentPigment < 10) {
-			CurrentPigment+=0.02f;
+		if (CurrentPigment < MaxPigment) {
+			CurrentPigment+=0.01f;
 		}
 		//densityHigh ();
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -70,7 +72,7 @@ public class MouseManager : MonoBehaviour {
 			GameObject ourHitObject = hitInfo.collider.transform.gameObject;
 
 
-			if (Input.GetMouseButtonDown (0) && CurrentPigment > 0) {
+			if (Input.GetMouseButtonDown (0) && CurrentPigment > 1.99) {
 
 				HexInfo HexInfoObject = ourHitObject.GetComponentInParent<HexInfo> ();
 
@@ -86,18 +88,18 @@ public class MouseManager : MonoBehaviour {
 					if (ColorHUD.ColorsSelected == 'C') {
 
 						ColorsChangeCyan (mr, HexInfoObject);
-						CurrentPigment--;
-						//Debug.Log ("RayCast Hit");
+						CurrentPigment-=2;
+		
 
 					} else if (ColorHUD.ColorsSelected == 'M') {
 					
 						ColorsChangeMagenta (mr, HexInfoObject);
-						CurrentPigment--;
+						CurrentPigment-=2;
 
 					} else if (ColorHUD.ColorsSelected == 'Y') {
 					
 						ColorsChangeYellow (mr, HexInfoObject);
-						CurrentPigment--;
+						CurrentPigment-=2;
 					}
 
 					combo1Check (HexInfoObject);
@@ -105,6 +107,7 @@ public class MouseManager : MonoBehaviour {
 			}
 		}
 		UpdatePigmentBar ();
+		print (CurrentPigment);
 	}
 
 	void UpdatePigmentBar(){
@@ -118,7 +121,7 @@ public class MouseManager : MonoBehaviour {
 
 	void ColorsChangeCyan(MeshRenderer mr, HexInfo hexInfo){
 
-		if (mr.material.mainTexture == null) {
+		if (mr.material.mainTexture == DefaultText) {
 
 			hexInfo.HexColor = Color.cyan;
 			mr.material.mainTexture = CyanTex;
@@ -148,7 +151,7 @@ public class MouseManager : MonoBehaviour {
 
 	void ColorsChangeMagenta(MeshRenderer mr, HexInfo hexInfo){
 
-		if (mr.material.mainTexture == null) {
+		if (mr.material.mainTexture == DefaultText) {
 
 			hexInfo.HexColor = Color.magenta;
 			mr.material.mainTexture = MagentaTex;
@@ -178,7 +181,7 @@ public class MouseManager : MonoBehaviour {
 
 	void ColorsChangeYellow(MeshRenderer mr, HexInfo hexInfo){
 
-		if (mr.material.mainTexture == null) {
+		if (mr.material.mainTexture == DefaultText) {
 
 			hexInfo.HexColor = Color.yellow;
 			mr.material.mainTexture = YellowTex;

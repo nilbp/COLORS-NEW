@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class spawner : MonoBehaviour {
 
@@ -121,23 +122,25 @@ public class spawner : MonoBehaviour {
 			}
 		}
 	}
+
+
 	void IAMoveForward(HexInfo SpawnHex, GameObject[] Minion, int i){
 		int LocalSpawnCounter= MinionSpawnCounter;
 
 		if (time > 50) {
 
-			if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].HexColor == Color.white) {
+			if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].Nucli == true) {
+
+				SceneManager.LoadScene ("MainMenu");
+
+			}
+			else if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].HexColor == Color.white) {
 
 				Minion[i].transform.position = Vector3.Lerp (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].transform.position, SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x + 1].transform.position, fracjourn); 
 				SpawnHex.x++;
 
 			
 			} 	
-			else if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].Nucli == true) {
-
-				Application.LoadLevel("newlvl");
-
-			}
 
 			else {
 
@@ -157,7 +160,13 @@ public class spawner : MonoBehaviour {
 		int LocalSpawnCounter= MinionSpawnCounter;
 
 		if (time2 > 25) {
-			if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].HexColor == Color.white) {
+
+			if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].Nucli == true) {
+
+				SceneManager.LoadScene ("MainMenu");
+
+			}
+			else if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].HexColor == Color.white) {
 
 				if (SpawnHex.y % 2 == 0) {
 
@@ -172,6 +181,7 @@ public class spawner : MonoBehaviour {
 
 				}
 			} 
+
 			else {
 				ColisionColorDetection (SpawnHex.map.hexLines[SpawnHex.y].columns [SpawnHex.x], Minion, i);	
 
@@ -304,7 +314,6 @@ public class spawner : MonoBehaviour {
 			} else if (SpawnHex.HexColor == Color.yellow) {
 
 				ResetHexagonColorValues (SpawnHex, HexColor);
-				//COlors contraris, s'ha de tornar gris l'hexagon
 
 			} else if (SpawnHex.HexColor == Color.blue){
 

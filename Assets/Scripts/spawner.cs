@@ -101,6 +101,7 @@ public class spawner : MonoBehaviour {
 		return MinionInstantiat;
 
 	}*/
+
 	void densityHigh(HexInfo ActualHex){
 
 		ActualHex.transform.localScale = new Vector3(1, 1, 3 * ActualHex.ColorDensity);
@@ -201,7 +202,7 @@ public class spawner : MonoBehaviour {
 
 		SpawnHex.HexColor = Color.white;
 		SpawnHex.transform.localScale = new Vector3 (1, 1, 1);
-		HexColor.material.mainTexture = DefaultTexture;
+		HexColor.material.mainTexture = null;
 	}
 
 	void ColisionColorDetection(HexInfo SpawnHex, GameObject[] Minion, int i){
@@ -299,7 +300,7 @@ public class spawner : MonoBehaviour {
 
 		}
 
-		if (Minion[i].name == "blueMinion") {
+		if (Minion [i].name == "blueMinion") {
 
 			if (SpawnHex.HexColor == Color.cyan) {
 
@@ -315,29 +316,27 @@ public class spawner : MonoBehaviour {
 
 				ResetHexagonColorValues (SpawnHex, HexColor);
 
-			} else if (SpawnHex.HexColor == Color.blue){
+			} else if (SpawnHex.HexColor == Color.blue) {
 
 				SpawnHex.ColorDensity++;
 				MinionSpawnCounter++;
 				densityHigh (SpawnHex);
-				Destroy (Minion[i]);
+				Destroy (Minion [i]);
 
-			} else if (SpawnHex.HexColor == Color.red){
-
-				ResetHexagonColorValues (SpawnHex, HexColor);
-				MinionSpawnCounter++;
-				Destroy (Minion[i]);
-
-			} else if (SpawnHex.HexColor == Color.green){
+			} else if (SpawnHex.HexColor == Color.red) {
 
 				ResetHexagonColorValues (SpawnHex, HexColor);
 				MinionSpawnCounter++;
-				Destroy (Minion[i]);
+				Destroy (Minion [i]);
+
+			} else if (SpawnHex.HexColor == Color.green) {
+
+				ResetHexagonColorValues (SpawnHex, HexColor);
+				MinionSpawnCounter++;
+				Destroy (Minion [i]);
 
 			}
-		}
-
-		else if(Minion[i].name == "redMinion"){
+		} else if (Minion [i].name == "redMinion") {
 
 			if (SpawnHex.HexColor == Color.cyan) {
 
@@ -351,25 +350,26 @@ public class spawner : MonoBehaviour {
 
 				ResetHexagonColorValues (SpawnHex, HexColor);
 
-		} 	} else if (SpawnHex.HexColor == Color.blue){
+			} else if (SpawnHex.HexColor == Color.blue) {
 
-			ResetHexagonColorValues (SpawnHex, HexColor);
-			MinionSpawnCounter++;
-			Destroy (Minion[i]);
+				ResetHexagonColorValues (SpawnHex, HexColor);
+				MinionSpawnCounter++;
+				Destroy (Minion [i]);
 
-		} else if (SpawnHex.HexColor == Color.red){
+			} else if (SpawnHex.HexColor == Color.red) {
 
 
-			SpawnHex.ColorDensity++;
-			MinionSpawnCounter++;
-			densityHigh (SpawnHex);
-			Destroy (Minion[i]);
+				SpawnHex.ColorDensity++;
+				MinionSpawnCounter++;
+				densityHigh (SpawnHex);
+				Destroy (Minion [i]);
 
-		} else if (SpawnHex.HexColor == Color.green){
+			} else if (SpawnHex.HexColor == Color.green) {
 
-			ResetHexagonColorValues (SpawnHex, HexColor);
-			MinionSpawnCounter++;
-			Destroy (Minion[i]);
+				ResetHexagonColorValues (SpawnHex, HexColor);
+				MinionSpawnCounter++;
+				Destroy (Minion [i]);
+			}
 		}
 
 		else if (Minion[i].name == "greenMinion"){
@@ -410,8 +410,5 @@ public class spawner : MonoBehaviour {
 		}
 
 	}
-
-
-
 
 }

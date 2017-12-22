@@ -51,13 +51,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\collisions\Blue.cs" />
-     <Compile Include="Assets\Scripts\collisions\Cyan.cs" />
-     <Compile Include="Assets\Scripts\collisions\Green.cs" />
-     <Compile Include="Assets\Scripts\collisions\Magenta.cs" />
-     <Compile Include="Assets\Scripts\collisions\Red.cs" />
-     <Compile Include="Assets\Scripts\collisions\Yellow.cs" />
-     <Compile Include="Assets\Scripts\ColorHUD.cs" />
      <Compile Include="Assets\Scripts\HexInfo.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Map.cs" />

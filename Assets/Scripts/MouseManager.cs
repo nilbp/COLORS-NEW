@@ -24,6 +24,12 @@ public class MouseManager : MonoBehaviour {
 	public Texture2D BlueTex;
 	public Texture2D GreenTex;
 
+	private HexInfo Nucli;
+	private MeshRenderer NucliMesh;
+	char ColorInHand;
+
+	public GameObject Totem;
+
 	enum NeighbourPosition
 	{
 		Left,
@@ -35,32 +41,22 @@ public class MouseManager : MonoBehaviour {
 		NumPositions,
 	}
 
-	enum TwoStepsNeighbourPosition
-	{
-		TwoLeft,
-		TwoUpLeft,
-		TwoUpRight,
-		TwoRight,
-		TwoDownRight,
-		TwoDownLeft,
-		TwoNumPositions,
 
-	}
 	void Start(){
 
 
 
-		HexInfo hex = GetComponentInChildren<HexInfo> ();
-
+		Nucli = GameObject.Find ("Hex_6_4").GetComponentInChildren<HexInfo> ();
+		NucliMesh = Nucli.GetComponentInChildren<MeshRenderer> ();
+		RandomPrimaryColorSpawn ();
 	
-
-		}
+	}
 
 
 	void Update () {
 
 		if (CurrentPigment < MaxPigment) {
-			CurrentPigment+=0.01f;
+			CurrentPigment+=0.03f;
 		}
 		//densityHigh ();
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -72,42 +68,74 @@ public class MouseManager : MonoBehaviour {
 			GameObject ourHitObject = hitInfo.collider.transform.gameObject;
 
 
-			if (Input.GetMouseButtonDown (0) && CurrentPigment > 1.99) {
 
-				HexInfo HexInfoObject = ourHitObject.GetComponentInParent<HexInfo> ();
+			if (Input.GetMouseButtonDown (0)) {
 
-				IsClickable(HexInfoObject);
+				HexInfo HexInfoObject = ourHitObject.GetComponentInChildren<HexInfo> ();
 
-
-				if(HexInfoObject.Clickable == true){
+				//IsClickable(HexInfoObject);
 					
-					MeshRenderer mr = ourHitObject.GetComponentInChildren<MeshRenderer> ();
 
-					//bola.transform.position = new Vector3 (ourHitObject.transform.position.x, 0.3f ,ourHitObject.transform.position.z);
 
-					if (ColorHUD.ColorsSelected == 'C') {
 
-						ColorsChangeCyan (mr, HexInfoObject);
-						CurrentPigment-=2;
+				if (CurrentPigment > 1) {
+					if (HexInfoObject.Clickable == true) {
+					
+						MeshRenderer mr = ourHitObject.GetComponentInChildren<MeshRenderer> ();
+
+						//bola.transform.position = new Vector3 (ourHitObject.transform.position.x, 0.3f ,ourHitObject.transform.position.z);
+
+						if (ColorInHand == 'C') {
+
+							ColorsChangeCyan (mr, HexInfoObject);
+							CurrentPigment -= 2;
 		
 
-					} else if (ColorHUD.ColorsSelected == 'M') {
+						} else if (ColorInHand == 'M') {
 					
-						ColorsChangeMagenta (mr, HexInfoObject);
-						CurrentPigment-=2;
+							ColorsChangeMagenta (mr, HexInfoObject);
+							CurrentPigment -= 2;
 
-					} else if (ColorHUD.ColorsSelected == 'Y') {
+						} else if (ColorInHand == 'Y') {
 					
-						ColorsChangeYellow (mr, HexInfoObject);
-						CurrentPigment-=2;
+							ColorsChangeYellow (mr, HexInfoObject);
+							CurrentPigment -= 2;
+						}
+						ComboCheck ();
+						RandomPrimaryColorSpawn ();
+		
 					}
-
-					combo1Check (HexInfoObject);
 				}
 			}
+
 		}
 		UpdatePigmentBar ();
-		print (CurrentPigment);
+
+
+	}
+
+	void RandomPrimaryColorSpawn(){
+
+		//Random rnd = new Random();
+		int Rand = Random.Range(0, 3);
+
+
+		switch (Rand) {
+
+		case 0:
+			ColorInHand = 'C';
+			NucliMesh.material.mainTexture = CyanTex;
+			break;
+		case 1: 
+			ColorInHand = 'M';
+			NucliMesh.material.mainTexture = MagentaTex;
+			break;
+		case 2:
+			ColorInHand = 'Y';
+			NucliMesh.material.mainTexture = YellowTex;
+			break;
+		}
+	
 	}
 
 	void UpdatePigmentBar(){
@@ -119,13 +147,77 @@ public class MouseManager : MonoBehaviour {
 	
 	}
 
+	void ComboCheck(){
+
+
+		for (int x = 0; x < Map.width; x++) {
+			for (int y = 0; y < Map.height; y++) {
+				
+
+				GameObject HexGameObject = GameObject.Find ("Hex_" + x + "_" + y);
+				HexInfo ActualHex = HexGameObject.GetComponentInChildren<HexInfo> ();
+
+				int[] ColorMatch= new int[6];
+
+				for (int i = 0; i < 6; i++) {
+
+					if (ActualHex.neigbours [i] != null) {
+
+						if (ActualHex.HexColor != Color.white && ActualHex.HexColor == ActualHex.neigbours [i].HexColor) {
+							ColorMatch [i] = 1;
+						}
+					}
+				}
+
+				Combo1 (ColorMatch, ActualHex);
+				totems (ActualHex);
+			}
+		}
+	}
+
+	void totems(HexInfo ActualHex){
+
+		if (ActualHex.ColorDensity > 4) {
+
+			ActualHex.ColorDensity = 0;
+			ActualHex.transform.localScale = new Vector3 (1, 1, 1);
+			Instantiate (Totem, ActualHex.transform.position, Quaternion.identity);
+		}
+
+	}
+
+	void Combo1(int[] ColorMatch, HexInfo Actualhex){
+
+		if (ColorMatch [0] == 1 && ColorMatch [3] == 1 || ColorMatch [1] == 1 && ColorMatch [4] == 1 || ColorMatch [2] == 1 && ColorMatch [5] == 1) {
+			print ("Combo One Biach");
+		}
+
+	}
+
+	
+	void IsClickable(HexInfo ActualHex){
+
+		for (int i = 0 ; i < 6 ; i++) {
+			
+
+			if (ActualHex.neigbours[i] != null) {
+
+				if (ActualHex.neigbours[i].Nucli == true) {
+					ActualHex.Clickable = true;
+
+				}
+			}
+		}
+	}
+	
+
 	void ColorsChangeCyan(MeshRenderer mr, HexInfo hexInfo){
 
-		if (mr.material.mainTexture == DefaultText) {
+		if (mr.material.mainTexture == DefaultText || mr.material.mainTexture == null) {
 
 			hexInfo.HexColor = Color.cyan;
 			mr.material.mainTexture = CyanTex;
-			NeighbourDensityManager (hexInfo);
+			//NeighbourDensityManager (hexInfo);
 
 
 		} else if (mr.material.mainTexture == CyanTex) {
@@ -151,11 +243,11 @@ public class MouseManager : MonoBehaviour {
 
 	void ColorsChangeMagenta(MeshRenderer mr, HexInfo hexInfo){
 
-		if (mr.material.mainTexture == DefaultText) {
+		if (mr.material.mainTexture == DefaultText || mr.material.mainTexture == null) {
 
 			hexInfo.HexColor = Color.magenta;
 			mr.material.mainTexture = MagentaTex;
-			NeighbourDensityManager (hexInfo);
+			//NeighbourDensityManager (hexInfo);
 
 
 		} else if (mr.material.mainTexture == MagentaTex) {
@@ -181,11 +273,11 @@ public class MouseManager : MonoBehaviour {
 
 	void ColorsChangeYellow(MeshRenderer mr, HexInfo hexInfo){
 
-		if (mr.material.mainTexture == DefaultText) {
+		if (mr.material.mainTexture == DefaultText || mr.material.mainTexture == null) {
 
 			hexInfo.HexColor = Color.yellow;
 			mr.material.mainTexture = YellowTex;
-			NeighbourDensityManager (hexInfo);
+			//NeighbourDensityManager (hexInfo);
 
 
 		} else if (mr.material.mainTexture == YellowTex) {
@@ -216,269 +308,18 @@ public class MouseManager : MonoBehaviour {
 
 	void NeighbourDensityManager(HexInfo ActualHex){
 
-		for (int i = (int)NeighbourPosition.Left; i < (int)NeighbourPosition.NumPositions; i++) {
-			HexInfo neighbour = GetNeighbourByPosition ((NeighbourPosition)i, ActualHex);
+		for (int i = 0; i < 6; i++) {
+			
 
-			if (neighbour != null) {
+			if (ActualHex.neigbours[i] != null) {
 
-				if (neighbour.ColorDensity > 1) {
-					neighbour.ColorDensity--;
-					densityHigh (neighbour);
+				if (ActualHex.neigbours[i].ColorDensity > 1) {
+					ActualHex.neigbours[i].ColorDensity--;
+					densityHigh (ActualHex.neigbours[i]);
 					CurrentPigment++;
 					break;
 				}
 			}
 		}
 	}
-
-	void IsClickable(HexInfo ActualHex){
-
-		for (int i = (int)NeighbourPosition.Left; i < (int)NeighbourPosition.NumPositions; i++) {
-			HexInfo neighbour = GetNeighbourByPosition ((NeighbourPosition)i, ActualHex);
-
-			//Debug.Log(x + " " + y + " " + neighbour);
-
-			if (neighbour != null) {
-
-				if (neighbour.Nucli == true || neighbour.ColorDensity > 0) {
-					ActualHex.Clickable = true;
-
-				}
-			}
-		}
-	}
-
-	//COMBOS
-
-	void combo1(){
-		
-	}
-
-	void combo1Check(HexInfo ActualHex){
-
-		if (ActualHex.x > 0 && ActualHex.x < Map.width - 1 && ActualHex.y > 0 && ActualHex.y < Map.height - 1) {
-
-			if (ActualHex.HexColor == GetNeighbourByPosition (NeighbourPosition.Left, ActualHex).HexColor && ActualHex.HexColor == GetNeighbourByPosition (NeighbourPosition.Right, ActualHex).HexColor) {
-				combo1 ();
-			} else if (ActualHex.HexColor == GetNeighbourByPosition (NeighbourPosition.UpLeft, ActualHex).HexColor && ActualHex.HexColor == GetNeighbourByPosition (NeighbourPosition.DownRight, ActualHex).HexColor) {
-				combo1 ();
-			} else if (ActualHex.HexColor == GetNeighbourByPosition (NeighbourPosition.DownLeft, ActualHex).HexColor && ActualHex.HexColor == GetNeighbourByPosition (NeighbourPosition.UpRight, ActualHex).HexColor) {
-				combo1 ();
-			} 
-		}
-
-		//FarNeigbours (6 cases)
-
-		else if (ActualHex.x > 1 && ActualHex.HexColor ==  GetNeighbourByPosition (NeighbourPosition.Left,ActualHex).HexColor && ActualHex.HexColor == GetFarNeighbourByPosition (TwoStepsNeighbourPosition.TwoLeft,ActualHex).HexColor) {
-			combo1 ();
-		} 
-		else if (ActualHex.x > 0 && ActualHex.y < Map.height - 2 && ActualHex.HexColor ==  GetNeighbourByPosition (NeighbourPosition.UpLeft,ActualHex).HexColor && ActualHex.HexColor == GetFarNeighbourByPosition (TwoStepsNeighbourPosition.TwoUpLeft,ActualHex).HexColor) {
-			combo1 ();
-		} 
-		else if (ActualHex.x < Map.width - 1 && ActualHex.y < Map.height - 2 && ActualHex.HexColor ==  GetNeighbourByPosition (NeighbourPosition.UpRight,ActualHex).HexColor && ActualHex.HexColor == GetFarNeighbourByPosition (TwoStepsNeighbourPosition.TwoUpRight,ActualHex).HexColor) {
-			combo1 ();
-		} 
-		else if (ActualHex.x > Map.width-2 && ActualHex.HexColor ==  GetNeighbourByPosition (NeighbourPosition.Right,ActualHex).HexColor && ActualHex.HexColor == GetFarNeighbourByPosition (TwoStepsNeighbourPosition.TwoRight,ActualHex).HexColor) {
-			combo1 ();
-		} 
-		else if (ActualHex.x < Map.width - 1 && ActualHex.y > 1 && ActualHex.HexColor ==  GetNeighbourByPosition (NeighbourPosition.DownRight,ActualHex).HexColor && ActualHex.HexColor == GetFarNeighbourByPosition (TwoStepsNeighbourPosition.TwoDownRight,ActualHex).HexColor) {
-			combo1 ();
-		} 
-		else if (ActualHex.x > 0 && ActualHex.y > 1 && ActualHex.HexColor ==  GetNeighbourByPosition (NeighbourPosition.DownLeft,ActualHex).HexColor && ActualHex.HexColor == GetFarNeighbourByPosition (TwoStepsNeighbourPosition.TwoDownLeft,ActualHex).HexColor) {
-			combo1 ();
-		} 
-	}
-
-
-	HexInfo GetNeighbourByPosition(NeighbourPosition position, HexInfo ActualHex)
-	{
-		HexInfo retVal = null;
-
-		switch (position)
-		{
-		case NeighbourPosition.Left:
-			retVal = GetLeftNeighbour (ActualHex);
-			break;
-		case NeighbourPosition.UpLeft:
-			retVal = GetUpLeftNeighbour (ActualHex);
-			break;
-		case NeighbourPosition.UpRight:
-			retVal = GetUpRightNeighbour(ActualHex);
-			break;
-		case NeighbourPosition.Right:
-			retVal = GetRightNeighbour (ActualHex);
-			break;
-		case NeighbourPosition.DownRight:
-			retVal = GetDownRightNeighbour(ActualHex);
-			break;
-		case NeighbourPosition.DownLeft:
-			retVal = GetDownLeftNeighbour (ActualHex);
-			break;
-		default:
-			break;
-		}
-
-		return retVal;
-	}
-
-	HexInfo GetFarNeighbourByPosition(TwoStepsNeighbourPosition position, HexInfo ActualHex)
-	{
-		HexInfo retVal = null;
-	
-		switch (position)
-		{
-		case TwoStepsNeighbourPosition.TwoLeft:
-			retVal = Get2LeftNeighbour (ActualHex);
-			break;
-		case TwoStepsNeighbourPosition.TwoUpLeft:
-			retVal = Get2UpLeftNeighbour (ActualHex);
-			break;
-		case TwoStepsNeighbourPosition.TwoUpRight:
-			retVal = Get2UpRightNeighbour(ActualHex);
-			break;
-		case TwoStepsNeighbourPosition.TwoRight:
-			retVal = Get2RightNeighbour (ActualHex);
-			break;
-		case TwoStepsNeighbourPosition.TwoDownRight:
-			retVal = Get2DownRightNeighbour(ActualHex);
-			break;
-		case TwoStepsNeighbourPosition.TwoDownLeft:
-			retVal = Get2DownLeftNeighbour (ActualHex);
-			break;
-		default:
-			break;
-		}
-
-		return retVal;
-	}
-
-	HexInfo GetLeftNeighbour(HexInfo ActualHex)
-	{
-		HexInfo retVal = null;
-
-		if (ActualHex.x > 0)
-		{
-			retVal = ActualHex.map.hexLines[ActualHex.y].columns[ActualHex.x-1];
-		}
-
-		return retVal;
-	}
-
-	HexInfo GetUpLeftNeighbour(HexInfo ActualHex){
-
-		HexInfo retVal = null;
-
-		if (ActualHex.y % 2 == 0 && ActualHex.x > 0 ) {
-			retVal = ActualHex.map.hexLines [ActualHex.y+1].columns [ActualHex.x-1];
-
-		} 
-		else if (ActualHex.y % 2 == 1 && ActualHex.y < Map.height -1) {
-			retVal = ActualHex.map.hexLines [ActualHex.y+1].columns [ActualHex.x];
-		}
-		return retVal;
-	}
-
-	HexInfo GetUpRightNeighbour(HexInfo ActualHex){
-
-		HexInfo retVal = null;
-
-		if (ActualHex.y % 2 == 0) {
-
-			retVal = ActualHex.map.hexLines [ActualHex.y + 1].columns [ActualHex.x]; 
-
-		} else if (ActualHex.y % 2 == 1 && ActualHex.x < Map.width - 1 && ActualHex.y < Map.height - 1) {
-			
-			retVal = ActualHex.map.hexLines [ActualHex.y + 1].columns [ActualHex.x + 1];
-		}
-		return retVal;
-	}
-
-	HexInfo GetRightNeighbour(HexInfo ActualHex){
-
-		HexInfo retVal = null;
-
-		if (ActualHex.x < Map.width-1) {
-
-			retVal = ActualHex.map.hexLines [ActualHex.y].columns [ActualHex.x+1];
-
-		}
-
-		return retVal;
-	}
-
-	HexInfo GetDownRightNeighbour(HexInfo ActualHex){
-
-		HexInfo retVal=null;
-
-		if (ActualHex.y % 2 == 0 && ActualHex.y > 0) {
-			retVal = ActualHex.map.hexLines [ActualHex.y-1].columns [ActualHex.x];
-		}
-		else if (ActualHex.y % 2 == 1 && ActualHex.x < Map.width-1 ) {
-
-			retVal = ActualHex.map.hexLines[ActualHex.y - 1].columns[ActualHex.x + 1];
-		}
-
-		return retVal;
-	}
-	HexInfo GetDownLeftNeighbour(HexInfo ActualHex){
-
-		HexInfo retVal=null;
-
-		if (ActualHex.y % 2 == 0 && ActualHex.x > 0 && ActualHex.y > 0) {
-			retVal = ActualHex.map.hexLines [ActualHex.y - 1].columns [ActualHex.x - 1];
-		} 
-		else if (ActualHex.y % 2 == 1) {
-			retVal = ActualHex.map.hexLines [ActualHex.y-1].columns [ActualHex.x];
-		}
-		return retVal;
-	}
-
-	//FarNeighbours (em sembla que no calen els "if" , ja està en el Combo1Check();)
-
-
-	HexInfo Get2LeftNeighbour(HexInfo ActualHex){
-		HexInfo retVal = null;
-		if (ActualHex.x > 1) {
-			retVal = ActualHex.map.hexLines [ActualHex.y].columns [ActualHex.x-2];
-		}
-		return retVal;
-	}
-	HexInfo Get2UpLeftNeighbour(HexInfo ActualHex){
-		HexInfo retVal = null;
-		if (ActualHex.x > 0 && ActualHex.y < Map.height - 2) {
-			retVal = ActualHex.map.hexLines [ActualHex.y + 2].columns [ActualHex.x - 1];
-		}
-		return retVal;
-	}
-	HexInfo Get2UpRightNeighbour(HexInfo ActualHex){
-		HexInfo retVal = null;
-		if (ActualHex.x < Map.width - 1 && ActualHex.y < Map.height - 2) {
-			retVal = ActualHex.map.hexLines [ActualHex.y + 2].columns [ActualHex.x + 1];
-		}
-		return retVal;
-	}
-	HexInfo Get2RightNeighbour(HexInfo ActualHex){
-		HexInfo retVal = null;
-		if (ActualHex.x > Map.width-2) {
-			retVal = ActualHex.map.hexLines [ActualHex.y].columns [ActualHex.x + 2];
-		}
-		return retVal;
-	}
-	HexInfo Get2DownRightNeighbour(HexInfo ActualHex){
-		HexInfo retVal = null;
-		if (ActualHex.x < Map.width - 1 && ActualHex.y > 1) {
-			retVal = ActualHex.map.hexLines [ActualHex.y - 2].columns [ActualHex.x + 1];
-		}
-		return retVal;
-	}
-	HexInfo Get2DownLeftNeighbour(HexInfo ActualHex){
-		HexInfo retVal = null;
-		if (ActualHex.x > 0 && ActualHex.y > 1) {
-			retVal = ActualHex.map.hexLines [ActualHex.y - 2].columns [ActualHex.x - 1];
-		}
-		return retVal;
-	}
-
-
-
 }

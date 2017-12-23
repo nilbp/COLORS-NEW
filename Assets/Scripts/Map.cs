@@ -78,7 +78,7 @@ public class Map : MonoBehaviour {
 				hexInfo.ColorDensity = 0;
 				hexInfo.Clickable = false;
                 hexInfo.map = this;
-				hexInfo.HexColor = Color.white;
+				hexInfo.HexColor = 'W';
 
 
 				if(hexInfo.x==6 && hexInfo.y==4){
@@ -173,7 +173,8 @@ public class Map : MonoBehaviour {
 						}
 
 						for(int j=0;j<6;j++){
-							if (ActualHex.neigbours [i].neigbours [j] != null) {
+							
+							if (ActualHex.neigbours [i].neigbours [j]!= null) {
 								if (ActualHex.neigbours [i].neigbours [j].Nucli) {
 									ActualHex.Clickable = true;
 									ActualHexRend.material.mainTexture = null;

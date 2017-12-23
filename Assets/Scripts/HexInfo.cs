@@ -12,12 +12,25 @@ public class HexInfo : MonoBehaviour {
 	public int ColorDensity;
 	public bool Clickable;
 
-	public Color HexColor;
+	public char HexColor;
 	public Map map;
 
 	public HexInfo[] neigbours;
 
-	public bool Totem;
+	enum tipusTotem{farming, defensa, area};
+
+	struct Totem{
+
+		tipusTotem TotemType;
+		Color[] ColorsDefensa;
+		int FireRatio;
+		int Area;
+		int NumAbsorcions;
+
+
+	}
+
 }
+
 
 

@@ -30,6 +30,18 @@ public class MouseManager : MonoBehaviour {
 
 	public GameObject Totem;
 
+	public struct colorCombo{
+
+		public int i;
+		public bool IsNeighbour;
+	}
+
+	public struct combo{
+
+		public colorCombo Color1;
+		public colorCombo Color2;
+	}
+
 	enum NeighbourPosition
 	{
 		Left,
@@ -40,11 +52,9 @@ public class MouseManager : MonoBehaviour {
 		DownLeft,
 		NumPositions,
 	}
-
+		
 
 	void Start(){
-
-
 
 		Nucli = GameObject.Find ("Hex_6_4").GetComponentInChildren<HexInfo> ();
 		NucliMesh = Nucli.GetComponentInChildren<MeshRenderer> ();
@@ -159,20 +169,69 @@ public class MouseManager : MonoBehaviour {
 
 				int[] ColorMatch= new int[6];
 
+
+
 				for (int i = 0; i < 6; i++) {
 
 					if (ActualHex.neigbours [i] != null) {
+						if(ActualHex.HexColor != 'W' ){
 
-						if (ActualHex.HexColor != Color.white && ActualHex.HexColor == ActualHex.neigbours [i].HexColor) {
-							ColorMatch [i] = 1;
+							Combos(ActualHex, i);
+
 						}
 					}
 				}
 
-				Combo1 (ColorMatch, ActualHex);
+
 				totems (ActualHex);
 			}
 		}
+	}
+
+
+	void Combos(HexInfo Actualhex, int i){
+		
+
+		combo ComboTriadic;
+		ComboTriadic.Color1.IsNeighbour = false;
+		ComboTriadic.Color2.IsNeighbour = false;
+
+
+		if (Actualhex.HexColor == 'C') {
+		
+			if (Actualhex.neigbours [i].HexColor == 'M') {
+
+				ComboTriadic.Color1.IsNeighbour = true;
+				ComboTriadic.Color1.i = i;
+
+			} else if (Actualhex.neigbours [i].HexColor == 'Y') {
+
+				ComboTriadic.Color2.IsNeighbour = true;
+				ComboTriadic.Color2.i = i;
+			}
+
+		} else if (Actualhex.HexColor == 'M') {
+		
+		} else if (Actualhex.HexColor == 'Y') {
+
+		}
+
+		else if (Actualhex.HexColor == 'R') {
+
+		} 
+		else if (Actualhex.HexColor == 'B') {
+
+		}
+		else if (Actualhex.HexColor == 'G') {
+
+		} 
+
+		if (ComboTriadic.Color1.IsNeighbour == true && ComboTriadic.Color2.IsNeighbour == true) {
+
+			 
+
+		}
+
 	}
 
 	void totems(HexInfo ActualHex){
@@ -185,15 +244,6 @@ public class MouseManager : MonoBehaviour {
 		}
 
 	}
-
-	void Combo1(int[] ColorMatch, HexInfo Actualhex){
-
-		if (ColorMatch [0] == 1 && ColorMatch [3] == 1 || ColorMatch [1] == 1 && ColorMatch [4] == 1 || ColorMatch [2] == 1 && ColorMatch [5] == 1) {
-			print ("Combo One Biach");
-		}
-
-	}
-
 	
 	void IsClickable(HexInfo ActualHex){
 
@@ -215,7 +265,7 @@ public class MouseManager : MonoBehaviour {
 
 		if (mr.material.mainTexture == DefaultText || mr.material.mainTexture == null) {
 
-			hexInfo.HexColor = Color.cyan;
+			hexInfo.HexColor = 'C';
 			mr.material.mainTexture = CyanTex;
 			//NeighbourDensityManager (hexInfo);
 
@@ -228,13 +278,13 @@ public class MouseManager : MonoBehaviour {
 		}
 		else if (mr.material.mainTexture == MagentaTex) {
 
-			hexInfo.HexColor = Color.cyan;
+			hexInfo.HexColor = 'B';
 			mr.material.mainTexture = BlueTex;
 
 		}
 		else if (mr.material.mainTexture == YellowTex) {
 
-			hexInfo.HexColor = Color.green;
+			hexInfo.HexColor = 'G';
 			mr.material.mainTexture = GreenTex;
 
 		}
@@ -245,7 +295,7 @@ public class MouseManager : MonoBehaviour {
 
 		if (mr.material.mainTexture == DefaultText || mr.material.mainTexture == null) {
 
-			hexInfo.HexColor = Color.magenta;
+			hexInfo.HexColor = 'M';
 			mr.material.mainTexture = MagentaTex;
 			//NeighbourDensityManager (hexInfo);
 
@@ -257,13 +307,13 @@ public class MouseManager : MonoBehaviour {
 		}
 		else if (mr.material.mainTexture == CyanTex) {
 
-			hexInfo.HexColor = Color.blue;
+			hexInfo.HexColor = 'B';
 			mr.material.mainTexture = BlueTex;
 
 		}
 		else if (mr.material.mainTexture == YellowTex) {
 
-			hexInfo.HexColor = Color.red;
+			hexInfo.HexColor = 'R';
 			mr.material.mainTexture = RedTex;
 
 		}
@@ -275,7 +325,7 @@ public class MouseManager : MonoBehaviour {
 
 		if (mr.material.mainTexture == DefaultText || mr.material.mainTexture == null) {
 
-			hexInfo.HexColor = Color.yellow;
+			hexInfo.HexColor = 'Y';
 			mr.material.mainTexture = YellowTex;
 			//NeighbourDensityManager (hexInfo);
 
@@ -288,13 +338,13 @@ public class MouseManager : MonoBehaviour {
 		}
 		else if (mr.material.mainTexture == CyanTex) {
 
-			hexInfo.HexColor = Color.green;
+			hexInfo.HexColor = 'G';
 			mr.material.mainTexture = GreenTex;
 
 		}
 		else if (mr.material.mainTexture == MagentaTex) {
 
-			hexInfo.HexColor = Color.blue;
+			hexInfo.HexColor = 'B';
 			mr.material.mainTexture = BlueTex;
 
 		}

@@ -8,14 +8,29 @@ public class HexInfo : MonoBehaviour {
 	public int x;
 	public int y;
 
-	public bool Nucli=true;
+	public bool Nucli;
 	public int ColorDensity;
 	public bool Clickable;
 
-	public Color HexColor;
+	public char HexColor;
 	public Map map;
 
+	public HexInfo[] neigbours;
+
+	enum tipusTotem{farming, defensa, area};
+
+	struct Totem{
+
+		tipusTotem TotemType;
+		Color[] ColorsDefensa;
+		int FireRatio;
+		int Area;
+		int NumAbsorcions;
+
+
+	}
 
 }
+
 
 

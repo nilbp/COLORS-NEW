@@ -13,8 +13,8 @@ public class Map : MonoBehaviour {
 	//size of the map
 
 	//Ha de ser parell (width i heith) SEMPRE!!
-	public static int width = 15;
-	public static int height = 10;
+	public static int width = 16;
+	public static int height = 16;
 
 	float xOffset = 0.882f;
 	float zOffset = 0.764f;
@@ -81,13 +81,14 @@ public class Map : MonoBehaviour {
 				hexInfo.HexColor = 'W';
 
 
-				if(hexInfo.x==6 && hexInfo.y==4){
+				if(hexInfo.x==7 && hexInfo.y==7){
 
 					hexInfo.Nucli= true;
 				}
 
 				SpawnEnemies (Hex_go, x, y);
 				SpawnEnemies2 (Hex_go, x, y);
+				//SpawnEnemies3 (Hex_go, x, y);
                 hexLines[y].columns[x] = hexInfo;
 
                 //Aray out of range!!!!	
@@ -108,7 +109,7 @@ public class Map : MonoBehaviour {
 
 	void SpawnEnemies(GameObject hexInfo, int x, int y){
 	
-		if(x == 0 && y == 4){
+		if(x == 0 && y == 7){
 
 			spawner.HexSpawn1 = hexInfo;
 
@@ -118,14 +119,24 @@ public class Map : MonoBehaviour {
 			}
 	void SpawnEnemies2(GameObject hexInfo, int x, int y){
 
-		if(x == 0 && y == 4){
+		if(x == 7 && y == 14){
 
-			spawner.HexSpawn2 = hexInfo;
+			spawner1.HexSpawn2 = hexInfo;
 
 		}
 			
 
 	}
+	/*void SpawnEnemies3(GameObject hexInfo, int x, int y){
+
+		if(x == 7 && y == 0){
+
+			spawner1.HexSpawn3 = hexInfo;
+
+		}
+
+
+	}*/
 
 	void FillNeighbours(){
 

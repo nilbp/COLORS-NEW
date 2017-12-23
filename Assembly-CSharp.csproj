@@ -57,6 +57,8 @@
      <Compile Include="Assets\Scripts\MouseManager.cs" />
      <Compile Include="Assets\Scripts\Pigment.cs" />
      <Compile Include="Assets\Scripts\spawner.cs" />
+     <Compile Include="Assets\Scripts\spawner1.cs" />
+     <Compile Include="Assets\Scripts\totems.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

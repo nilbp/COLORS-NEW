@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ public class HexInfo : MonoBehaviour {
 
 	enum tipusTotem{farming, defensa, area};
 
-	struct Totem{
+	public struct Totem{
 
 		tipusTotem TotemType;
 		Color[] ColorsDefensa;

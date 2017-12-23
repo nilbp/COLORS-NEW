@@ -6,24 +6,26 @@ using UnityEngine.SceneManagement;
 public class spawner : MonoBehaviour {
 
 	public static GameObject HexSpawn1;
-	public static GameObject HexSpawn2;
-	public static GameObject HexSpawn3;
+	//public static GameObject HexSpawn2;
+	//public static GameObject HexSpawn3;
 
 	public GameObject[] minionspawn;
+	public GameObject[] minionspawn2;
+
 
 	public Texture2D DefaultTexture;
 
 	int MinionSpawnSize = 10;
 	int MinionStorage = 0;
 
-	public int puntuacion=0;
-
-	public Transform nucli;
-
 	HexInfo SpawnHex;
-	HexInfo SpawnHex2;
-	HexInfo SpawnHex3;
+	//HexInfo SpawnHex2;
+	//HexInfo SpawnHex3;
 
+	int time6=0;
+	int time5=0;
+	int time4=0;
+	int time3=0;
 	int time2=0;
 	int time=0;
 	   
@@ -35,6 +37,8 @@ public class spawner : MonoBehaviour {
 	float fracjourn;
 
 	int MinionSpawnCounter=0;
+	int MinionSpawnCounter2=0;
+	int MinionSpawnCounter3=0;
 
 	void Start()
 	{
@@ -44,7 +48,7 @@ public class spawner : MonoBehaviour {
 		startTime = Time.time;
 
 		SpawnHex = HexSpawn1.GetComponentInChildren<HexInfo> ();
-		SpawnHex2 = HexSpawn2.GetComponentInChildren<HexInfo> ();
+		//SpawnHex2 = HexSpawn2.GetComponentInChildren<HexInfo> ();
 		//SpawnHex3 = HexSpawn3.GetComponentInChildren<HexInfo> ();
 
 
@@ -59,20 +63,20 @@ public class spawner : MonoBehaviour {
 	void Update(){
 
 		SpawnManager ();
-
 	}
 	
 	void SpawnManager(){
 
 
 		time2++;
-		time ++;
+		time++;
 
 		if (minionspawn [MinionSpawnCounter] != null) {
 
 			if (MinionSpawnCounter == 3 || MinionSpawnCounter == 5) {
 				IAMoveS (SpawnHex, minionspawn, MinionSpawnCounter);
-			} else {
+			} 
+			else {
 				IAMoveForward (SpawnHex, minionspawn, MinionSpawnCounter);
 			}
 		} 
@@ -132,22 +136,18 @@ public class spawner : MonoBehaviour {
 
 		if (time > 50) {
 
-<<<<<<< HEAD
+
 			//GameObject MinionInstantiat = InstantiateInSpawn (SpawnHex, 0, 2, Minion, i);
 
-			if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].HexColor == Color.white) {
-=======
 			if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].Nucli == true) {
 
 				SceneManager.LoadScene ("MainMenu");
 
 			}
-<<<<<<< HEAD
-			else if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].HexColor == Color.white) {
->>>>>>> master
-=======
+
+
 			else if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].HexColor == 'W') {
->>>>>>> master
+
 
 				Minion[i].transform.position = Vector3.Lerp (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].transform.position, SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x + 1].transform.position, fracjourn); 
 				SpawnHex.x++;
@@ -160,19 +160,10 @@ public class spawner : MonoBehaviour {
 				ColisionColorDetection (SpawnHex.map.hexLines[SpawnHex.y].columns [SpawnHex.x], Minion, i);
 
 				if (LocalSpawnCounter != MinionSpawnCounter) {
-					ResetSpawn (SpawnHex, 0, 2);
-
-
+					ResetSpawn (SpawnHex, 0, 7);
 				}
-
-			ColisionColorDetection (SpawnHex.map.hexLines[SpawnHex.y].columns [SpawnHex.x], Minion, i);
-			
-				ResetSpawn (SpawnHex, 0, 2);
-				MinionSpawnCounter++;
-				Destroy (Minion[i]);
-
-			time = 0;
 		}
+			time = 0;
 	}
 	}
 
@@ -206,7 +197,7 @@ public class spawner : MonoBehaviour {
 				ColisionColorDetection (SpawnHex.map.hexLines[SpawnHex.y].columns [SpawnHex.x], Minion, i);	
 
 				if (LocalSpawnCounter != MinionSpawnCounter) {
-					ResetSpawn (SpawnHex, 0, 2);
+					ResetSpawn (SpawnHex, 0, 7);
 
 				}
 
@@ -215,7 +206,6 @@ public class spawner : MonoBehaviour {
 		}
 
 	}
-
 
 	void ResetHexagonColorValues(HexInfo SpawnHex, MeshRenderer HexColor){
 
@@ -236,9 +226,9 @@ public class spawner : MonoBehaviour {
 				
 				SpawnHex.ColorDensity++;
 				densityHigh (SpawnHex);
-				puntuacion++;
 
-			} else if (SpawnHex.HexColor == 'M') {
+			}
+			else if (SpawnHex.HexColor == 'M') {
 
 
 				ResetHexagonColorValues (SpawnHex, HexColor);
@@ -274,7 +264,6 @@ public class spawner : MonoBehaviour {
 
 				SpawnHex.ColorDensity++;
 				densityHigh (SpawnHex);
-				puntuacion++;
 
 
 			} else if (SpawnHex.HexColor == 'Y') {
@@ -310,7 +299,6 @@ public class spawner : MonoBehaviour {
 
 				SpawnHex.ColorDensity++;
 				densityHigh (SpawnHex);
-				puntuacion++;
 
 
 			} else {
@@ -345,16 +333,8 @@ public class spawner : MonoBehaviour {
 				SpawnHex.ColorDensity++;
 				MinionSpawnCounter++;
 				densityHigh (SpawnHex);
-<<<<<<< HEAD
-<<<<<<< Updated upstream
 				Destroy (Minion[i]);
-=======
-				puntuacion++;
 
->>>>>>> Stashed changes
-=======
-				Destroy (Minion [i]);
->>>>>>> master
 
 			} else if (SpawnHex.HexColor == 'R') {
 

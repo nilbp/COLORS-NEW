@@ -56,7 +56,7 @@ public class MouseManager : MonoBehaviour {
 
 	void Start(){
 
-		Nucli = GameObject.Find ("Hex_6_4").GetComponentInChildren<HexInfo> ();
+		Nucli = GameObject.Find ("Hex_7_7").GetComponentInChildren<HexInfo> ();
 		NucliMesh = Nucli.GetComponentInChildren<MeshRenderer> ();
 		RandomPrimaryColorSpawn ();
 	

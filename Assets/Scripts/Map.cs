@@ -88,7 +88,8 @@ public class Map : MonoBehaviour {
 
 				SpawnEnemies (Hex_go, x, y);
 				SpawnEnemies2 (Hex_go, x, y);
-				//SpawnEnemies3 (Hex_go, x, y);
+				SpawnEnemies3 (Hex_go, x, y);
+				SpawnEnemies4 (Hex_go, x, y);
                 hexLines[y].columns[x] = hexInfo;
 
                 //Aray out of range!!!!	
@@ -119,24 +120,30 @@ public class Map : MonoBehaviour {
 			}
 	void SpawnEnemies2(GameObject hexInfo, int x, int y){
 
-		if(x == 7 && y == 14){
+		if(x == 7 && y == 15){
 
-			spawner1.HexSpawn2 = hexInfo;
+			spawner.HexSpawn2 = hexInfo;
 
 		}
 			
 
 	}
-	/*void SpawnEnemies3(GameObject hexInfo, int x, int y){
+	void SpawnEnemies3(GameObject hexInfo, int x, int y){
 
 		if(x == 7 && y == 0){
 
-			spawner1.HexSpawn3 = hexInfo;
+			spawner.HexSpawn3 = hexInfo;
 
 		}
+	}
+	void SpawnEnemies4(GameObject hexInfo, int x, int y){
 
+		if(x == 15 && y == 7){
 
-	}*/
+			spawner.HexSpawn4 = hexInfo;
+
+		}
+	}
 
 	void FillNeighbours(){
 

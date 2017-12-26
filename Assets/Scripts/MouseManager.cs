@@ -111,7 +111,8 @@ public class MouseManager : MonoBehaviour {
 							ColorsChangeYellow (mr, HexInfoObject);
 							CurrentPigment -= 2;
 						}
-						ComboCheck ();
+						ComboTresEnRalla ();
+						ComboTresAgrupats (HexInfoObject);
 						RandomPrimaryColorSpawn ();
 		
 					}
@@ -157,7 +158,101 @@ public class MouseManager : MonoBehaviour {
 	
 	}
 
-	void ComboCheck(){
+	void ResetHexagonValues(HexInfo ActualHex){
+
+		ActualHex.GetComponentInChildren<MeshRenderer> ().material.mainTexture = null;
+		ActualHex.HexColor = 'W';
+		ActualHex.transform.localScale = new Vector3 (1, 1, 1);
+		ActualHex.ColorDensity = 0;
+
+	}
+
+	void ComboTriada(HexInfo ActualHex, int i, int j){
+
+		DefenseTotem totem = Totem.GetComponentInChildren<DefenseTotem> ();
+
+		totem.TotemColor1 = ActualHex.HexColor;
+		totem.TotemColor1 = ActualHex.neigbours[i].HexColor;
+		totem.TotemColor1 = ActualHex.neigbours[j].HexColor;
+
+		ResetHexagonValues (ActualHex.neigbours [i]);
+		ResetHexagonValues (ActualHex.neigbours [j]);
+			
+		ActualHex.ColorDensity = 0;
+		ActualHex.transform.localScale = new Vector3 (1, 1, 1);
+		ActualHex.GetComponent<MeshRenderer> ().material.color = Color.white;
+
+		Instantiate (Totem, ActualHex.transform.position, Quaternion.identity);
+							
+
+		
+	}
+
+	void ComboTresAgrupats(HexInfo ActualHex){
+
+		for(int i = 0; i<5;i++){
+			for(int j = i+1; j<6;j++){
+
+				if (ActualHex.neigbours [i].ColorDensity == ActualHex.neigbours [j].ColorDensity && ActualHex.neigbours [j].ColorDensity == ActualHex.ColorDensity) {
+
+					if (ActualHex.HexColor == 'C') {
+
+						if (ActualHex.neigbours [i].HexColor == 'M' && ActualHex.neigbours [j].HexColor == 'Y' || ActualHex.neigbours [j].HexColor == 'M' && ActualHex.neigbours [i].HexColor == 'Y') {
+
+							ComboTriada (ActualHex, i, j);
+
+						}
+
+
+					} else if (ActualHex.HexColor == 'M') {
+
+						if (ActualHex.neigbours [i].HexColor == 'C' && ActualHex.neigbours [j].HexColor == 'Y' || ActualHex.neigbours [j].HexColor == 'M' && ActualHex.neigbours [i].HexColor == 'Y') {
+
+							ComboTriada (ActualHex, i, j);
+
+						}
+				
+					} else if (ActualHex.HexColor == 'Y') {
+
+						if (ActualHex.neigbours [i].HexColor == 'M' && ActualHex.neigbours [j].HexColor == 'C' || ActualHex.neigbours [j].HexColor == 'M' && ActualHex.neigbours [i].HexColor == 'Y') {
+
+							ComboTriada (ActualHex, i, j);
+
+						}
+
+					} else if (ActualHex.HexColor == 'B') {
+
+						if (ActualHex.neigbours [i].HexColor == 'G' && ActualHex.neigbours [j].HexColor == 'R' || ActualHex.neigbours [j].HexColor == 'M' && ActualHex.neigbours [i].HexColor == 'Y') {
+
+							ComboTriada (ActualHex, i, j);
+
+						}
+
+					} else if (ActualHex.HexColor == 'R') {
+
+						if (ActualHex.neigbours [i].HexColor == 'G' && ActualHex.neigbours [j].HexColor == 'B' || ActualHex.neigbours [j].HexColor == 'M' && ActualHex.neigbours [i].HexColor == 'Y') {
+
+							ComboTriada (ActualHex, i, j);
+
+						}
+
+					} else if (ActualHex.HexColor == 'G') {
+
+						if (ActualHex.neigbours [i].HexColor == 'R' && ActualHex.neigbours [j].HexColor == 'B' || ActualHex.neigbours [j].HexColor == 'M' && ActualHex.neigbours [i].HexColor == 'Y') {
+
+							ComboTriada (ActualHex, i, j);
+
+						}
+					
+					}
+				}
+			}
+		}
+	}
+
+
+
+	void ComboTresEnRalla(){
 
 
 		for (int x = 0; x < Map.width; x++) {
@@ -183,7 +278,7 @@ public class MouseManager : MonoBehaviour {
 				}
 
 
-				totems (ActualHex);
+
 			}
 		}
 	}
@@ -199,10 +294,11 @@ public class MouseManager : MonoBehaviour {
 
 		if (Actualhex.HexColor == 'C') {
 		
-			if (Actualhex.neigbours [i].HexColor == 'M') {
+			if (Actualhex.neigbours [i].HexColor == 'M' ) {
 
 				ComboTriadic.Color1.IsNeighbour = true;
 				ComboTriadic.Color1.i = i;
+
 
 			} else if (Actualhex.neigbours [i].HexColor == 'Y') {
 
@@ -228,19 +324,8 @@ public class MouseManager : MonoBehaviour {
 
 		if (ComboTriadic.Color1.IsNeighbour == true && ComboTriadic.Color2.IsNeighbour == true) {
 
-			 
+			print ("GOS");
 
-		}
-
-	}
-
-	void totems(HexInfo ActualHex){
-
-		if (ActualHex.ColorDensity > 4) {
-
-			ActualHex.ColorDensity = 0;
-			ActualHex.transform.localScale = new Vector3 (1, 1, 1);
-			Instantiate (Totem, ActualHex.transform.position, Quaternion.identity);
 		}
 
 	}
@@ -267,6 +352,7 @@ public class MouseManager : MonoBehaviour {
 
 			hexInfo.HexColor = 'C';
 			mr.material.mainTexture = CyanTex;
+			hexInfo.ColorDensity++;
 			//NeighbourDensityManager (hexInfo);
 
 
@@ -297,6 +383,7 @@ public class MouseManager : MonoBehaviour {
 
 			hexInfo.HexColor = 'M';
 			mr.material.mainTexture = MagentaTex;
+			hexInfo.ColorDensity++;
 			//NeighbourDensityManager (hexInfo);
 
 
@@ -327,6 +414,7 @@ public class MouseManager : MonoBehaviour {
 
 			hexInfo.HexColor = 'Y';
 			mr.material.mainTexture = YellowTex;
+			hexInfo.ColorDensity++;
 			//NeighbourDensityManager (hexInfo);
 
 
@@ -373,3 +461,4 @@ public class MouseManager : MonoBehaviour {
 		}
 	}
 }
+

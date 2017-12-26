@@ -51,9 +51,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\DefenseTotem.cs" />
      <Compile Include="Assets\Scripts\HexInfo.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Map.cs" />
+     <Compile Include="Assets\Scripts\Minions.cs" />
      <Compile Include="Assets\Scripts\MouseManager.cs" />
      <Compile Include="Assets\Scripts\Pigment.cs" />
      <Compile Include="Assets\Scripts\spawner.cs" />

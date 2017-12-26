@@ -148,7 +148,7 @@ public class spawner : MonoBehaviour {
 				ColisionColorDetection (SpawnHex.map.hexLines[SpawnHex.y].columns [SpawnHex.x], Minion, i);
 
 				if (LocalSpawnCounter != MinionSpawnCounter) {
-					ResetSpawn (SpawnHex, 0, 2);
+					ResetSpawn (SpawnHex, 0, 4);
 
 				}
 			
@@ -203,6 +203,7 @@ public class spawner : MonoBehaviour {
 		SpawnHex.HexColor = 'W';
 		SpawnHex.transform.localScale = new Vector3 (1, 1, 1);
 		HexColor.material.mainTexture = null;
+		SpawnHex.ColorDensity = 0;
 	}
 
 	void ColisionColorDetection(HexInfo SpawnHex, GameObject[] Minion, int i){

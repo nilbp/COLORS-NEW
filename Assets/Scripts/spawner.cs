@@ -136,7 +136,7 @@ public class spawner : MonoBehaviour {
 		if (time3 > 80) {
 
 
-			//GameObject MinionInstantiat = InstantiateInSpawn (SpawnHex, 0, 2, Minion, i);
+			//GameObject MinionSpawn1 = (gameObject)InstantiateInSpawn (SpawnHex, 0, 2, Minion, i);
 
 			if (SpawnHex.map.hexLines [SpawnHex.y].columns [SpawnHex.x].Nucli == true) {
 
@@ -451,16 +451,16 @@ public class spawner : MonoBehaviour {
 				ColisionColorDetection (SpawnHex.map.hexLines[SpawnHex.y].columns [SpawnHex.x], Minion, i);
 
 				if (LocalSpawnCounter != MinionSpawnCounter) {
-<<<<<<< HEAD
+
 					ResetSpawn (SpawnHex, 0, 4);
 
-=======
+
 					ResetSpawn (SpawnHex, 0, 7);
->>>>>>> master
+
 				}
-		}
+			}
 			time = 0;
-	}
+		}
 	}
 
 	void IAMoveS(HexInfo SpawnHex, GameObject[] Minion, int i){

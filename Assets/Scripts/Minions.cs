@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Minions : MonoBehaviour {
 
-	public char ColorIdentifier = 'C';
-
+	public char ColorIdentifier;
 
 }

@@ -19,14 +19,50 @@ public class HexInfo : MonoBehaviour {
 
 	enum tipusTotem{farming, defensa, area};
 
-	public struct Totem{
+	private GameObject Totem;
 
-		tipusTotem TotemType;
-		Color[] ColorsDefensa;
-		int FireRatio;
-		int Area;
-		int NumAbsorcions;
+	public Color hoverColor;
+	private Renderer rend;
+	private Color startColor; 
 
+	BuildManager buildManager;
+
+	void Start(){
+
+		rend = GetComponent<Renderer> ();
+		startColor = rend.material.color;
+
+		buildManager = BuildManager.instance;
+	}
+
+	void OnMouseDown(){
+	
+		if (buildManager.GetTotemToBuild () == null)
+			return;
+		
+		if (Totem != null) {
+		
+			Debug.Log ("Can't build");
+			return;
+		}
+
+		GameObject totemToBuild = BuildManager.instance.GetTotemToBuild ();
+		Totem = (GameObject)Instantiate (totemToBuild, transform.position, Quaternion.identity);
+
+	}
+
+	void OnMouseEnter(){
+	
+		if (buildManager.GetTotemToBuild () == null)
+			return;
+		
+		rend.material.color =  hoverColor;
+
+	
+	}
+	void OnMouseExit(){
+
+		rend.material.color = startColor;
 
 	}
 

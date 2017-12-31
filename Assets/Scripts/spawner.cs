@@ -95,7 +95,7 @@ public class spawner : MonoBehaviour {
 
 			}
 		} 
-		if (minionspawn2 [MinionSpawnCounter2] != null) {
+		/*if (minionspawn2 [MinionSpawnCounter2] != null) {
 
 			if (MinionSpawnCounter2 == 3 || MinionSpawnCounter2 == 5) {
 				
@@ -126,7 +126,7 @@ public class spawner : MonoBehaviour {
 		} 
 		else {
 			print("LEVEL PASSED!!!");
-		}
+		}*/
 	}
 
 	void IAMoveS2(HexInfo SpawnHex, GameObject[] Minion, int i){

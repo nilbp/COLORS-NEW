@@ -32,7 +32,12 @@ public class MouseManager : MonoBehaviour {
 	public GameObject MagentaTotem;
 	public GameObject YellowTotem;
 
-	public struct colorCombo{
+	public GameObject CyanTubPinturaPrefab;
+	public GameObject MagentaTubPinturaPrefab;
+	public GameObject YellowTubPinturaPrefab;
+
+	public Vector3 PositionOffset;
+	/*public struct colorCombo{
 
 		public int i;
 		public bool IsNeighbour;
@@ -42,7 +47,7 @@ public class MouseManager : MonoBehaviour {
 
 		public colorCombo Color1;
 		public colorCombo Color2;
-	}
+	}*/
 
 	enum NeighbourPosition
 	{
@@ -114,7 +119,7 @@ public class MouseManager : MonoBehaviour {
 							CurrentPigment -= 2;
 						}
 
-						//ComboTresEnRalla ();
+						ComboTresEnRalla (HexInfoObject);
 						ComboTresAgrupats (HexInfoObject);
 						RandomPrimaryColorSpawn ();
 		
@@ -235,7 +240,7 @@ public class MouseManager : MonoBehaviour {
 
 
 
-	void ComboTresEnRalla(){
+	void ComboTresEnRalla(HexInfo LastHexPressed){
 
 
 		for (int x = 0; x < Map.width; x++) {
@@ -245,29 +250,79 @@ public class MouseManager : MonoBehaviour {
 				GameObject HexGameObject = GameObject.Find ("Hex_" + x + "_" + y);
 				HexInfo ActualHex = HexGameObject.GetComponentInChildren<HexInfo> ();
 
-				int[] ColorMatch= new int[6];
+				if (ActualHex.HexColor == 'C') {
 
+					if (ActualHex.neigbours [0].HexColor == 'C' && ActualHex.neigbours [3].HexColor == 'C') {
 
+						TresEnRallaInstantiateTub (CyanTubPinturaPrefab , ActualHex, LastHexPressed, 0, 3);
 
-				for (int i = 0; i < 6; i++) {
+					}
+					else if(ActualHex.neigbours [1].HexColor == 'C' && ActualHex.neigbours [4].HexColor == 'C'){
 
-					if (ActualHex.neigbours [i] != null) {
-						if(ActualHex.HexColor != 'W' ){
+						TresEnRallaInstantiateTub (CyanTubPinturaPrefab ,ActualHex, LastHexPressed, 1, 4);
 
-							Combos(ActualHex, i);
+					}
+					else if(ActualHex.neigbours [2].HexColor == 'C' && ActualHex.neigbours [5].HexColor == 'C') {
 
-						}
+						TresEnRallaInstantiateTub (CyanTubPinturaPrefab ,ActualHex, LastHexPressed, 2, 5);
+
 					}
 				}
 
+				if (ActualHex.HexColor == 'M') {
 
+					if (ActualHex.neigbours [0].HexColor == 'M' && ActualHex.neigbours [3].HexColor == 'M') {
 
+						TresEnRallaInstantiateTub (MagentaTubPinturaPrefab ,ActualHex, LastHexPressed, 0, 3);
+
+					}
+					else if(ActualHex.neigbours [1].HexColor == 'M' && ActualHex.neigbours [4].HexColor == 'M'){
+
+						TresEnRallaInstantiateTub (MagentaTubPinturaPrefab, ActualHex, LastHexPressed, 1, 4);
+
+					}
+					else if(ActualHex.neigbours [2].HexColor == 'M' && ActualHex.neigbours [5].HexColor == 'M') {
+
+						TresEnRallaInstantiateTub (MagentaTubPinturaPrefab, ActualHex, LastHexPressed, 2, 5);
+
+					}
+				}
+
+				if (ActualHex.HexColor == 'Y') {
+
+					if (ActualHex.neigbours [0].HexColor == 'Y' && ActualHex.neigbours [3].HexColor == 'Y') {
+
+						TresEnRallaInstantiateTub (YellowTubPinturaPrefab, ActualHex, LastHexPressed, 0, 3);
+
+					}
+					else if(ActualHex.neigbours [1].HexColor == 'Y' && ActualHex.neigbours [4].HexColor == 'Y'){
+
+						TresEnRallaInstantiateTub (YellowTubPinturaPrefab, ActualHex, LastHexPressed, 1, 4);
+
+					}
+					else if(ActualHex.neigbours [2].HexColor == 'Y' && ActualHex.neigbours [5].HexColor == 'Y') {
+
+						TresEnRallaInstantiateTub (YellowTubPinturaPrefab, ActualHex, LastHexPressed, 2, 5);
+
+					}
+				}
 			}
 		}
 	}
 
+	void TresEnRallaInstantiateTub(GameObject Tub, HexInfo ActualHex, HexInfo lastHexPressed, int i, int j){
+	
+		ResetHexagonValues (ActualHex.neigbours [i]);
+		ResetHexagonValues (ActualHex.neigbours [j]);
+		ResetHexagonValues (ActualHex);
 
-	void Combos(HexInfo Actualhex, int i){
+		Tub.GetComponent<TubDePintura> ().actualHex = lastHexPressed;
+		Instantiate (Tub, lastHexPressed.transform.position + PositionOffset, Quaternion.identity);
+
+
+
+	}
+	/*void Combos(HexInfo Actualhex, int i){
 		
 
 		combo ComboTriadic;
@@ -311,7 +366,7 @@ public class MouseManager : MonoBehaviour {
 
 		}
 
-	}
+	}*/
 	
 	void IsClickable(HexInfo ActualHex){
 

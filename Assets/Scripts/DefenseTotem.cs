@@ -12,6 +12,8 @@ public class DefenseTotem : MonoBehaviour {
 
 	[Header("Unity Setup Fields")]
 
+	public HexInfo actualHex;
+
 	public Transform target;
 	public string enemyTag = "Enemy";
 
@@ -38,19 +40,22 @@ public class DefenseTotem : MonoBehaviour {
 			if (distanceToEnemy < shortestDistance) 
 			{
 				shortestDistance = distanceToEnemy;
-				nearestEnemy = enemy;
+				nearestEnemy = enemy; 
 			}
 		}
 
 		if (nearestEnemy != null && shortestDistance <= range ) 
 		{
-			if(nearestEnemy.GetComponent<Minions>().ColorIdentifier == TotemColor)
-					
-					target = nearestEnemy.transform;
+			Minions minion = nearestEnemy.GetComponent<Minions> ();
 
-				
+			if (minion.ColorIdentifier == TotemColor) {
+					
+				target = nearestEnemy.transform;
+
+			}
 		}
 	}
+
 
 	void Update(){
 
@@ -68,8 +73,16 @@ public class DefenseTotem : MonoBehaviour {
 
 	void Shoot(){
 	
-		Instantiate (bulletPrefab, firePoint.position, firePoint.rotation);
-		Destroy (target.gameObject);
+		GameObject bulletGO = (GameObject)Instantiate (bulletPrefab, firePoint.position, firePoint.rotation);
+		Bullet bullet = bulletGO.GetComponent<Bullet> ();
+
+		if (bullet != null) {
+
+			bullet.chase (target);
+
+		}
+
+		//Destroy (target.gameObject);
 	
 	}
 

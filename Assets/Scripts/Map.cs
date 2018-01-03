@@ -14,9 +14,14 @@ public class Map : MonoBehaviour {
 
 	//Ha de ser parell (width i heith) SEMPRE!!
 
+<<<<<<< Updated upstream
 	public static int width = 14;
 	public static int height = 14;
 
+=======
+	public static int width = 16;
+	public static int height = 16;
+>>>>>>> Stashed changes
 
 	float xOffset = 0.882f;
 	float zOffset = 0.764f;
@@ -111,9 +116,9 @@ public class Map : MonoBehaviour {
 	}
 
 	void SpawnEnemies(GameObject hexInfo, int x, int y){
-	
-		if(x == 0 && y == 7){
 
+		if(x == 0 && y == 7){
+			
 			spawner.HexSpawn1 = hexInfo;
 
 		}
@@ -132,7 +137,7 @@ public class Map : MonoBehaviour {
 	}
 	void SpawnEnemies3(GameObject hexInfo, int x, int y){
 
-		if(x == 7 && y == 0){
+		if(x == 7 && y == 1){
 
 			spawner.HexSpawn3 = hexInfo;
 

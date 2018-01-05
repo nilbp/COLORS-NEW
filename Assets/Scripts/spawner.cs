@@ -55,9 +55,9 @@ public class spawner : MonoBehaviour {
 		startTime = Time.time;
 
 		SpawnHex = HexSpawn1.GetComponentInChildren<HexInfo> ();
-		SpawnHex2 = HexSpawn2.GetComponentInChildren<HexInfo> ();
+		/*SpawnHex2 = HexSpawn2.GetComponentInChildren<HexInfo> ();
 		SpawnHex3 = HexSpawn3.GetComponentInChildren<HexInfo> ();
-		SpawnHex4 = HexSpawn4.GetComponentInChildren<HexInfo> ();
+		SpawnHex4 = HexSpawn4.GetComponentInChildren<HexInfo> ();*/
 
 
 

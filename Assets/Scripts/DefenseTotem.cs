@@ -46,7 +46,7 @@ public class DefenseTotem : MonoBehaviour {
 
 		if (nearestEnemy != null && shortestDistance <= range ) 
 		{
-			Minions minion = nearestEnemy.GetComponent<Minions> ();
+			MinionMovement minion = nearestEnemy.GetComponent<MinionMovement> ();
 
 			if (minion.ColorIdentifier == TotemColor) {
 					

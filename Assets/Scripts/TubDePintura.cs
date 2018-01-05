@@ -6,9 +6,9 @@ public class TubDePintura : MonoBehaviour {
 
 	[Header("Atributes")]
 
-	public float range = 1.2f; //distancia entre hex i hex
 	public int hexRange = 3;
 
+	public float range = 1.2f;
 	public float FireRatio = 1f; //3 = 3s ? 
 	public float FireCountdown = 0f;
 
@@ -51,13 +51,16 @@ public class TubDePintura : MonoBehaviour {
 			}
 		}
 
-		if (nearestEnemy != null && shortestDistance <= range ) 
-		{
-			Minions minion = nearestEnemy.GetComponent<Minions> ();
+		if (nearestEnemy != null /*podriem comprovar si està en range per no fer
+									un get component de tots els minions del camp
+									&& distanceToEnemy < range*/) {
 
-			if (minion.ColorIdentifier == TotemColor && IsInHexRange (minion) == true) {
+			MinionMovement minion = nearestEnemy.GetComponent<MinionMovement> ();
 
-				target = nearestEnemy.transform;
+			if (IsInHexRange (minion) == true && minion.ColorIdentifier == TotemColor) {
+
+
+					target = nearestEnemy.transform;
 
 			}
 		}
@@ -81,10 +84,10 @@ public class TubDePintura : MonoBehaviour {
 
 	}
 
-	bool IsInHexRange(Minions minion){
+	bool IsInHexRange(MinionMovement minion){
 
 		for(int i = 0; i< hexRange; i++){
-			if (ListOfHexesInRange [i].x == minion.x && ListOfHexesInRange [i].y == minion.y) 
+			if (ListOfHexesInRange [i] == minion.ActualHex) 
 				return true;	
 		}
 		return false;

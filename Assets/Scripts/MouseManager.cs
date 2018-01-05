@@ -36,7 +36,7 @@ public class MouseManager : MonoBehaviour {
 	public GameObject MagentaTubPinturaPrefab;
 	public GameObject YellowTubPinturaPrefab;
 
-	public Vector3 PositionOffset;
+	public Vector3 SpraiPositionOffset;
 	/*public struct colorCombo{
 
 		public int i;
@@ -66,6 +66,8 @@ public class MouseManager : MonoBehaviour {
 		Nucli = GameObject.Find ("Hex_7_7").GetComponentInChildren<HexInfo> ();
 		NucliMesh = Nucli.GetComponentInChildren<MeshRenderer> ();
 		RandomPrimaryColorSpawn ();
+
+		SpraiPositionOffset = new Vector3 (0, 0.485f, 0);
 	
 	}
 
@@ -193,8 +195,10 @@ public class MouseManager : MonoBehaviour {
 								ResetHexagonValues (ActualHex.neigbours [j]);
 								ResetHexagonValues (ActualHex);
 
-								CyanTotem.GetComponent<DefenseTotem> ().TotemColor = 'C';
-								Instantiate (CyanTotem, ActualHex.transform.position, Quaternion.identity);
+								DefenseTotem totemScript = CyanTotem.GetComponent<DefenseTotem> ();
+								totemScript.TotemColor = 'C';
+								totemScript.actualHex = ActualHex;
+								Instantiate (CyanTotem, ActualHex.transform.position + SpraiPositionOffset, CyanTotem.transform.rotation);
 							}
 						}
 					}
@@ -211,7 +215,7 @@ public class MouseManager : MonoBehaviour {
 								ResetHexagonValues (ActualHex.neigbours [i]);
 								ResetHexagonValues (ActualHex.neigbours [j]);
 								ResetHexagonValues (ActualHex);
-								Instantiate (MagentaTotem, ActualHex.transform.position, Quaternion.identity);
+								Instantiate (MagentaTotem, ActualHex.transform.position, CyanTotem.transform.rotation);
 								MagentaTotem.GetComponent<DefenseTotem> ().TotemColor = 'M';
 							}
 						}
@@ -228,7 +232,7 @@ public class MouseManager : MonoBehaviour {
 								ResetHexagonValues (ActualHex.neigbours [i]);
 								ResetHexagonValues (ActualHex.neigbours [j]);
 								ResetHexagonValues (ActualHex);
-								Instantiate (YellowTotem, ActualHex.transform.position, Quaternion.identity);
+								Instantiate (YellowTotem, ActualHex.transform.position, CyanTotem.transform.rotation);
 								YellowTotem.GetComponent<DefenseTotem> ().TotemColor = 'Y';
 							}
 						}
@@ -317,7 +321,7 @@ public class MouseManager : MonoBehaviour {
 		ResetHexagonValues (ActualHex);
 
 		Tub.GetComponent<TubDePintura> ().actualHex = lastHexPressed;
-		Instantiate (Tub, lastHexPressed.transform.position + PositionOffset, Quaternion.identity);
+		Instantiate (Tub, lastHexPressed.transform.position, Quaternion.identity);
 
 
 

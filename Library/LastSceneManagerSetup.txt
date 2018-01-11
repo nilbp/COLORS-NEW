@@ -1,12 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scenes/Nil_Level.unity
-=======
-<<<<<<< Updated upstream
-- path: Assets/Levels/Nil_Level.unity
-=======
-- path: Assets/Levels/adam_lvl.unity
->>>>>>> Stashed changes
->>>>>>> master
   isLoaded: 1
   isActive: 1

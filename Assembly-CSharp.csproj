@@ -63,7 +63,6 @@
      <Compile Include="Assets\Scripts\MouseManager.cs" />
      <Compile Include="Assets\Scripts\Paleta.cs" />
      <Compile Include="Assets\Scripts\spawner.cs" />
-     <Compile Include="Assets\Scripts\totems.cs" />
      <Compile Include="Assets\Scripts\TubDePintura.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

@@ -43,7 +43,7 @@ public class Bullet : MonoBehaviour {
 		Destroy (effectIns, 2f); 
 
 		Destroy (gameObject);
-		Destroy (target.gameObject);
+		target.GetComponent<MinionMovement> ().Life--;
 
 	}
 }

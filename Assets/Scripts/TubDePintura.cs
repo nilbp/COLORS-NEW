@@ -55,7 +55,7 @@ public class TubDePintura : MonoBehaviour {
 									un get component de tots els minions del camp
 									&& distanceToEnemy < range*/) {
 
-			MinionMovement minion = nearestEnemy.GetComponent<MinionMovement> ();
+			MinionMovement minion = nearestEnemy.GetComponentInParent<MinionMovement> ();
 
 			if (IsInHexRange (minion) == true && minion.ColorIdentifier == TotemColor) {
 

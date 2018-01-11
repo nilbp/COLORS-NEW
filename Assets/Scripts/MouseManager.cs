@@ -37,6 +37,8 @@ public class MouseManager : MonoBehaviour {
 	public GameObject YellowTubPinturaPrefab;
 
 	public Vector3 SpraiPositionOffset;
+	public Vector3 TubOfset;
+
 	/*public struct colorCombo{
 
 		public int i;
@@ -122,7 +124,7 @@ public class MouseManager : MonoBehaviour {
 						}
 
 						ComboTresEnRalla (HexInfoObject);
-						ComboTresAgrupats (HexInfoObject);
+						CreateSprai (HexInfoObject);
 						RandomPrimaryColorSpawn ();
 		
 					}
@@ -180,7 +182,7 @@ public class MouseManager : MonoBehaviour {
 
 
 
-	void ComboTresAgrupats(HexInfo ActualHex){
+	void CreateSprai(HexInfo ActualHex){
 
 		for(int i = 0; i<5;i++){
 			for(int j = i+1; j<6;j++){
@@ -215,7 +217,7 @@ public class MouseManager : MonoBehaviour {
 								ResetHexagonValues (ActualHex.neigbours [i]);
 								ResetHexagonValues (ActualHex.neigbours [j]);
 								ResetHexagonValues (ActualHex);
-								Instantiate (MagentaTotem, ActualHex.transform.position, CyanTotem.transform.rotation);
+								Instantiate (MagentaTotem, ActualHex.transform.position + SpraiPositionOffset, CyanTotem.transform.rotation);
 								MagentaTotem.GetComponent<DefenseTotem> ().TotemColor = 'M';
 							}
 						}
@@ -232,7 +234,7 @@ public class MouseManager : MonoBehaviour {
 								ResetHexagonValues (ActualHex.neigbours [i]);
 								ResetHexagonValues (ActualHex.neigbours [j]);
 								ResetHexagonValues (ActualHex);
-								Instantiate (YellowTotem, ActualHex.transform.position, CyanTotem.transform.rotation);
+								Instantiate (YellowTotem, ActualHex.transform.position + SpraiPositionOffset, CyanTotem.transform.rotation);
 								YellowTotem.GetComponent<DefenseTotem> ().TotemColor = 'Y';
 							}
 						}

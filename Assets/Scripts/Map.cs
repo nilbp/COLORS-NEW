@@ -13,15 +13,10 @@ public class Map : MonoBehaviour {
 	//size of the map
 
 	//Ha de ser parell (width i heith) SEMPRE!!
-
-<<<<<<< Updated upstream
 	public static int width = 14;
 	public static int height = 14;
 
-=======
-	public static int width = 16;
-	public static int height = 16;
->>>>>>> Stashed changes
+
 
 	float xOffset = 0.882f;
 	float zOffset = 0.764f;
@@ -49,7 +44,7 @@ public class Map : MonoBehaviour {
 
 		createMap ();
 		FillNeighbours ();
-		ClickableSpace ();
+		//ClickableSpace ();
 
 	}
 
@@ -83,7 +78,7 @@ public class Map : MonoBehaviour {
 				hexInfo.y = y;
 				hexInfo.Nucli = false;
 				hexInfo.ColorDensity = 0;
-				hexInfo.Clickable = false;
+				hexInfo.Clickable = true;
                 hexInfo.map = this;
 				hexInfo.HexColor = 'W';
 
@@ -93,8 +88,8 @@ public class Map : MonoBehaviour {
 					hexInfo.Nucli= true;
 				}
 
-				SpawnEnemies (Hex_go, x, y);
-				/*SpawnEnemies2 (Hex_go, x, y);
+				/*SpawnEnemies (Hex_go, x, y);
+				SpawnEnemies2 (Hex_go, x, y);
 				SpawnEnemies3 (Hex_go, x, y);
 				SpawnEnemies4 (Hex_go, x, y);*/
                 hexLines[y].columns[x] = hexInfo;
@@ -114,25 +109,16 @@ public class Map : MonoBehaviour {
 			}
 		}
 	}
-
-<<<<<<< HEAD
-	void SpawnEnemies(GameObject Hex_go, int x, int y){
+		
+	/*void SpawnEnemies(GameObject Hex_go, int x, int y){
 	
 		if(x == 0 && y == 7){
 
 			spawner.HexSpawn1 = Hex_go;
-=======
-	void SpawnEnemies(GameObject hexInfo, int x, int y){
-
-		if(x == 0 && y == 7){
-			
-			spawner.HexSpawn1 = hexInfo;
->>>>>>> master
-
+		
 		}
+	}
 
-
-			}
 	void SpawnEnemies2(GameObject hexInfo, int x, int y){
 
 		if(x == 7 && y == 15){
@@ -158,7 +144,7 @@ public class Map : MonoBehaviour {
 			spawner.HexSpawn4 = hexInfo;
 
 		}
-	}
+	}*/
 
 	void FillNeighbours(){
 

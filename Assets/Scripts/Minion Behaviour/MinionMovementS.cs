@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinionMovement : MonoBehaviour {
+public class MinionMovementS : MonoBehaviour {
 
 	public HexInfo ActualHex;
 	public HexInfo NextHex;
@@ -14,15 +14,15 @@ public class MinionMovement : MonoBehaviour {
 	private float Size;
 	public char ColorIdentifier;
 
+	private int counter = 0;
+
 	Transform target;
 
 	public float speed = 1;
 
-	private bool rotated;
-
 	void Start () {
 
-		Life = 5;
+		Life = 1;
 		NextHex = ActualHex.neigbours[3];
 		target = NextHex.gameObject.transform;
 
@@ -33,7 +33,7 @@ public class MinionMovement : MonoBehaviour {
 
 
 		if (ActualHex.HexColor == 'W') {
-			Movement ();
+			MovementS ();
 		} 
 		else {
 			Colision ();
@@ -51,68 +51,59 @@ public class MinionMovement : MonoBehaviour {
 			return;
 		} 
 
-		Size = Life*0.4f;
+		Size = 1+Life*0.2f;
 		transform.localScale = new Vector3(Size,Size,Size);
 
 
 	}
-	bool RandomDecrese(){
-	
-		int Rand = Random.Range(0, 2);
 
-		if (Rand == 0)
-			return true;
-		else
-			return false;
-		
-	}
-
-	void Movement(){
-
+	void MovementS(){
 
 		Vector3 dir= target.position - transform.position;
-
 		float distanceThisFrame = speed * Time.fixedDeltaTime;
 
 		if (dir.magnitude <= distanceThisFrame)
 		{
-
 			ActualHex = NextHex;
 
-			if (ActualHex.y > Nucli.y && RandomDecrese() == true || ActualHex.y > Nucli.y && ActualHex.x >= Nucli.x-2) {
-
+			if (counter == 0) {
+				
 				NextHex = ActualHex.neigbours [4];
-
-				if (rotated == false) {
-
-					transform.Rotate(1, 60, 1);
-					rotated = true;
-				}
-
+				transform.Rotate (1, 60, 1);
+				counter = 1;
 			} 
-			else {
-
-				if (rotated) {
-					transform.Rotate (1, -60, 1);
-					rotated = false;
-				}
+			else if (counter == 1) 
+			{
 				
 				NextHex = ActualHex.neigbours [3];
-
+				transform.Rotate (1, -60, 1);
+				counter = 2;	
+			}
+			else if(counter == 2)
+			{
+				NextHex = ActualHex.neigbours [2];
+				transform.Rotate (1, -60, 1);
+				counter = 3;
+			}
+			else  
+			{
+				NextHex = ActualHex.neigbours [3];
+				transform.Rotate (1, 60, 1);
+				counter = 0;	
 			}
 
 			if (NextHex == null) {
 				Destroy (gameObject);
 				return;
 			}
-			
+
 			target = NextHex.gameObject.transform;
 
 		}
 
-	
-			transform.Translate (dir.normalized * distanceThisFrame, Space.World);
-	
+
+		transform.Translate (dir.normalized * distanceThisFrame, Space.World);
+
 
 	}
 
@@ -134,11 +125,14 @@ public class MinionMovement : MonoBehaviour {
 
 		} 
 		else {
-			
-			//Es transformen en un altre color?
+
+			Life++;
+			ResetHexagonColorValues (ActualHex);
+			//Es transformen en un altre color i life ++ 
+
 		}
-	
-	
+
+
 	}
 
 

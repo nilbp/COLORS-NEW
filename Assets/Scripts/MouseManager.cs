@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class MouseManager : MonoBehaviour {
 
-	public GameObject bola;
 	int xHexPos;
 	int yHexPos;
 
@@ -25,8 +24,7 @@ public class MouseManager : MonoBehaviour {
 	public Texture2D GreenTex;
 
 	private HexInfo Nucli;
-	private MeshRenderer NucliMesh;
-	private char ColorInHand;
+	public static char ColorInHand;
 
 	public GameObject CyanTotem;
 	public GameObject MagentaTotem;
@@ -66,8 +64,7 @@ public class MouseManager : MonoBehaviour {
 	void Start(){
 
 		Nucli = GameObject.Find ("Hex_7_7").GetComponentInChildren<HexInfo> ();
-		NucliMesh = Nucli.GetComponentInChildren<MeshRenderer> ();
-		RandomPrimaryColorSpawn ();
+		//RandomPrimaryColorSpawn ();
 
 		SpraiPositionOffset = new Vector3 (0, 0.485f, 0);
 	
@@ -93,11 +90,6 @@ public class MouseManager : MonoBehaviour {
 			if (Input.GetMouseButtonDown (0)) {
 
 				HexInfo HexInfoObject = ourHitObject.GetComponentInChildren<HexInfo> ();
-
-				//IsClickable(HexInfoObject);
-					
-
-
 
 				if (CurrentPigment > 1) {
 					if (HexInfoObject.Clickable == true) {
@@ -125,7 +117,7 @@ public class MouseManager : MonoBehaviour {
 
 						ComboTresEnRalla (HexInfoObject);
 						CreateSprai (HexInfoObject);
-						RandomPrimaryColorSpawn ();
+						//RandomPrimaryColorSpawn ();
 		
 					}
 				}
@@ -137,6 +129,8 @@ public class MouseManager : MonoBehaviour {
 
 	}
 
+
+	/* GENERADOR DE COLORS RANDOM EN EL NULCI
 	void RandomPrimaryColorSpawn(){
 
 		//Random rnd = new Random();
@@ -159,7 +153,7 @@ public class MouseManager : MonoBehaviour {
 			break;
 		}
 	
-	}
+	}*/
 
 	void UpdatePigmentBar(){
 	

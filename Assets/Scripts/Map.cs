@@ -13,8 +13,8 @@ public class Map : MonoBehaviour {
 	//size of the map
 
 	//Ha de ser parell (width i heith) SEMPRE!!
-	public static int width = 14;
-	public static int height = 14;
+	public static int width = 10;
+	public static int height = 8;
 
 
 
@@ -83,19 +83,13 @@ public class Map : MonoBehaviour {
 				hexInfo.HexColor = 'W';
 
 
-				if(hexInfo.x==7 && hexInfo.y==7){
+				if(hexInfo.x==9){
 
 					hexInfo.Nucli= true;
+					hexInfo.GetComponent<Renderer> ().material.color = Color.black;
 				}
-
-				/*SpawnEnemies (Hex_go, x, y);
-				SpawnEnemies2 (Hex_go, x, y);
-				SpawnEnemies3 (Hex_go, x, y);
-				SpawnEnemies4 (Hex_go, x, y);*/
+					
                 hexLines[y].columns[x] = hexInfo;
-
-                //Aray out of range!!!!	
-                //Neighbours (Hex_go);
 
                 //Rename hexes with coordenate names
                 Hex_go.name = "Hex_" + x + "_" + y;

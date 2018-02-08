@@ -71,7 +71,7 @@ public class MinionSpawn : MonoBehaviour {
 			}
 			counter++;
 		} 
-		else if (counter >= 5 && counter <= 10) 
+		else if (counter >= 20 && counter <= 50) 
 		{
 			if (MinionColorIdenityfier == 'C') {
 
@@ -86,7 +86,7 @@ public class MinionSpawn : MonoBehaviour {
 			counter++;
 		}
 
-		else if (counter < 5) 
+		else if (counter < 20) 
 		{
 
 			Debug.Log ("vaina");

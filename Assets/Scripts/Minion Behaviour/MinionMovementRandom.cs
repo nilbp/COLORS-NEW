@@ -7,18 +7,19 @@ public class MinionMovementRandom : MonoBehaviour {
 		public HexInfo ActualHex;
 		public HexInfo NextHex;
 		public HexInfo Nucli;
-
 		public Texture DefaultTexture;
-
-		public int Life;
-		private float Size;
-		public char ColorIdentifier;
-
 		Transform target;
-
+		private bool facingNordEast;
+		private bool facingSouthEast;
+		private float Size;
+		
+	   	// CARACTERISTIQUES
+		public int Life;
+		public char ColorIdentifier;
 		public float speed = 1;
-
-		private bool rotated;
+		
+		//MÉS GRAN L'ENTER = MENYS POSSIBILITATS QUE CANVII.
+		public int chanceToChangeDirection = 10;
 
 		void Start () {
 
@@ -56,15 +57,9 @@ public class MinionMovementRandom : MonoBehaviour {
 
 
 		}
-		bool RandomDecrese(){
-
-			int Rand = Random.Range(0, 2);
-
-			if (Rand == 0)
-				return true;
-			else
-				return false;
-
+		int RandomInt(int from, int to){
+			int Rand = Random.Range(from, to);
+			return Rand;
 		}
 
 
@@ -76,26 +71,50 @@ public class MinionMovementRandom : MonoBehaviour {
 			{
 				ActualHex = NextHex;
 
-				if (RandomDecrese() == true) {
+				if (RandomInt (0, chanceToChangeDirection) == 0) {
 
 					NextHex = ActualHex.neigbours [4];
-
-					if (rotated == false) {
-
-						transform.Rotate(1, 60, 1);
-						rotated = true;
+					
+					if (facingNordEast == true) {
+						transform.Rotate (1, 120, 1);
+						facingSouthEast = true;
+						
 					}
+					else if (facingSouthEast == false) {
 
+						transform.Rotate (1, 60, 1);
+						facingSouthEast = true;
+					} 
+					facingNordEast = false;
 				} 
+				else if (RandomInt (0, chanceToChangeDirection) == 1) {
+				
+					NextHex = ActualHex.neigbours [2];
+
+					if (facingSouthEast == true) {
+
+						transform.Rotate (1, -120, 1);
+						facingNordEast = true;
+						
+					} 
+					else if (facingNordEast == false) {
+						transform.Rotate (1, -60, 1);
+						facingNordEast = true;
+					}
+					facingSouthEast = false;
+				}
 				else {
 
-					if (rotated) {
-						transform.Rotate (1, -60, 1);
-						rotated = false;
-					}
-
 					NextHex = ActualHex.neigbours [3];
-
+					
+					if (facingNordEast == true) {
+						transform.Rotate (1, 60, 1);
+						facingNordEast = false;
+					} 
+					else if (facingSouthEast == true) {
+						transform.Rotate (1, -60, 1);
+						facingSouthEast = false;
+					}
 				}
 
 				if (NextHex == null) {
@@ -140,4 +159,5 @@ public class MinionMovementRandom : MonoBehaviour {
 
 
 		}
+
 }

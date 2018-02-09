@@ -20,19 +20,28 @@ public class MinionMovementS : MonoBehaviour {
 
 	public float speed = 1;
 
+	//EVITA QUE DETECTI COLISIÓ DE COLOR DESPRÉS DE PASSAR PEL HEX
+	private float maxDist = 0.7f;
+	private float minDist = 0.3f;
+	private bool neutralHex = false;
+
+	//Valor del mínon en funció de la dificultat de matar-lo
+	public int minionValue = 0;
+
 	void Start () {
 
 		Life = 1;
 		NextHex = ActualHex.neigbours[3];
 		target = NextHex.gameObject.transform;
 
+		minionValue = Life * 10;
 
 	}
 
 	void Update(){
 
 
-		if (ActualHex.HexColor == 'W') {
+		if (ActualHex.HexColor == 'W' || !neutralHex) {
 			MovementS ();
 		} 
 		else {
@@ -47,6 +56,7 @@ public class MinionMovementS : MonoBehaviour {
 
 		if (Life <= 0) {
 
+			MoneyManager.Pigment += minionValue;
 			Destroy (gameObject);
 			return;
 		} 
@@ -62,10 +72,16 @@ public class MinionMovementS : MonoBehaviour {
 		Vector3 dir= target.position - transform.position;
 		float distanceThisFrame = speed * Time.fixedDeltaTime;
 
+		//EVITA QUE DETECTI COLISIÓ DE COLOR DESPRÉS DE PASSAR PEL HEX
+		if (dir.magnitude < maxDist && dir.magnitude > minDist)
+			neutralHex = false;
+		else if (dir.magnitude < minDist) {
+			neutralHex = true;
+			ActualHex = NextHex;
+		}
+
 		if (dir.magnitude <= distanceThisFrame)
 		{
-			ActualHex = NextHex;
-
 			if (counter == 0) {
 				
 				NextHex = ActualHex.neigbours [4];
@@ -121,6 +137,7 @@ public class MinionMovementS : MonoBehaviour {
 
 			Life--;
 			ResetHexagonColorValues (ActualHex);
+
 
 
 		} 

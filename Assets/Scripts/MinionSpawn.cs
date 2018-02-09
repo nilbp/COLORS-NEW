@@ -21,17 +21,27 @@ public class MinionSpawn : MonoBehaviour {
 	public GameObject minionMagentaRandom;
 	public GameObject minionYellowRandom;
 
-	void Start(){
-	
-		InvokeRepeating ("Spawn", 1f, 3f);
+	private int firstSpawnPoint = 1;
+	private int lastSpawnPoint = 7;
 
+	//RESPAWN TIME
+	public float invoke = 3f;
 
+	//PROGRESIVE SPAWN TIME (-= 0.1 seconds EACH MINION SPAWNED)
+	private float resetInvoke = 3f;
+
+	void Update(){
+
+		if (invoke * Time.deltaTime <= 0) {
+			invoke = resetInvoke;
+			Spawn ();
+		}
+		invoke -= Time.deltaTime;
 	}
 
-	char RandomColor(){
-
+	char RandomColor()
+	{
 		int Rand = Random.Range(0, 3);
-
 		switch (Rand) {
 
 		case 0:
@@ -41,38 +51,48 @@ public class MinionSpawn : MonoBehaviour {
 		case 2:
 			return 'Y';
 		default:
-
 			Debug.Log ("random error spawn");
 			return 'E';
-
 		}
 	}
 
+	int RandomInt(int from, int to)
+	{
+		return Random.Range (from, to);
+	}
+		
 	void Spawn(){
-	
-		//yield return new WaitForSeconds (1);
 
-		spawn1 = GameObject.Find ("Hex_0_5");
-		Nucli = GameObject.Find ("Hex_7_7").GetComponentInChildren<HexInfo>();
-
+		spawn1 = GameObject.Find ("Hex_0_" + RandomInt(firstSpawnPoint, lastSpawnPoint));
 		char MinionColorIdenityfier = RandomColor ();
 
-		if (counter == 100) 
-		{
+		int rand = RandomInt (0, 10);
+
+		if(rand < 5)
+			SpawnRecte (MinionColorIdenityfier);
+		else if(rand >= 5 && rand <= 8)
+			SpawnS (MinionColorIdenityfier);
+		else
+			SpawnRandom (MinionColorIdenityfier);
+
+		if(resetInvoke > 1.5)
+			resetInvoke -= 0.1f;
+	}
+	void SpawnRecte(char MinionColorIdenityfier)
+	{
 			if (MinionColorIdenityfier == 'C') {
 
 				InstantiateForward (minionCyan, spawn1, MinionColorIdenityfier);
 			} else if (MinionColorIdenityfier == 'M') {
-			
+
 				InstantiateForward (minionMagenta, spawn1, MinionColorIdenityfier);
 			} else if (MinionColorIdenityfier == 'Y') {
 
 				InstantiateForward (minionYellow, spawn1, MinionColorIdenityfier);
 			}
-			counter++;
-		} 
-		else if (counter >= 20 && counter <= 50) 
-		{
+	}
+	void SpawnS(char MinionColorIdenityfier)
+	{
 			if (MinionColorIdenityfier == 'C') {
 
 				InstantiateS (minionCyanS, spawn1, MinionColorIdenityfier);
@@ -83,14 +103,9 @@ public class MinionSpawn : MonoBehaviour {
 
 				InstantiateS (minionYellowS, spawn1, MinionColorIdenityfier);
 			}
-			counter++;
-		}
-
-		else if (counter < 20) 
-		{
-
-			Debug.Log ("vaina");
-
+	}
+	void SpawnRandom(char MinionColorIdenityfier)
+	{
 			if (MinionColorIdenityfier == 'C') {
 
 				InstantiateRandom (minionCyanRandom, spawn1, MinionColorIdenityfier);
@@ -103,8 +118,6 @@ public class MinionSpawn : MonoBehaviour {
 
 				InstantiateRandom (minionYellowRandom, spawn1, MinionColorIdenityfier);
 			}
-			counter++;
-		}
 	}
 
 	void InstantiateForward(GameObject minion, GameObject spawn1, char MinionColorIdentyfier){

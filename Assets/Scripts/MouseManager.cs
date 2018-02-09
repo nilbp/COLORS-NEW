@@ -91,7 +91,7 @@ public class MouseManager : MonoBehaviour {
 
 				HexInfo HexInfoObject = ourHitObject.GetComponentInChildren<HexInfo> ();
 
-				if (CurrentPigment > 1) {
+				if (MoneyManager.Pigment > 0) {
 					if (HexInfoObject.Clickable == true) {
 					
 						MeshRenderer mr = ourHitObject.GetComponentInChildren<MeshRenderer> ();
@@ -101,18 +101,18 @@ public class MouseManager : MonoBehaviour {
 						if (ColorInHand == 'C') {
 
 							ColorsChangeCyan (mr, HexInfoObject);
-							CurrentPigment -= 2;
+							MoneyManager.Pigment -= 5;
 		
 
 						} else if (ColorInHand == 'M') {
 					
 							ColorsChangeMagenta (mr, HexInfoObject);
-							CurrentPigment -= 2;
+							MoneyManager.Pigment -= 5;
 
 						} else if (ColorInHand == 'Y') {
 					
 							ColorsChangeYellow (mr, HexInfoObject);
-							CurrentPigment -= 2;
+							MoneyManager.Pigment -= 5;
 						}
 
 						ComboTresEnRalla (HexInfoObject);

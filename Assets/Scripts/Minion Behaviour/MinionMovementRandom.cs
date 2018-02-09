@@ -6,9 +6,17 @@ public class MinionMovementRandom : MonoBehaviour {
 
 		public HexInfo ActualHex;
 		public HexInfo NextHex;
+		
+		//EVITA QUE DETECTI COLISIÓ DE COLOR DESPRÉS DE PASSAR PEL HEX
+		private float maxDist = 0.7f;
+		private float minDist = 0.3f;
+		private bool neutralHex = false;
+
 		public HexInfo Nucli;
 		public Texture DefaultTexture;
+
 		Transform target;
+
 		private bool facingNordEast;
 		private bool facingSouthEast;
 		private float Size;
@@ -18,27 +26,31 @@ public class MinionMovementRandom : MonoBehaviour {
 		public char ColorIdentifier;
 		public float speed = 1;
 		
+		//COMPROVAR QUE NO SURTIN DEL MAPA
+		public int lastSpawnPoint = 7;
+		public int firstSpawnPoint = 0;
+
 		//MÉS GRAN L'ENTER = MENYS POSSIBILITATS QUE CANVII.
 		public int chanceToChangeDirection = 10;
+
+		//Valor del mínon en funció de la dificultat de matar-lo
+		public int minionValue = 0;
 
 		void Start () {
 
 			Life = 1;
 			NextHex = ActualHex.neigbours[3];
 			target = NextHex.gameObject.transform;
-
+			minionValue = Life * 10;
 
 		}
 
 		void Update(){
 
-
-			if (ActualHex.HexColor == 'W') {
+			if (ActualHex.HexColor == 'W' || !neutralHex) 
 				MovementRandom ();
-			} 
-			else {
+			else 
 				Colision ();
-			}
 
 			LifeManager ();
 
@@ -47,7 +59,8 @@ public class MinionMovementRandom : MonoBehaviour {
 		void LifeManager(){
 
 			if (Life <= 0) {
-
+				
+				MoneyManager.Pigment += minionValue;
 				Destroy (gameObject);
 				return;
 			} 
@@ -66,12 +79,19 @@ public class MinionMovementRandom : MonoBehaviour {
 		void MovementRandom(){
 			Vector3 dir= target.position - transform.position;
 			float distanceThisFrame = speed * Time.fixedDeltaTime;
-
+			
+			//EVITA QUE DETECTI COLISIÓ DE COLOR DESPRÉS DE PASSAR PEL HEX
+			if (dir.magnitude < maxDist && dir.magnitude > minDist)
+				neutralHex = false;
+			else if (dir.magnitude < minDist) {
+				neutralHex = true;
+				ActualHex = NextHex;
+			}
+			
 			if (dir.magnitude <= distanceThisFrame)
 			{
-				ActualHex = NextHex;
 
-				if (RandomInt (0, chanceToChangeDirection) == 0) {
+				if (RandomInt (0, chanceToChangeDirection) == 0 && ActualHex.y > firstSpawnPoint) {
 
 					NextHex = ActualHex.neigbours [4];
 					
@@ -87,7 +107,7 @@ public class MinionMovementRandom : MonoBehaviour {
 					} 
 					facingNordEast = false;
 				} 
-				else if (RandomInt (0, chanceToChangeDirection) == 1) {
+				else if (RandomInt (0, chanceToChangeDirection) == 1 && ActualHex.y < lastSpawnPoint) {
 				
 					NextHex = ActualHex.neigbours [2];
 
@@ -121,12 +141,8 @@ public class MinionMovementRandom : MonoBehaviour {
 					Destroy (gameObject);
 					return;
 				}
-
 				target = NextHex.gameObject.transform;
-
 			}
-
-
 			transform.Translate (dir.normalized * distanceThisFrame, Space.World);
 
 

@@ -48,11 +48,11 @@ public class DefenseTotem : MonoBehaviour {
 		{
 			MinionMovement minion = nearestEnemy.GetComponentInParent<MinionMovement> ();
 
-			if (minion.ColorIdentifier == TotemColor) {
+			/*if (minion.ColorIdentifier1 == TotemColor) {
 					
 				target = nearestEnemy.transform;
 
-			}
+			}*/
 		}
 	}
 

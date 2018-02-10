@@ -57,12 +57,12 @@ public class TubDePintura : MonoBehaviour {
 
 			MinionMovement minion = nearestEnemy.GetComponentInParent<MinionMovement> ();
 
-			if (IsInHexRange (minion) == true && minion.ColorIdentifier == TotemColor) {
+			/*if (IsInHexRange (minion) == true && minion.ColorIdentifier == TotemColor) {
 
 
 					target = nearestEnemy.transform;
 
-			}
+			}*/
 		}
 	}
 

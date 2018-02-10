@@ -124,7 +124,7 @@ public class MouseManager : MonoBehaviour {
 			}
 
 		}
-		UpdatePigmentBar ();
+		
 
 
 	}
@@ -154,15 +154,6 @@ public class MouseManager : MonoBehaviour {
 		}
 	
 	}*/
-
-	void UpdatePigmentBar(){
-	
-		PigmentRatio = CurrentPigment / MaxPigment;
-
-		PigmentBar.transform.localScale = new Vector3 (1, PigmentRatio, 1);
-
-	
-	}
 
 	void ResetHexagonValues(HexInfo ActualHex){
 

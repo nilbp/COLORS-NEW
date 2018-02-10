@@ -9,9 +9,7 @@ public class MinionSpawn : MonoBehaviour {
 
 	private int counter;
 
-	public GameObject minionCyan;
-	public GameObject minionMagenta;
-	public GameObject minionYellow;
+	public GameObject minion1;
 
 	public GameObject minionCyanS;
 	public GameObject minionMagentaS;
@@ -68,29 +66,12 @@ public class MinionSpawn : MonoBehaviour {
 
 		int rand = RandomInt (0, 10);
 
-		if(rand < 5)
-			SpawnRecte (MinionColorIdenityfier);
-		else if(rand >= 5 && rand <= 8)
-			SpawnS (MinionColorIdenityfier);
-		else
-			SpawnRandom (MinionColorIdenityfier);
+        SpawnMinionBehaviour1(minion1, spawn1, 0, 2, 3);
 
-		if(resetInvoke > 1.5)
+        if (resetInvoke > 1.5)
 			resetInvoke -= 0.1f;
 	}
-	void SpawnRecte(char MinionColorIdenityfier)
-	{
-			if (MinionColorIdenityfier == 'C') {
-
-				InstantiateForward (minionCyan, spawn1, MinionColorIdenityfier);
-			} else if (MinionColorIdenityfier == 'M') {
-
-				InstantiateForward (minionMagenta, spawn1, MinionColorIdenityfier);
-			} else if (MinionColorIdenityfier == 'Y') {
-
-				InstantiateForward (minionYellow, spawn1, MinionColorIdenityfier);
-			}
-	}
+	
 	void SpawnS(char MinionColorIdenityfier)
 	{
 			if (MinionColorIdenityfier == 'C') {
@@ -120,16 +101,20 @@ public class MinionSpawn : MonoBehaviour {
 			}
 	}
 
-	void InstantiateForward(GameObject minion, GameObject spawn1, char MinionColorIdentyfier){
+    //
+	void SpawnMinionBehaviour1(GameObject minion1, GameObject spawn1, int cyanQuantity, int magentaQuantity, int yellowQuantity){
 
 
-		MinionMovement minionScript = minion.GetComponent<MinionMovement> ();
+		MinionMovement minionScript = minion1.GetComponent<MinionMovement> ();
 		HexInfo spawn1Hex = spawn1.GetComponentInChildren<HexInfo> ();
 
 		minionScript.ActualHex = spawn1Hex;
-		minionScript.ColorIdentifier = MinionColorIdentyfier;
 
-		Instantiate (minion, spawn1.transform.position, minionCyan.transform.rotation);
+		minionScript.cyanQuantity = cyanQuantity;
+        minionScript.magentaQuantity = magentaQuantity;
+        minionScript.yellowQuantity = yellowQuantity;
+
+		Instantiate (minion1, spawn1.transform.position, minion1.transform.rotation);
 
 	}
 
@@ -142,7 +127,7 @@ public class MinionSpawn : MonoBehaviour {
 		minionScript.ActualHex = spawn1Hex;
 		minionScript.ColorIdentifier = MinionColorIdentyfier;
 
-		Instantiate (minion, spawn1.transform.position, minionCyan.transform.rotation);
+		Instantiate (minion, spawn1.transform.position, minion1.transform.rotation);
 
 	}
 
@@ -155,7 +140,7 @@ public class MinionSpawn : MonoBehaviour {
 		minionScript.ActualHex = spawn1Hex;
 		minionScript.ColorIdentifier = MinionColorIdentyfier;
 
-		Instantiate (minion, spawn1.transform.position, minionCyan.transform.rotation);
+		Instantiate (minion, spawn1.transform.position, minion1.transform.rotation);
 
 	}
 

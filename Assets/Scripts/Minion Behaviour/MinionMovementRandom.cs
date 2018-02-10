@@ -24,7 +24,7 @@ public class MinionMovementRandom : MonoBehaviour {
 	   	// CARACTERISTIQUES
 		public int Life;
 		public char ColorIdentifier;
-		public float speed = 1;
+		public float speed = 0.2f;
 		
 		//COMPROVAR QUE NO SURTIN DEL MAPA
 		public int lastSpawnPoint = 7;

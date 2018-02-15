@@ -75,13 +75,13 @@ public class MinionSpawn : MonoBehaviour {
                 switch (waves[i].minion[j].behaviour)
                 {
 
-                    case (Behaviour)1:
+                    case (Behaviour)0:
                         SpawnMinionBehaviour1(waves[i].minion[j]);
                         break;
-                    case (Behaviour)2:
+                    case (Behaviour)1:
                         SpawnMinionBehaviour2(waves[i].minion[j]);
                         break;
-                    case (Behaviour)3:
+                    case (Behaviour)2:
                         SpawnMinionBehaviour3(waves[i].minion[j]);
                         break;                
                     default:
@@ -184,8 +184,8 @@ public class MinionSpawn : MonoBehaviour {
 
 		minionScript.ActualHex = spawn1Hex;
 
-        BuildMinion(minion); 
-        
+        BuildMinion(minion);
+
         //POSA LES VARIABLES DE COLOR EN FUNCIÓ DE "MINION.SIZE" I "MINION.COLORCOMPLEXITY"
         colorComponents.cyanComponent = cyanQuantity;
         colorComponents.magentaComponent = magentaQuantity;

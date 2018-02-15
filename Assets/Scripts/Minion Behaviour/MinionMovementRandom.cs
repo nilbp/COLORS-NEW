@@ -243,33 +243,33 @@ public class MinionMovementRandom : MonoBehaviour {
         if (ActualHex.HexColor == 'C')
         {
             if (cyanQuantity > 0)
-                cyanQuantity--;
+                ownColor.cyanComponent--;
 
             else if (cyanQuantity <= 0)
             {
-                cyanQuantity++;
+                ownColor.cyanComponent++;
             }
             ResetHexagonColorValues(ActualHex);
         }
         else if (ActualHex.HexColor == 'M')
         {
             if (magentaQuantity > 0)
-                magentaQuantity--;
+                ownColor.magentaComponent--;
 
             else if (magentaQuantity <= 0)
             {
-                magentaQuantity++;
+                ownColor.magentaComponent++;
             }
             ResetHexagonColorValues(ActualHex);
         }
         else if (ActualHex.HexColor == 'Y')
         {
             if (yellowQuantity > 0)
-                yellowQuantity--;
+                ownColor.yellowComponent--;
 
             else if (yellowQuantity <= 0)
             {
-                yellowQuantity++;
+                ownColor.yellowComponent++;
             }
             ResetHexagonColorValues(ActualHex);
         }

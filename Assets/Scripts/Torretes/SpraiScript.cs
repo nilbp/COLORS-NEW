@@ -98,7 +98,7 @@ public class SpraiScript : MonoBehaviour {
 			bullet.chase (target);
             bullet.color = spraiColor;
 
-		}
+		}	
 	}
 
 	void OnDrawGizmosSelected(){

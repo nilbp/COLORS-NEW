@@ -9,16 +9,29 @@ public class MinionMovementS : MonoBehaviour {
 	public HexInfo Nucli;
 
 	public Texture DefaultTexture;
+    private MeshRenderer minionRenderer;
+    private ColorComponents ownColor;
 
-	public int Life;
+    public int Life;
 	private float Size;
-	public char ColorIdentifier;
 
-	private int counter = 0;
+    //QUANTITAT TOTAL DEL MINION
+    private Color totalColor;
+    public int minionColorQuantity;
+
+    //COMPONTENTS DE COLORS PRIMARIS
+    public int cyanQuantity = 0;
+    public int magentaQuantity = 0;
+    public int yellowQuantity = 0;
+
+    //SIZE VARIABLE
+    float sizeIncreaseVariable = 0.15f;
+
+    private int counter = 0;
 
 	Transform target;
 
-	public float speed = 1;
+	public float speed = 0.2f;
 
 	//EVITA QUE DETECTI COLISIÓ DE COLOR DESPRÉS DE PASSAR PEL HEX
 	private float maxDist = 0.7f;
@@ -28,41 +41,103 @@ public class MinionMovementS : MonoBehaviour {
 	//Valor del mínon en funció de la dificultat de matar-lo
 	public int minionValue = 0;
 
-	void Start () {
+    //AQUESTA FUNCIÓ ES CRIDA DES DE L'SPAWN MANAGER DIENT LA QUANTITAT DE COLOR QUE TE EL MINION EX:(3,4,0) 3 CYANS I 4 MAGENTES
 
-		Life = 1;
-		NextHex = ActualHex.neigbours[3];
+    void ConvineColors(int cyanQuantity, int magentaQuantity, int yellowQuantity)
+    {
+        int totalSize = cyanQuantity + magentaQuantity + yellowQuantity;
+        Color[] aColors = new Color[totalSize];
+
+        bool exitLoop = false;
+        int posInArray = 0;
+        do
+        {
+            if (cyanQuantity > 0)
+            {
+                aColors[posInArray] += Color.cyan;
+                cyanQuantity--;
+                posInArray++;
+            }
+            else if (magentaQuantity > 0)
+            {
+                aColors[posInArray] += Color.magenta;
+                magentaQuantity--;
+                posInArray++;
+            }
+            else if (yellowQuantity > 0)
+            {
+                aColors[posInArray] += Color.yellow;
+                yellowQuantity--;
+                posInArray++;
+            }
+            else
+            {
+                exitLoop = true;
+            }
+
+        } while (!exitLoop);
+
+        Color result = new Color(0, 0, 0, 0);
+        foreach (Color c in aColors)
+        {
+            result += c;
+        }
+        result /= aColors.Length;
+
+        minionColorQuantity = totalSize;
+
+        totalColor = result;
+
+    }
+
+    void Start () {
+
+        minionRenderer = GetComponentInChildren<MeshRenderer>();
+        ownColor = GetComponent<ColorComponents>();
+        ConvineColors(cyanQuantity, magentaQuantity, yellowQuantity);
+        minionValue = minionColorQuantity * 10;
+
+        NextHex = ActualHex.neigbours[3];
 		target = NextHex.gameObject.transform;
 
-		minionValue = Life * 10;
+		
 
 	}
 
 	void Update(){
 
+        if (minionColorQuantity <= 0)
+        {
+            MoneyManager.Pigment += minionValue;
+            Destroy(gameObject);
+            return;
+        }
 
-		if (ActualHex.HexColor == 'W' || !neutralHex) {
+        if (ActualHex.HexColor == 'W' || !neutralHex) {
 			MovementS ();
 		} 
 		else {
 			Colision ();
 		}
 
-		LifeManager ();
+		ColorManager ();
 
-	}
+        //FER UPDATE DE LES VARIABLES DE L'SCRIPT "COLOR COMPONENTS"
+        cyanQuantity = ownColor.cyanComponent;
+        magentaQuantity = ownColor.magentaComponent;
+        yellowQuantity = ownColor.yellowComponent;
+    }
 
-	void LifeManager(){
+	void ColorManager(){
 
-		if (Life <= 0) {
+        ConvineColors(cyanQuantity, magentaQuantity, yellowQuantity);
 
-			MoneyManager.Pigment += minionValue;
-			Destroy (gameObject);
-			return;
-		} 
+        //CANVIA EL COLOR
+        minionRenderer.materials[0].color = totalColor;
+        minionRenderer.materials[1].color = totalColor;
 
-		Size = 1+Life*0.2f;
-		transform.localScale = new Vector3(Size,Size,Size);
+        Size = 1 + minionColorQuantity * sizeIncreaseVariable;
+        transform.localScale = new Vector3(Size,Size,Size);
 
 
 	}
@@ -133,24 +208,43 @@ public class MinionMovementS : MonoBehaviour {
 
 	void Colision(){
 
-		if (ActualHex.HexColor == ColorIdentifier) {
+        if (ActualHex.HexColor == 'C')
+        {
+            if (cyanQuantity > 0)
+                cyanQuantity--;
 
-			Life--;
-			ResetHexagonColorValues (ActualHex);
+            else if (cyanQuantity <= 0)
+            {
+                cyanQuantity++;
+            }
+            ResetHexagonColorValues(ActualHex);
+        }
+        else if (ActualHex.HexColor == 'M')
+        {
+            if (magentaQuantity > 0)
+                magentaQuantity--;
 
+            else if (magentaQuantity <= 0)
+            {
+                magentaQuantity++;
+            }
+            ResetHexagonColorValues(ActualHex);
+        }
+        else if (ActualHex.HexColor == 'Y')
+        {
+            if (yellowQuantity > 0)
+                yellowQuantity--;
 
-
-		} 
-		else {
-
-			Life++;
-			ResetHexagonColorValues (ActualHex);
-			//Es transformen en un altre color i life ++ 
-
-		}
-
-
-	}
+            else if (yellowQuantity <= 0)
+            {
+                yellowQuantity++;
+            }
+            ResetHexagonColorValues(ActualHex);
+        }
+    }
 
 
 }
+
+
+

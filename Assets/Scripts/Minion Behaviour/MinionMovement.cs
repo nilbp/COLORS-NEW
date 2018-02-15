@@ -9,9 +9,10 @@ public class MinionMovement : MonoBehaviour {
 	public HexInfo Nucli;
 
 	public Texture DefaultTexture;
-    private Renderer minionRenderer;
+    private MeshRenderer minionRenderer;
+    private ColorComponents ownColor;
 
-	private float Size;
+    private float Size;
 
     //QUANTITAT TOTAL DEL MINION
     private Color totalColor;
@@ -24,13 +25,10 @@ public class MinionMovement : MonoBehaviour {
     
     Transform target;
 
-	public float speed = 1;
+	public float speed = 0.2f;
 
     //SIZE VARIABLE
     float sizeIncreaseVariable = 0.15f;
-
-    //VELOCITAT DEL MINION
-    public float realSpeed = 0.3f;
 
 	private bool rotated;
 
@@ -87,14 +85,14 @@ public class MinionMovement : MonoBehaviour {
 
         minionColorQuantity = totalSize;
 
-        //CANVIA EL COLOR DEL MINION
         totalColor = result;
 
     }
 
     void Start () {
 
-        minionRenderer = GetComponentInChildren<Renderer>();
+        minionRenderer = GetComponentInChildren<MeshRenderer>();
+        ownColor = GetComponent<ColorComponents>();
 
         ConvineColors(cyanQuantity, magentaQuantity, yellowQuantity);
 
@@ -113,7 +111,7 @@ public class MinionMovement : MonoBehaviour {
             return;
         }
 
-        if (ActualHex.HexColor == 'W' || !neutralHex) {
+        if (ActualHex != null && ActualHex.HexColor == 'W' || ActualHex!= null && !neutralHex) {
 			MovementRecte ();
 		} 
 		else {
@@ -122,14 +120,27 @@ public class MinionMovement : MonoBehaviour {
 
 		ColorManager ();
 
-	}
+        if (ownColor == null)
+            return;
+
+        //FER UPDATE DE LES VARIABLES DE L'SCRIPT "COLOR COMPONENTS"
+        cyanQuantity = ownColor.cyanComponent;
+        magentaQuantity = ownColor.magentaComponent;
+        yellowQuantity = ownColor.yellowComponent;
+
+    }
 
 	void ColorManager(){
+
+        if (minionRenderer == null)
+            return;
 
         ConvineColors(cyanQuantity,magentaQuantity,yellowQuantity);
 
         //CANVIA EL COLOR
-        minionRenderer.material.color = totalColor;
+        minionRenderer.materials[0].color = totalColor;
+        minionRenderer.materials[1].color = totalColor;
+
 
         Size = 1+minionColorQuantity*sizeIncreaseVariable;
 		transform.localScale = new Vector3(Size,Size,Size);
@@ -160,7 +171,7 @@ public class MinionMovement : MonoBehaviour {
 			target = NextHex.gameObject.transform;
 		}
 
-		transform.Translate (dir.normalized * distanceThisFrame * realSpeed, Space.World);
+		transform.Translate (dir.normalized * distanceThisFrame, Space.World);
 	
 	}
 
@@ -175,7 +186,10 @@ public class MinionMovement : MonoBehaviour {
 
 	void Colision(){
 
-		if (ActualHex.HexColor == 'C')
+        if (ActualHex == null)
+            return;
+
+        if (ActualHex.HexColor == 'C')
         {
             if (cyanQuantity > 0)
                 cyanQuantity--;

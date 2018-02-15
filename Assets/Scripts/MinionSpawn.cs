@@ -5,21 +5,15 @@ using UnityEngine;
 public class MinionSpawn : MonoBehaviour {
 
 	GameObject spawn1;
-	HexInfo Nucli;
 
 	private int counter;
 
-	public GameObject minion1;
+    //MINION PREFABS
+    public GameObject minion1;
+    public GameObject minion2;
+    public GameObject minion3;
 
-	public GameObject minionCyanS;
-	public GameObject minionMagentaS;
-	public GameObject minionYellowS;
-
-	public GameObject minionCyanRandom;
-	public GameObject minionMagentaRandom;
-	public GameObject minionYellowRandom;
-
-	private int firstSpawnPoint = 1;
+    private int firstSpawnPoint = 1;
 	private int lastSpawnPoint = 7;
 
 	//RESPAWN TIME
@@ -28,121 +22,248 @@ public class MinionSpawn : MonoBehaviour {
 	//PROGRESIVE SPAWN TIME (-= 0.1 seconds EACH MINION SPAWNED)
 	private float resetInvoke = 3f;
 
-	void Update(){
+    //VARIABLES PEL CANVI DE COLOR
+    int cyanQuantity;
+    int magentaQuantity;
+    int yellowQuantity;
 
-		if (invoke * Time.deltaTime <= 0) {
-			invoke = resetInvoke;
-			Spawn ();
-		}
-		invoke -= Time.deltaTime;
-	}
+    [System.Serializable]
+    public enum ColorComplexity {basic,medium,advanced,random};
 
-	char RandomColor()
-	{
-		int Rand = Random.Range(0, 3);
-		switch (Rand) {
+    [System.Serializable]
+    public enum Behaviour {move_Forward, mov_S,move_Random};
 
-		case 0:
-			return 'C';
-		case 1: 
-			return 'M';
-		case 2:
-			return 'Y';
-		default:
-			Debug.Log ("random error spawn");
-			return 'E';
-		}
+   //STRUCTS PEL LEVEL DESIGN 
+   [System.Serializable]
+    public struct Minion
+    {
+
+        public int size;
+
+        //0.2 ÉS VELOCITAT RAONABLE
+        public float speed;
+
+        //1 = 1 color. 2 = 2 colors, 3 = 3 colors, 4 = random 
+        public ColorComplexity colorComplexity;
+
+        //1 = move forward, 2 = move S, 3 = move random, 4 = random
+        public Behaviour behaviour;
+    }
+
+    [System.Serializable]
+    public struct Waves
+    {
+        public float spawnRatio;
+        public float startTime;
+        public Minion[] minion;
+
+    }
+
+    //VARIABLES PER EL LEVEL DESIGN
+    [Header("LEVEL DESIGN TOOL")]
+    public Waves[] waves;
+
+
+    void Start()
+    {
+        StartCoroutine(SpawnManager1());
+    }
+
+    IEnumerator SpawnManager1()
+    {
+
+
+
+        for (int i = 0; i < waves.Length; i++)
+        {
+            yield return new WaitForSeconds(waves[i].startTime);
+            for (int j = 0; j < waves[i].minion.Length; j++)
+            {
+                yield return new WaitForSeconds(waves[i].spawnRatio);
+
+                switch (waves[i].minion[j].behaviour)
+                {
+
+                    case (Behaviour)1:
+                        SpawnMinionBehaviour1(waves[i].minion[j]);
+                        break;
+                    case (Behaviour)2:
+                        SpawnMinionBehaviour2(waves[i].minion[j]);
+                        break;
+                    case (Behaviour)3:
+                        SpawnMinionBehaviour3(waves[i].minion[j]);
+                        break;                
+                    default:
+                        SpawnMinionBehaviour1(waves[i].minion[j]);
+                        break;
+                }
+            }
+        }
+    }
+
+    void Update(){
+
+		
 	}
 
 	int RandomInt(int from, int to)
 	{
 		return Random.Range (from, to);
 	}
-		
-	void Spawn(){
 
-		spawn1 = GameObject.Find ("Hex_0_" + RandomInt(firstSpawnPoint, lastSpawnPoint));
-		char MinionColorIdenityfier = RandomColor ();
+    void BuildMinion(Minion minion)  {
 
-		int rand = RandomInt (0, 10);
+        int acum;
+        int counter;
+        int aux;
 
-        SpawnMinionBehaviour1(minion1, spawn1, 0, 2, 3);
+        switch (minion.colorComplexity)
+        {
+            case (ColorComplexity)1:
+                acum = RandomInt(1, 3);
+                if (acum == 1)
+                    cyanQuantity = minion.size;
+                else if (acum == 2)
+                    magentaQuantity = minion.size;
+                else
+                    yellowQuantity = minion.size;
+                break;
+            case (ColorComplexity)2:
+                counter = RandomInt(0, minion.size);
+                acum = RandomInt(1, 3);
+                if (acum == 1)
+                {
+                    cyanQuantity = counter;
+                    magentaQuantity = minion.size - counter;
+                }
+                else if (acum == 2)
+                {
+                    yellowQuantity = counter;
+                    cyanQuantity = minion.size - counter;
+                }
+                else
+                {
+                    magentaQuantity = counter;
+                    yellowQuantity = minion.size - counter;
+                }
+                break;
+            case (ColorComplexity)3:
+                counter = RandomInt(0, minion.size);
+                aux = RandomInt(0, minion.size - counter);
 
-        if (resetInvoke > 1.5)
-			resetInvoke -= 0.1f;
-	}
-	
-	void SpawnS(char MinionColorIdenityfier)
-	{
-			if (MinionColorIdenityfier == 'C') {
+                acum = RandomInt(1, 3);
+                if (acum == 1)
+                {
+                    cyanQuantity = counter;
+                    magentaQuantity = aux;
+                    yellowQuantity = minion.size - (aux + counter);
+                }
+                else if (acum == 2)
+                {
+                    yellowQuantity = counter;
+                    cyanQuantity = aux;
+                    magentaQuantity = minion.size - (aux + counter);
+                }
+                else
+                {
+                    magentaQuantity = counter;
+                    yellowQuantity = aux;
+                    cyanQuantity = minion.size - (aux + counter);
+                }
+                break;
+            case (ColorComplexity)4:
+                minion.colorComplexity = (ColorComplexity)RandomInt(1, 3);
+                BuildMinion(minion);
+                break;
+        }
+    }
 
-				InstantiateS (minionCyanS, spawn1, MinionColorIdenityfier);
-			} else if (MinionColorIdenityfier == 'M') {
+    
 
-				InstantiateS (minionMagentaS, spawn1, MinionColorIdenityfier);
-			} else if (MinionColorIdenityfier == 'Y') {
+   //FORWARD MOVE
+	void SpawnMinionBehaviour1(Minion minion){
 
-				InstantiateS (minionYellowS, spawn1, MinionColorIdenityfier);
-			}
-	}
-	void SpawnRandom(char MinionColorIdenityfier)
-	{
-			if (MinionColorIdenityfier == 'C') {
+        
+        spawn1 = GameObject.Find("Hex_0_" + RandomInt(firstSpawnPoint, lastSpawnPoint));
 
-				InstantiateRandom (minionCyanRandom, spawn1, MinionColorIdenityfier);
-			} 
-			else if (MinionColorIdenityfier == 'M') {
-
-				InstantiateRandom (minionMagentaRandom, spawn1, MinionColorIdenityfier);
-			} 
-			else if (MinionColorIdenityfier == 'Y') {
-
-				InstantiateRandom (minionYellowRandom, spawn1, MinionColorIdenityfier);
-			}
-	}
-
-    //
-	void SpawnMinionBehaviour1(GameObject minion1, GameObject spawn1, int cyanQuantity, int magentaQuantity, int yellowQuantity){
-
-
-		MinionMovement minionScript = minion1.GetComponent<MinionMovement> ();
-		HexInfo spawn1Hex = spawn1.GetComponentInChildren<HexInfo> ();
+        //PASSO, A L'SCRIPT DEL MINION, "HEXINFO" (NECESSARI PER QUE EL MINION SAPIGA SABER ON ÉS) I VARIABLES DE COLOR, TAMANY I VELOCITAT (PER QUE SAPIGA COM CONSTRUIR-SE)
+        HexInfo spawn1Hex = spawn1.GetComponentInChildren<HexInfo>();
+        MinionMovement minionScript = minion1.GetComponent<MinionMovement> ();
+        ColorComponents colorComponents = minion1.GetComponent<ColorComponents>();
 
 		minionScript.ActualHex = spawn1Hex;
 
-		minionScript.cyanQuantity = cyanQuantity;
-        minionScript.magentaQuantity = magentaQuantity;
-        minionScript.yellowQuantity = yellowQuantity;
+        BuildMinion(minion); 
+        
+        //POSA LES VARIABLES DE COLOR EN FUNCIÓ DE "MINION.SIZE" I "MINION.COLORCOMPLEXITY"
+        colorComponents.cyanComponent = cyanQuantity;
+        colorComponents.magentaComponent = magentaQuantity;
+        colorComponents.yellowComponent = yellowQuantity;
 
-		Instantiate (minion1, spawn1.transform.position, minion1.transform.rotation);
+        //RESET DE LES VARIABLES GLOBALS DE COLOR
+        cyanQuantity = 0;
+        magentaQuantity = 0;
+        yellowQuantity = 0;
 
+        minionScript.speed = minion.speed; 
+
+        Instantiate (minion1, spawn1.transform.position, minion1.transform.rotation);
 	}
 
-	void InstantiateS(GameObject minion, GameObject spawn1, char MinionColorIdentyfier){
+    //S MOVE
+	void SpawnMinionBehaviour2(Minion minion)
+    {
+        //MATEIXA ESTRUCTURA QUE "FORWARD MOVE" PERO INSTANTIAN UN MINION AMB UN ALTRE COMPORTAMENT 
+        spawn1 = GameObject.Find("Hex_0_" + RandomInt(firstSpawnPoint, lastSpawnPoint));
 
+        HexInfo spawn1Hex = spawn1.GetComponentInChildren<HexInfo>();
+        MinionMovementS minionScript = minion2.GetComponent<MinionMovementS>();
+        ColorComponents colorComponents = minion2.GetComponent<ColorComponents>();
 
-		MinionMovementS minionScript = minion.GetComponent<MinionMovementS> ();
-		HexInfo spawn1Hex = spawn1.GetComponentInChildren<HexInfo> ();
+        minionScript.ActualHex = spawn1Hex;
 
-		minionScript.ActualHex = spawn1Hex;
-		minionScript.ColorIdentifier = MinionColorIdentyfier;
+        BuildMinion(minion);
+        colorComponents.cyanComponent = cyanQuantity;
+        colorComponents.magentaComponent = magentaQuantity;
+        colorComponents.yellowComponent = yellowQuantity;
 
-		Instantiate (minion, spawn1.transform.position, minion1.transform.rotation);
+        cyanQuantity = 0;
+        magentaQuantity = 0;
+        yellowQuantity = 0;
 
-	}
+        minionScript.speed = minion.speed;
 
-	void InstantiateRandom(GameObject minion, GameObject spawn1, char MinionColorIdentyfier){
+        Instantiate(minion2, spawn1.transform.position, minion2.transform.rotation);
 
+    }
 
-		MinionMovementRandom minionScript = minion.GetComponent<MinionMovementRandom> ();
-		HexInfo spawn1Hex = spawn1.GetComponentInChildren<HexInfo> ();
+    //RANDOM MOVE
+	void SpawnMinionBehaviour3(Minion minion)
+    {
 
-		minionScript.ActualHex = spawn1Hex;
-		minionScript.ColorIdentifier = MinionColorIdentyfier;
+        //MATEIXA ESTRUCTURA QUE "FORWARD MOVE" PERO INSTANTIAN UN MINION AMB UN ALTRE COMPORTAMENT 
+        spawn1 = GameObject.Find("Hex_0_" + RandomInt(firstSpawnPoint, lastSpawnPoint));
 
-		Instantiate (minion, spawn1.transform.position, minion1.transform.rotation);
+        HexInfo spawn1Hex = spawn1.GetComponentInChildren<HexInfo>();
+        MinionMovementRandom minionScript = minion3.GetComponent<MinionMovementRandom>();
+        ColorComponents colorComponents = minion3.GetComponent<ColorComponents>();
 
-	}
+        minionScript.ActualHex = spawn1Hex;
+
+        BuildMinion(minion);
+        colorComponents.cyanComponent = cyanQuantity;
+        colorComponents.magentaComponent = magentaQuantity;
+        colorComponents.yellowComponent = yellowQuantity;
+
+        cyanQuantity = 0;
+        magentaQuantity = 0;
+        yellowQuantity = 0;
+
+        minionScript.speed = minion.speed;
+
+        Instantiate(minion3, spawn1.transform.position, minion3.transform.rotation);
+
+    }
 
 
 }

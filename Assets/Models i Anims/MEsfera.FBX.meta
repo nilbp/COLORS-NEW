@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: feffae2dca4307c46bf8d45ed03cd798
-timeCreated: 1518286472
+guid: 68992fddcfa54764b8056c9ffd826564
+timeCreated: 1518461816
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -13,7 +13,17 @@ ModelImporter:
     3300000: //RootNode
     4300000: Object002
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 01 - Default
+    second: {fileID: 2100000, guid: 1136d20bfcdfcbe4c9189ae63b3893aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 02 - Default
+    second: {fileID: 2100000, guid: 862b30c39bcd937449ae4f22510bc540, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -43,7 +53,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.4
     meshCompression: 0
     addColliders: 0
     importVisibility: 1

@@ -68,7 +68,6 @@ public class SpraiScript : MonoBehaviour {
                         target = null;
                     break;
             }
-            print(target);
 		}
         if (shortestDistance > range)
             target = null;
@@ -100,9 +99,6 @@ public class SpraiScript : MonoBehaviour {
             bullet.color = spraiColor;
 
 		}
-
-		//Destroy (target.gameObject);
-	
 	}
 
 	void OnDrawGizmosSelected(){

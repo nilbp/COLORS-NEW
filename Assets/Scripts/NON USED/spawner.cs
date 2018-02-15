@@ -1,5 +1,4 @@
-<<<<<<< Updated upstream
-﻿/*﻿using System.Collections;
+/*﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -1600,8 +1599,8 @@ public class spawner : MonoBehaviour {
 
 	}
 
-}*/
-=======
+}
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -2099,7 +2098,7 @@ public class spawner : MonoBehaviour {
 
 		return MinionInstantiat;
 
-	}*/
+	}
 
 	void densityHigh(HexInfo ActualHex){
 
@@ -2597,5 +2596,5 @@ public class spawner : MonoBehaviour {
 			}
 		}
 	}
-}
->>>>>>> Stashed changes
+}*/
+

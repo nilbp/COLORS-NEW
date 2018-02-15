@@ -6,7 +6,6 @@ public class MinionMovement : MonoBehaviour {
 
 	public HexInfo ActualHex;
 	public HexInfo NextHex;
-	public HexInfo Nucli;
 
 	public Texture DefaultTexture;
     private MeshRenderer minionRenderer;
@@ -93,6 +92,11 @@ public class MinionMovement : MonoBehaviour {
 
         minionRenderer = GetComponentInChildren<MeshRenderer>();
         ownColor = GetComponent<ColorComponents>();
+
+        //INICIALITZAR ELS PROPIS COLORS
+        cyanQuantity = ownColor.cyanComponent;
+        magentaQuantity = ownColor.magentaComponent;
+        yellowQuantity = ownColor.yellowComponent;
 
         ConvineColors(cyanQuantity, magentaQuantity, yellowQuantity);
 

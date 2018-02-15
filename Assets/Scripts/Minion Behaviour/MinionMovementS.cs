@@ -94,6 +94,12 @@ public class MinionMovementS : MonoBehaviour {
 
         minionRenderer = GetComponentInChildren<MeshRenderer>();
         ownColor = GetComponent<ColorComponents>();
+
+        //INICIALITZAR ELS PROPIS COLORS
+        cyanQuantity = ownColor.cyanComponent;
+        magentaQuantity = ownColor.magentaComponent;
+        yellowQuantity = ownColor.yellowComponent;
+
         ConvineColors(cyanQuantity, magentaQuantity, yellowQuantity);
         minionValue = minionColorQuantity * 10;
 

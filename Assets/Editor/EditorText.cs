@@ -8,7 +8,6 @@ public class EditorText : Editor {
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
-        string hello = "hello";
 
     }
 }

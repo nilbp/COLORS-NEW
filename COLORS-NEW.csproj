@@ -289,8 +289,10 @@
     <Compile Include="Assets\Scripts\ColorComponents.cs" />
     <Compile Include="Assets\Scripts\ColorHUD.cs" />
     <Compile Include="Assets\Scripts\HexInfo.cs" />
-    <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Map.cs" />
+    <Compile Include="Assets\Scripts\menus\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\menus\monSelector.cs" />
+    <Compile Include="Assets\Scripts\menus\settingsMenu.cs" />
     <Compile Include="Assets\Scripts\Minion Behaviour\MinionMovement.cs" />
     <Compile Include="Assets\Scripts\Minion Behaviour\MinionMovementRandom.cs" />
     <Compile Include="Assets\Scripts\Minion Behaviour\MinionMovementS.cs" />
@@ -298,9 +300,10 @@
     <Compile Include="Assets\Scripts\MinionSpawn.cs" />
     <Compile Include="Assets\Scripts\MoneyManager.cs" />
     <Compile Include="Assets\Scripts\MouseManager.cs" />
+    <Compile Include="Assets\Scripts\NON USED\Paleta.cs" />
+    <Compile Include="Assets\Scripts\NON USED\RestesDeCodi.cs" />
     <Compile Include="Assets\Scripts\NON USED\spawner.cs" />
-    <Compile Include="Assets\Scripts\Paleta.cs" />
-    <Compile Include="Assets\Scripts\RestesDeCodi.cs" />
+    <Compile Include="Assets\Scripts\shop\buy.cs" />
     <Compile Include="Assets\Scripts\SpinningCube.cs" />
     <Compile Include="Assets\Scripts\Torretes\Bullet.cs" />
     <Compile Include="Assets\Scripts\Torretes\SpraiScript.cs" />

@@ -16,12 +16,6 @@ public class MinionSpawn : MonoBehaviour {
     private int firstSpawnPoint = 1;
 	private int lastSpawnPoint = 7;
 
-	//RESPAWN TIME
-	public float invoke = 3f;
-
-	//PROGRESIVE SPAWN TIME (-= 0.1 seconds EACH MINION SPAWNED)
-	private float resetInvoke = 3f;
-
     //VARIABLES PEL CANVI DE COLOR
     int cyanQuantity;
     int magentaQuantity;
@@ -31,7 +25,7 @@ public class MinionSpawn : MonoBehaviour {
     public enum ColorComplexity {basic,medium,advanced,random};
 
     [System.Serializable]
-    public enum Behaviour {move_Forward, mov_S,move_Random};
+    public enum Behaviour {move_Forward, mov_S, move_Random};
 
    //STRUCTS PEL LEVEL DESIGN 
    [System.Serializable]
@@ -71,9 +65,6 @@ public class MinionSpawn : MonoBehaviour {
 
     IEnumerator SpawnManager1()
     {
-
-
-
         for (int i = 0; i < waves.Length; i++)
         {
             yield return new WaitForSeconds(waves[i].startTime);
@@ -116,10 +107,10 @@ public class MinionSpawn : MonoBehaviour {
         int acum;
         int counter;
         int aux;
-
+        
         switch (minion.colorComplexity)
         {
-            case (ColorComplexity)1:
+            case (ColorComplexity)0:
                 acum = RandomInt(1, 3);
                 if (acum == 1)
                     cyanQuantity = minion.size;
@@ -128,7 +119,7 @@ public class MinionSpawn : MonoBehaviour {
                 else
                     yellowQuantity = minion.size;
                 break;
-            case (ColorComplexity)2:
+            case (ColorComplexity)1:
                 counter = RandomInt(0, minion.size);
                 acum = RandomInt(1, 3);
                 if (acum == 1)
@@ -147,7 +138,7 @@ public class MinionSpawn : MonoBehaviour {
                     yellowQuantity = minion.size - counter;
                 }
                 break;
-            case (ColorComplexity)3:
+            case (ColorComplexity)2:
                 counter = RandomInt(0, minion.size);
                 aux = RandomInt(0, minion.size - counter);
 
@@ -171,7 +162,7 @@ public class MinionSpawn : MonoBehaviour {
                     cyanQuantity = minion.size - (aux + counter);
                 }
                 break;
-            case (ColorComplexity)4:
+            case (ColorComplexity)3:
                 minion.colorComplexity = (ColorComplexity)RandomInt(1, 3);
                 BuildMinion(minion);
                 break;

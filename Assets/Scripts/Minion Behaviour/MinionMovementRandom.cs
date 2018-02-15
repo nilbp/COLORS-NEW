@@ -102,8 +102,13 @@ public class MinionMovementRandom : MonoBehaviour {
     void Start () {
 
         minionRenderer = GetComponentInChildren<MeshRenderer>();
-        ConvineColors(cyanQuantity, magentaQuantity, yellowQuantity);
         ownColor = GetComponent<ColorComponents>();
+        //INICIALITZAR ELS PROPIS COLORS
+        cyanQuantity = ownColor.cyanComponent;
+        magentaQuantity = ownColor.magentaComponent;
+        yellowQuantity = ownColor.yellowComponent;
+
+        ConvineColors(cyanQuantity, magentaQuantity, yellowQuantity);
 
         NextHex = ActualHex.neigbours[3];
 		target = NextHex.gameObject.transform;

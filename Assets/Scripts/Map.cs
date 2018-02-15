@@ -16,13 +16,6 @@ public class Map : MonoBehaviour {
 	public static int width = 10;
 	public static int height = 8;
 
-
-<<<<<<< Updated upstream
-=======
-	public static int width = 16;
-	public static int height = 16;
->>>>>>> Stashed changes
-
 	float xOffset = 0.882f;
 	float zOffset = 0.764f;
 

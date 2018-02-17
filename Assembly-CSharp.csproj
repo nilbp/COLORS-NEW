@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\NON USED\Paleta.cs" />
      <Compile Include="Assets\Scripts\NON USED\RestesDeCodi.cs" />
      <Compile Include="Assets\Scripts\NON USED\spawner.cs" />
+     <Compile Include="Assets\Scripts\popups.cs" />
      <Compile Include="Assets\Scripts\shop\buy.cs" />
      <Compile Include="Assets\Scripts\SpinningCube.cs" />
      <Compile Include="Assets\Scripts\Torretes\Bullet.cs" />

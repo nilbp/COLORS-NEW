@@ -308,6 +308,8 @@
     <Compile Include="Assets\Scripts\Torretes\Bullet.cs" />
     <Compile Include="Assets\Scripts\Torretes\SpraiScript.cs" />
     <Compile Include="Assets\Scripts\Torretes\TubDePintura.cs" />
+    <Compile Include="Assets\Scripts\TurretBlueprint.cs" />
+    <Compile Include="Assets\Torret_HUD.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

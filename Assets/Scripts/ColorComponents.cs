@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ColorComponents : MonoBehaviour
 {
+    public HexInfo actualHex;
 
     public int cyanComponent;
     public int magentaComponent;

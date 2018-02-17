@@ -17,17 +17,19 @@ public class HexInfo : MonoBehaviour {
 
 	public HexInfo[] neigbours;
 
-	enum tipusTotem{farming, defensa, area};
-
-	private GameObject Totem;
+    [Header("Optional")]
+	public GameObject turret;
 
 	public Color hoverColor;
 	private Renderer rend;
-	private Color startColor; 
+	private Color startColor;
 
-	BuildManager buildManager;
+    public Vector3 offsetX;
+
+    BuildManager buildManager;
 
 	void Start(){
+        offsetX = new Vector3(0, 0.3859f, 0);
 
 		rend = GetComponent<Renderer> ();
 		startColor = rend.material.color;
@@ -35,37 +37,37 @@ public class HexInfo : MonoBehaviour {
 		buildManager = BuildManager.instance;
 	}
 
+    public Vector3 GetBuildPosition()
+    {
+        return transform.position + offsetX;
+    }
+
 	void OnMouseDown(){
-	
-		if (buildManager.GetTotemToBuild () == null)
-			return;
-		
-		if (Totem != null) {
+
+        if (!buildManager.CanBuild)
+            return;
+
+        if (turret != null) {
 		
 			Debug.Log ("Can't build");
 			return;
 		}
-
-		GameObject totemToBuild = BuildManager.instance.GetTotemToBuild ();
-		Totem = (GameObject)Instantiate (totemToBuild, transform.position, Quaternion.identity);
-
+        buildManager.BuildTurretOn(this);
 	}
 
 	void OnMouseEnter(){
-	
-		if (buildManager.GetTotemToBuild () == null)
-			return;
+
+        if (!buildManager.CanBuild)
+            return;
 		
 		rend.material.color =  hoverColor;
 
 	
 	}
-	void OnMouseExit(){
-
+	void OnMouseExit()
+    {
 		rend.material.color = startColor;
-
 	}
-
 }
 
 

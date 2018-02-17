@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 
 public class Paleta : MonoBehaviour {
 
@@ -21,4 +21,4 @@ public class Paleta : MonoBehaviour {
 		buildManager.SetTotemToBuild (buildManager.AnotherTotemPrefab); 
 
 	}
-}
+}*/

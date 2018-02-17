@@ -43,37 +43,30 @@ public class MinionMovement : MonoBehaviour {
 
     void ConvineColors(int cyanQuantity , int magentaQuantity, int yellowQuantity)
     {
-        int totalSize = cyanQuantity + magentaQuantity + yellowQuantity;
-        Color[] aColors = new Color[totalSize];
+        if (cyanQuantity < 0 || magentaQuantity < 0 || yellowQuantity < 0)
+            return;
 
-        bool exitLoop = false;
+        minionColorQuantity = cyanQuantity + magentaQuantity + yellowQuantity;
+        Color[] aColors = new Color[minionColorQuantity];
+
         int posInArray = 0;
-        do
-        {
+        for(int i = 0; i < minionColorQuantity; i++) { 
             if (cyanQuantity > 0)
             {
                 aColors[posInArray] += Color.cyan;
                 cyanQuantity--;
-                posInArray++;
             }
             else if (magentaQuantity > 0)
             {
                 aColors[posInArray] += Color.magenta;
                 magentaQuantity--;
-                posInArray++;
             }
             else if (yellowQuantity > 0)
             {
                 aColors[posInArray] += Color.yellow;
                 yellowQuantity--;
-                posInArray++;
             }
-            else
-            {
-                exitLoop = true;
-            }
-            
-        } while (!exitLoop);
+        }
 
         Color result = new Color(0, 0, 0, 0);
         foreach (Color c in aColors)
@@ -82,10 +75,7 @@ public class MinionMovement : MonoBehaviour {
         }
         result /= aColors.Length;
 
-        minionColorQuantity = totalSize;
-
         totalColor = result;
-
     }
 
     void Start () {
@@ -126,10 +116,13 @@ public class MinionMovement : MonoBehaviour {
         if (ownColor == null)
             return;
 
+
         //FER UPDATE DE LES VARIABLES DE L'SCRIPT "COLOR COMPONENTS"
         cyanQuantity = ownColor.cyanComponent;
         magentaQuantity = ownColor.magentaComponent;
         yellowQuantity = ownColor.yellowComponent;
+        ownColor.actualHex = ActualHex;
+        
 
     }
 
@@ -159,7 +152,8 @@ public class MinionMovement : MonoBehaviour {
 			neutralHex = false;
 		else if (dir.magnitude < minDist) {
 			neutralHex = true;
-			ActualHex = NextHex;
+        
+            ActualHex = NextHex;
 		}
 
 		if (dir.magnitude <= distanceThisFrame) {

@@ -13,8 +13,8 @@ public class MinionSpawn : MonoBehaviour {
     public GameObject minion2;
     public GameObject minion3;
 
-    private int firstSpawnPoint = 1;
-	private int lastSpawnPoint = 7;
+    private int firstSpawnPoint = 0;
+	private int lastSpawnPoint = 6;
 
     //VARIABLES PEL CANVI DE COLOR
     int cyanQuantity;
@@ -120,7 +120,7 @@ public class MinionSpawn : MonoBehaviour {
                     yellowQuantity = minion.size;
                 break;
             case (ColorComplexity)1:
-                counter = RandomInt(0, minion.size);
+                counter = RandomInt(0, minion.size-1);
                 acum = RandomInt(1, 3);
                 if (acum == 1)
                 {
@@ -139,7 +139,7 @@ public class MinionSpawn : MonoBehaviour {
                 }
                 break;
             case (ColorComplexity)2:
-                counter = RandomInt(0, minion.size);
+                counter = RandomInt(0, minion.size-1);
                 aux = RandomInt(0, minion.size - counter);
 
                 acum = RandomInt(1, 3);
@@ -205,7 +205,7 @@ public class MinionSpawn : MonoBehaviour {
 	void SpawnMinionBehaviour2(Minion minion)
     {
         //MATEIXA ESTRUCTURA QUE "FORWARD MOVE" PERO INSTANTIAN UN MINION AMB UN ALTRE COMPORTAMENT 
-        spawn1 = GameObject.Find("Hex_0_" + RandomInt(firstSpawnPoint, lastSpawnPoint));
+        spawn1 = GameObject.Find("Hex_0_" + RandomInt(firstSpawnPoint+1, lastSpawnPoint-1));
 
         HexInfo spawn1Hex = spawn1.GetComponentInChildren<HexInfo>();
         MinionMovementS minionScript = minion2.GetComponent<MinionMovementS>();

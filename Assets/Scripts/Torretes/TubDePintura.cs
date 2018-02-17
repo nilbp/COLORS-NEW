@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TubDePintura : MonoBehaviour {
 
-	[Header("Atributes")]
+    [Header("Atributes")]
 
-	public int hexRange = 3;
+	public int tubRange = 3;
 
 	public float range = 1.2f;
 	public float FireRatio = 1f; //3 = 3s ? 
@@ -19,59 +19,26 @@ public class TubDePintura : MonoBehaviour {
 	public Transform target;
 	public string enemyTag = "Enemy";
 
-	public char TotemColor;
+	public char tubColor;
 
 	public GameObject bulletPrefab;
 	public Transform firePoint;
 
-	//per saber el rango cap a endavant en funció el numero de hexes 
-	private HexInfo[] ListOfHexesInRange; 
+    //per saber el rango cap a endavant en funció el numero de hexes 
+    private HexInfo[] ListOfHexesInRange;
 
-	void Start(){
+    void Start(){
 
 		SetRange ();
 		InvokeRepeating ("UpdateTarget", 0f, 0.5f);
-
-
-	}
-
-	void UpdateTarget(){
-
-		GameObject[] enemies = GameObject.FindGameObjectsWithTag (enemyTag);
-		float shortestDistance = Mathf.Infinity;
-		GameObject nearestEnemy = null;
-
-		foreach (GameObject enemy in enemies) 
-		{
-			float distanceToEnemy = Vector3.Distance (transform.position, enemy.transform.position);
-			if (distanceToEnemy < shortestDistance) 
-			{
-				shortestDistance = distanceToEnemy;
-				nearestEnemy = enemy; 
-			}
-		}
-
-		if (nearestEnemy != null /*podriem comprovar si està en range per no fer
-									un get component de tots els minions del camp
-									&& distanceToEnemy < range*/) {
-
-			MinionMovement minion = nearestEnemy.GetComponentInParent<MinionMovement> ();
-
-			/*if (IsInHexRange (minion) == true && minion.ColorIdentifier == TotemColor) {
-
-
-					target = nearestEnemy.transform;
-
-			}*/
-		}
 	}
 
 	void SetRange(){
 
-		ListOfHexesInRange = new HexInfo[hexRange];
+		ListOfHexesInRange = new HexInfo[tubRange];
 		HexInfo newHex = actualHex;
 
-		for (int i = 0; i < hexRange; i++) {
+		for (int i = 0; i < tubRange; i++) {
 
 			if (newHex.neigbours [0] == null)
 				return;
@@ -81,17 +48,15 @@ public class TubDePintura : MonoBehaviour {
 
 			Debug.Log (ListOfHexesInRange [i].x);
 		}
-
 	}
 
-	bool IsInHexRange(MinionMovement minion){
+	bool IsInHexRange(ColorComponents colorComponents){
 
-		for(int i = 0; i< hexRange; i++){
-			if (ListOfHexesInRange [i] == minion.ActualHex) 
+		for(int i = 0; i< tubRange; i++){
+			if (ListOfHexesInRange [i] == colorComponents.actualHex) 
 				return true;	
 		}
 		return false;
-
 	}
 
 	void Update(){
@@ -108,7 +73,65 @@ public class TubDePintura : MonoBehaviour {
 
 	}
 
-	void Shoot(){
+    void UpdateTarget()
+    {
+        
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+        float shortestDistance = Mathf.Infinity;
+        GameObject nearestEnemy = null;
+        ColorComponents minion;
+
+        foreach (GameObject enemy in enemies)
+        {
+            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distanceToEnemy < shortestDistance)
+            {
+                if (enemy.gameObject != null)
+                {
+                    minion = enemy.GetComponentInParent<ColorComponents>();
+
+                    Debug.Log(IsTheMinionShootable(minion));
+                    if (IsTheMinionShootable(minion))
+                    {
+                        shortestDistance = distanceToEnemy;
+                        nearestEnemy = enemy;
+                    }
+                   else
+                        nearestEnemy = null; 
+                }
+            }
+        }
+        if (nearestEnemy == null)
+            target = null;
+        else
+            target = nearestEnemy.transform;
+
+    }
+
+    public bool IsTheMinionShootable(ColorComponents minion)
+    {
+        if (!IsInHexRange(minion))
+            return false;
+
+        switch (tubColor)
+        {
+            case 'C':
+                if (minion.cyanComponent > 0)              
+                    return true;
+                break;
+            case 'M':
+                if (minion.magentaComponent > 0)
+                    return true;
+                break;
+            case 'Y':
+                if (minion.yellowComponent > 0)
+                    return true;
+                break;
+        }
+        return false;
+    }
+
+void Shoot(){
 
 		GameObject bulletGO = (GameObject)Instantiate (bulletPrefab, firePoint.position, firePoint.rotation);
 		Bullet bullet = bulletGO.GetComponent<Bullet> ();
@@ -116,18 +139,10 @@ public class TubDePintura : MonoBehaviour {
 		if (bullet != null) {
 
 			bullet.chase (target);
+            bullet.color = tubColor;
 
-		}
-
-		//Destroy (target.gameObject);
-
+        }
 	}
-
-	void OnDrawGizmosSelected(){
-
-		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere (transform.position, range);
-
-	}
-
 }
+
+

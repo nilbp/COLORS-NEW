@@ -23,7 +23,12 @@ public class MouseManager : MonoBehaviour {
 	public Vector3 SpraiPositionOffset;
 	public Vector3 TubOfset;
 
-	enum NeighbourPosition
+    //RAYCAST VARIABLES
+    GameObject ourHitObject;
+    RaycastHit hitInfo;
+    Ray ray;
+
+    enum NeighbourPosition
 	{
 		Left,
 		UpLeft,
@@ -44,51 +49,52 @@ public class MouseManager : MonoBehaviour {
 
 	void Update () {
 
-		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+		ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
-		RaycastHit hitInfo;
+        if (Physics.Raycast(ray, out hitInfo))
+        {
+            ourHitObject = hitInfo.collider.transform.gameObject;
 
-		if(Physics.Raycast(ray, out hitInfo)){
+            if (Input.GetMouseButtonDown(0))
+            {
+                HexInfo hexInfoObject = ourHitObject.GetComponentInChildren<HexInfo>();
+                /*if (turret != null) {
 
-			GameObject ourHitObject = hitInfo.collider.transform.gameObject;
+                }*/
 
+                if (MoneyManager.Pigment > 0)
+                {
+                    if (hexInfoObject!=null)
+                    {
+                        MeshRenderer mr = ourHitObject.GetComponentInChildren<MeshRenderer>();
 
-
-			if (Input.GetMouseButtonDown (0)) {
-
-				HexInfo hexInfoObject = ourHitObject.GetComponentInChildren<HexInfo> ();
-
-				if (MoneyManager.Pigment > 0) {
-					if (hexInfoObject.Clickable == true) {
-					
-						MeshRenderer mr = ourHitObject.GetComponentInChildren<MeshRenderer> ();
-
-						if (ColorInHand == 'C') {
+                        if (ColorInHand == 'C')
+                        {
 
                             hexInfoObject.HexColor = 'C';
                             mr.material.mainTexture = CyanTex;
                             MoneyManager.Pigment -= 5;
-		
-
-						} else if (ColorInHand == 'M') {
-
+                        }
+                        else if (ColorInHand == 'M')
+                        {
                             hexInfoObject.HexColor = 'M';
                             mr.material.mainTexture = MagentaTex;
                             MoneyManager.Pigment -= 5;
-
-						} else if (ColorInHand == 'Y') {
-
+                        }
+                        else if (ColorInHand == 'Y')
+                        {
                             hexInfoObject.HexColor = 'Y';
                             mr.material.mainTexture = YellowTex;
                             MoneyManager.Pigment -= 5;
-						}
-					}
-				}
-			}
-		}
+                        }
+                    }
+                }
+            }
+        }
 	}
 
-	
+    
+
 
 }
 

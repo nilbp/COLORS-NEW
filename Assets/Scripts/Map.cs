@@ -14,7 +14,7 @@ public class Map : MonoBehaviour {
 
 	//Ha de ser parell (width i heith) SEMPRE!!
 	public static int width = 10;
-	public static int height = 8;
+	public static int height = 6;
 
 	float xOffset = 0.882f;
 	float zOffset = 0.764f;

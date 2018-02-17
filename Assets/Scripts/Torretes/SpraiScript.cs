@@ -51,7 +51,9 @@ public class SpraiScript : MonoBehaviour {
             switch (spraiColor) {
                 case 'C':
                     if (minion.cyanComponent > 0)
+                    {
                         target = minion.transform;
+                    }
                     else
                         target = null;
                     break;

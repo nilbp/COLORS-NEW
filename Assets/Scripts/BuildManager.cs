@@ -3,6 +3,7 @@
 public class BuildManager : MonoBehaviour {
 
 	public static BuildManager instance;
+    
 
 	void Awake(){
 
@@ -14,20 +15,36 @@ public class BuildManager : MonoBehaviour {
 		instance = this;
 	}
 
-	public GameObject defenseTotemPrefab;
-	public GameObject AnotherTotemPrefab;
+	private TurretBlueprint turretToBuild;
 
-	private GameObject totemToBuild;
+    public bool CanBuild { get { return turretToBuild != null; } }
 
-	public GameObject GetTotemToBuild()
-	{
-		return totemToBuild; 
-	}
+    public void BuildTurretOn(HexInfo hex)
+    {
+        if (MoneyManager.Pigment < turretToBuild.cost)
+        {
+            Debug.Log("not enough money to build");
+            return;
+        }
 
-	public void SetTotemToBuild(GameObject totem){
+        MoneyManager.Pigment -= turretToBuild.cost;
 
-		totemToBuild = totem;
+        GameObject turret = (GameObject)Instantiate(turretToBuild.prefab, hex.GetBuildPosition(), turretToBuild.prefab.transform.rotation);
+        hex.turret = turret;
 
-	}
+        if (turret.GetComponent<TubDePintura>() != null)
+        {
+            turret.GetComponent<TubDePintura>().actualHex = hex;
+        }
+
+        Debug.Log(turretToBuild.cost + " " +MoneyManager.Pigment);
+        turretToBuild = null;
+    }
+
+	public void SelectTurretToBuild(TurretBlueprint turret)
+    {
+        turretToBuild = turret;
+        
+    }
 
 }

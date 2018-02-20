@@ -14,10 +14,10 @@ public class Map : MonoBehaviour {
 
 	//Ha de ser parell (width i heith) SEMPRE!!
 	public static int width = 10;
-	public static int height = 6;
+	public static int height = 4;
 
-	float xOffset = 0.882f;
-	float zOffset = 0.764f;
+	float xOffset = 0.858f;
+	float zOffset = 0.750f;
 
     [System.Serializable]
 

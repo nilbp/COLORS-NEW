@@ -11,11 +11,20 @@ public class MinionMovement : MonoBehaviour {
     private MeshRenderer minionRenderer;
     private ColorComponents ownColor;
 
+    ParticualsColor particuals;
+    public ParticleSystem particlesDead;
+
+    public GameObject particlesCyan;
+    public GameObject particlesMagenta;
+    public GameObject particlesYellow;
+    private Vector3 particlesOffset = new Vector3(0, 0.5f, 0);
+
     private float Size;
 
     //QUANTITAT TOTAL DEL MINION
     private Color totalColor;
     public int minionColorQuantity;
+    private Color lastColor;
 
     //COMPONTENTS DE COLORS PRIMARIS
     public int cyanQuantity=0;
@@ -49,21 +58,20 @@ public class MinionMovement : MonoBehaviour {
         minionColorQuantity = cyanQuantity + magentaQuantity + yellowQuantity;
         Color[] aColors = new Color[minionColorQuantity];
 
-        int posInArray = 0;
         for(int i = 0; i < minionColorQuantity; i++) { 
             if (cyanQuantity > 0)
             {
-                aColors[posInArray] += Color.cyan;
+                aColors[i] += Color.cyan;
                 cyanQuantity--;
             }
             else if (magentaQuantity > 0)
             {
-                aColors[posInArray] += Color.magenta;
+                aColors[i] += Color.magenta;
                 magentaQuantity--;
             }
             else if (yellowQuantity > 0)
             {
-                aColors[posInArray] += Color.yellow;
+                aColors[i] += Color.yellow;
                 yellowQuantity--;
             }
         }
@@ -97,10 +105,16 @@ public class MinionMovement : MonoBehaviour {
 
 	void Update(){
 
+        if (minionColorQuantity == 1)
+            lastColor = totalColor;
+
         if (minionColorQuantity <= 0)
-        {
+        { 
+
             MoneyManager.Pigment += minionValue;
             Destroy(gameObject);
+
+            InstantiateParticles(lastColor);
             return;
         }
 
@@ -126,7 +140,18 @@ public class MinionMovement : MonoBehaviour {
 
     }
 
-	void ColorManager(){
+    void InstantiateParticles(Color color)
+    {
+        Debug.Log("He entrat");
+        if (color == Color.cyan)
+            Instantiate(particlesCyan, transform.position + particlesOffset, particlesCyan.transform.rotation);
+        else if (color == Color.magenta)
+            Instantiate(particlesMagenta, transform.position + particlesOffset, particlesMagenta.transform.rotation);
+        else if (color == Color.yellow)
+            Instantiate(particlesYellow, transform.position + particlesOffset, particlesYellow.transform.rotation);
+    }
+
+    void ColorManager(){
 
         if (minionRenderer == null)
             return;

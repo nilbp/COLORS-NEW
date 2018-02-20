@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class MouseManager : MonoBehaviour {
 
@@ -38,18 +39,19 @@ public class MouseManager : MonoBehaviour {
 		DownLeft,
 		NumPositions,
 	}
-		
 
-	void Start(){
 
-		SpraiPositionOffset = new Vector3 (0, 0.485f, 0);
-	
-	}
-
+    void Start()
+    {
+        SpraiPositionOffset = new Vector3(0, 0.485f, 0);
+    }
 
 	void Update () {
 
-		ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
         if (Physics.Raycast(ray, out hitInfo))
         {
@@ -72,19 +74,19 @@ public class MouseManager : MonoBehaviour {
                         {
 
                             hexInfoObject.HexColor = 'C';
-                            mr.material.mainTexture = CyanTex;
+                            hexInfoObject.SetColorTo(CyanTex);
                             MoneyManager.Pigment -= 5;
                         }
                         else if (ColorInHand == 'M')
                         {
                             hexInfoObject.HexColor = 'M';
-                            mr.material.mainTexture = MagentaTex;
+                            hexInfoObject.SetColorTo(MagentaTex);
                             MoneyManager.Pigment -= 5;
                         }
                         else if (ColorInHand == 'Y')
                         {
                             hexInfoObject.HexColor = 'Y';
-                            mr.material.mainTexture = YellowTex;
+                            hexInfoObject.SetColorTo(YellowTex);
                             MoneyManager.Pigment -= 5;
                         }
                     }

@@ -8,17 +8,17 @@ public class MoneyManager : MonoBehaviour {
 
 	public static int Pigment ;
     public int startPigment = 100;
-	private Text text;
+	public Text text;
 
 	void Start()
 	{
         Pigment = startPigment;
-		text = GetComponent<Text> ();
+
 	}
 
 	void Update()
 	{
-		//text.text = " " + Pigment + " ";
+		text.text = " " + Pigment;
 	}
 
 }

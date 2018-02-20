@@ -41,11 +41,11 @@ public class MinionMovementRandom : MonoBehaviour {
     float sizeIncreaseVariable = 0.15f;
     
     //COMPROVAR QUE NO SURTIN DEL MAPA
-    private int lastSpawnPoint = 7;
-	private int firstSpawnPoint = 0;
+    private int lastSpawnPoint;
+	private int firstSpawnPoint;
 
 	//MÉS GRAN L'ENTER = MENYS POSSIBILITATS QUE CANVII.
-	public int chanceToChangeDirection = 10;
+	private int chanceToChangeDirection = 3;
 
 	//Valor del mínon en funció de la dificultat de matar-lo
 	public int minionValue = 0;
@@ -54,37 +54,30 @@ public class MinionMovementRandom : MonoBehaviour {
 
     void ConvineColors(int cyanQuantity, int magentaQuantity, int yellowQuantity)
     {
+        if (cyanQuantity < 0 || magentaQuantity < 0 || yellowQuantity < 0)
+            return;
+
         int totalSize = cyanQuantity + magentaQuantity + yellowQuantity;
         Color[] aColors = new Color[totalSize];
 
-        bool exitLoop = false;
-        int posInArray = 0;
-        do
+        for (int i = 0; i < minionColorQuantity; i++)
         {
             if (cyanQuantity > 0)
             {
-                aColors[posInArray] += Color.cyan;
+                aColors[i] += Color.cyan;
                 cyanQuantity--;
-                posInArray++;
             }
             else if (magentaQuantity > 0)
             {
-                aColors[posInArray] += Color.magenta;
+                aColors[i] += Color.magenta;
                 magentaQuantity--;
-                posInArray++;
             }
             else if (yellowQuantity > 0)
             {
-                aColors[posInArray] += Color.yellow;
+                aColors[i] += Color.yellow;
                 yellowQuantity--;
-                posInArray++;
             }
-            else
-            {
-                exitLoop = true;
-            }
-
-        } while (!exitLoop);
+        }
 
         Color result = new Color(0, 0, 0, 0);
         foreach (Color c in aColors)
@@ -109,6 +102,9 @@ public class MinionMovementRandom : MonoBehaviour {
         yellowQuantity = ownColor.yellowComponent;
 
         ConvineColors(cyanQuantity, magentaQuantity, yellowQuantity);
+
+        lastSpawnPoint = Map.height;
+        firstSpawnPoint = 0;
 
         NextHex = ActualHex.neigbours[3];
 		target = NextHex.gameObject.transform;
@@ -136,7 +132,7 @@ public class MinionMovementRandom : MonoBehaviour {
         cyanQuantity = ownColor.cyanComponent;
         magentaQuantity = ownColor.magentaComponent;
         yellowQuantity = ownColor.yellowComponent;
-
+        ownColor.actualHex = ActualHex;
     }
 
 	void ColorManager(){
@@ -239,6 +235,9 @@ public class MinionMovementRandom : MonoBehaviour {
 	}
 
 	void Colision(){
+
+        if (ActualHex == null)
+            return;
 
         if (ActualHex.HexColor == 'C')
         {

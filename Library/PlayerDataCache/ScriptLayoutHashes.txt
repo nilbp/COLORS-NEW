@@ -15,9 +15,9 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 6af7378a45ad6da4992a71ef50ddc2eb UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 6af7378a45ad6da4992a71ef50ddc2eb UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 9ca6347af5ceb6b0d1c105af31b6722e UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
-d4d3e174675ff7896ef28cbc8f5a46ad Assembly-CSharp.dll:.MoneyManager
-7cba77637d7aad6d539d78740a7af4bb Assembly-CSharp.dll:.MinionMovementRandom
-48dc34b2b338fdea9c63e4e6374cc981 Assembly-CSharp.dll:.SpraiScript
+1c319b397a8665472cc7b627bfb71feb Assembly-CSharp.dll:.MoneyManager
+b7859e59d00d2e83730d829995955142 Assembly-CSharp.dll:.MinionMovementRandom
+a3c074c639139a3306c46a03979d2a58 Assembly-CSharp.dll:.SpraiScript
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -94,7 +94,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 6af7378a45ad6da4992a71ef50ddc2eb UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 6af7378a45ad6da4992a71ef50ddc2eb UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 9ca6347af5ceb6b0d1c105af31b6722e UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
-2efa184b11ba5a752ee3e789d18053ae Assembly-CSharp.dll:.HexInfo
+388bb190218e5276c104d6d7e3eb17bd Assembly-CSharp.dll:.HexInfo
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -119,13 +119,14 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 2f68b1bb6edcdad48dcd75036af3cd31 Assembly-CSharp.dll:.monSelector
-7bfc8739228da84cf8a4ed8fbaab0e6f Assembly-CSharp.dll:.TubDePintura
-880deb1fc68d44b3f6f534bf5b5cb6ca Assembly-CSharp.dll:.Torret_HUD
+59b040f7229c8ab1d240b5275fb3506a Assembly-CSharp.dll:.TubDePintura
+a5e754bdf2aebc8cc7be77054f180bee Assembly-CSharp.dll:.Torret_HUD
 da80cd1be95d3c86569ef151ac634cbf Assembly-CSharp.dll:.settingsMenu
 24892d4c889f3507b84b7185b1d71c10 Assembly-CSharp.dll:.MinionSpawn
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
 03cb276e0af78d392aff5e4017ea0784 Assembly-CSharp.dll:.MinionMovement
+2767040b355f6aed8ecbfdb824df4b5d Assembly-CSharp.dll:.popups
 cb004cde9e430ca780a2fda6387826da Assembly-CSharp.dll:.SpinningCube
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -158,5 +159,5 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 454f7e78615d91af1950c7a9100834a7 Assembly-CSharp.dll:.buy
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BuildManager
+4666c303ba33b22a2157e80e429c47b6 Assembly-CSharp.dll:.BuildManager
 2eeecb7e99784acf06321a1760820bc0 Assembly-CSharp.dll:.MouseManager

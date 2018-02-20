@@ -1,6 +1,7 @@
 ﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class HexInfo : MonoBehaviour {
 
@@ -21,28 +22,35 @@ public class HexInfo : MonoBehaviour {
 	public GameObject turret;
 
 	public Color hoverColor;
-	private Renderer rend;
+	private MeshRenderer rend;
 	private Color startColor;
-
-    public Vector3 offsetX;
 
     BuildManager buildManager;
 
 	void Start(){
-        offsetX = new Vector3(0, 0.3859f, 0);
 
-		rend = GetComponent<Renderer> ();
+		rend = GetComponentInChildren<MeshRenderer> ();
 		startColor = rend.material.color;
 
 		buildManager = BuildManager.instance;
 	}
 
-    public Vector3 GetBuildPosition()
+    public void SetColorTo(Texture defaultTexture)
     {
-        return transform.position + offsetX;
+        if (turret != null)
+        {
+            Debug.Log("Can't paint under a turret");
+            return;
+        }
+        Debug.Log("pintar");
+        rend.material.mainTexture = defaultTexture;
     }
 
 	void OnMouseDown(){
+
+
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
 
         if (!buildManager.CanBuild)
             return;
@@ -57,16 +65,19 @@ public class HexInfo : MonoBehaviour {
 
 	void OnMouseEnter(){
 
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         if (!buildManager.CanBuild)
             return;
 		
-		rend.material.color =  hoverColor;
+		//rend.material.color =  hoverColor;
 
 	
 	}
 	void OnMouseExit()
     {
-		rend.material.color = startColor;
+		//rend.material.color = startColor;
 	}
 }
 

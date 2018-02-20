@@ -9,7 +9,7 @@ public class TubDePintura : MonoBehaviour {
 	public int tubRange = 3;
 
 	public float range = 1.2f;
-	public float FireRatio = 1f; //3 = 3s ? 
+	private float FireRatio = 0.4f; //1 max!!
 	public float FireCountdown = 0f;
 
 	[Header("Unity Setup Fields")]
@@ -24,6 +24,10 @@ public class TubDePintura : MonoBehaviour {
 	public GameObject bulletPrefab;
 	public Transform firePoint;
 
+    //ANIMATION VARIABLES
+    Animator anim;
+    int shootAnimation = Animator.StringToHash("Shoot");
+
     //per saber el rango cap a endavant en funció el numero de hexes 
     private HexInfo[] ListOfHexesInRange;
 
@@ -31,9 +35,23 @@ public class TubDePintura : MonoBehaviour {
 
 		SetRange ();
 		InvokeRepeating ("UpdateTarget", 0f, 0.5f);
-	}
+        anim = GetComponent<Animator>();
 
-	void SetRange(){
+        GetComponentInChildren<SkinnedMeshRenderer>().material.color = SetColor(tubColor);
+    }
+   
+    Color SetColor(char tubColor)
+    {
+        switch (tubColor)
+        {
+            case 'C': return Color.cyan;
+            case 'M': return Color.magenta;
+            case 'Y': return Color.yellow;
+        }
+        return Color.white;
+    }
+
+    void SetRange(){
 
 		ListOfHexesInRange = new HexInfo[tubRange];
 		HexInfo newHex = actualHex;
@@ -90,7 +108,6 @@ public class TubDePintura : MonoBehaviour {
                 {
                     minion = enemy.GetComponentInParent<ColorComponents>();
 
-                    Debug.Log(IsTheMinionShootable(minion));
                     if (IsTheMinionShootable(minion))
                     {
                         shortestDistance = distanceToEnemy;
@@ -133,7 +150,10 @@ public class TubDePintura : MonoBehaviour {
 
 void Shoot(){
 
-		GameObject bulletGO = (GameObject)Instantiate (bulletPrefab, firePoint.position, firePoint.rotation);
+
+        anim.SetTrigger(shootAnimation);
+
+        GameObject bulletGO = (GameObject)Instantiate (bulletPrefab, firePoint.position, firePoint.rotation);
 		Bullet bullet = bulletGO.GetComponent<Bullet> ();
 
 		if (bullet != null) {

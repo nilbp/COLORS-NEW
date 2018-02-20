@@ -110,8 +110,8 @@ public class MinionSpawn : MonoBehaviour {
         
         switch (minion.colorComplexity)
         {
-            case (ColorComplexity)0:
-                acum = RandomInt(1, 3);
+            case ColorComplexity.basic:
+                acum = RandomInt(1, 4);
                 if (acum == 1)
                     cyanQuantity = minion.size;
                 else if (acum == 2)
@@ -119,9 +119,10 @@ public class MinionSpawn : MonoBehaviour {
                 else
                     yellowQuantity = minion.size;
                 break;
-            case (ColorComplexity)1:
-                counter = RandomInt(0, minion.size-1);
-                acum = RandomInt(1, 3);
+            case ColorComplexity.medium:
+                counter = RandomInt(1, minion.size); 
+                acum = RandomInt(1, 4);
+                Debug.Log(acum);
                 if (acum == 1)
                 {
                     cyanQuantity = counter;
@@ -138,11 +139,11 @@ public class MinionSpawn : MonoBehaviour {
                     yellowQuantity = minion.size - counter;
                 }
                 break;
-            case (ColorComplexity)2:
-                counter = RandomInt(0, minion.size-1);
-                aux = RandomInt(0, minion.size - counter);
+            case ColorComplexity.advanced:
+                counter = RandomInt(1, minion.size-1);
+                aux = RandomInt(1, minion.size - counter);
 
-                acum = RandomInt(1, 3);
+                acum = RandomInt(1, 4);
                 if (acum == 1)
                 {
                     cyanQuantity = counter;

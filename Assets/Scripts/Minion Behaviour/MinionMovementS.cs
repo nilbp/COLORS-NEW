@@ -48,34 +48,24 @@ public class MinionMovementS : MonoBehaviour {
         int totalSize = cyanQuantity + magentaQuantity + yellowQuantity;
         Color[] aColors = new Color[totalSize];
 
-        bool exitLoop = false;
-        int posInArray = 0;
-        do
+        for (int i = 0; i < minionColorQuantity; i++)
         {
             if (cyanQuantity > 0)
             {
-                aColors[posInArray] += Color.cyan;
+                aColors[i] += Color.cyan;
                 cyanQuantity--;
-                posInArray++;
             }
             else if (magentaQuantity > 0)
             {
-                aColors[posInArray] += Color.magenta;
+                aColors[i] += Color.magenta;
                 magentaQuantity--;
-                posInArray++;
             }
             else if (yellowQuantity > 0)
             {
-                aColors[posInArray] += Color.yellow;
+                aColors[i] += Color.yellow;
                 yellowQuantity--;
-                posInArray++;
             }
-            else
-            {
-                exitLoop = true;
-            }
-
-        } while (!exitLoop);
+        }
 
         Color result = new Color(0, 0, 0, 0);
         foreach (Color c in aColors)
@@ -132,6 +122,7 @@ public class MinionMovementS : MonoBehaviour {
         cyanQuantity = ownColor.cyanComponent;
         magentaQuantity = ownColor.magentaComponent;
         yellowQuantity = ownColor.yellowComponent;
+        ownColor.actualHex = ActualHex;
     }
 
 	void ColorManager(){

@@ -3,7 +3,13 @@
 public class BuildManager : MonoBehaviour {
 
 	public static BuildManager instance;
-    
+    private Vector3 offsetBuild;
+
+    TubDePintura tubScript;
+    SpraiScript spraiScript;
+    public GameObject buildEffect;
+
+    public Texture defaultTexture;
 
 	void Awake(){
 
@@ -27,24 +33,61 @@ public class BuildManager : MonoBehaviour {
             return;
         }
 
+        if (hex.HexColor == 'W')
+        {
+            Debug.Log("Can't buil in a empty hex, it must have a color!! :D");
+            return;
+        }
+
         MoneyManager.Pigment -= turretToBuild.cost;
 
-        GameObject turret = (GameObject)Instantiate(turretToBuild.prefab, hex.GetBuildPosition(), turretToBuild.prefab.transform.rotation);
-        hex.turret = turret;
+        GameObject turret = (GameObject)Instantiate(turretToBuild.prefab, hex.gameObject.transform.position + offsetBuild, turretToBuild.prefab.transform.rotation);
+
+        GameObject buildParticles = (GameObject)Instantiate(buildEffect, hex.transform.position, buildEffect.transform.rotation);
+        
 
         if (turret.GetComponent<TubDePintura>() != null)
         {
-            turret.GetComponent<TubDePintura>().actualHex = hex;
+            tubScript = turret.GetComponent<TubDePintura>();
+            tubScript.actualHex = hex;
+            tubScript.tubColor = hex.HexColor;
+            hex.HexColor = 'W';
+;
+            hex.SetColorTo(defaultTexture);
+        }
+        else if (turret.GetComponent<SpraiScript>() != null)
+        {
+            spraiScript = turret.GetComponent<SpraiScript>();
+            spraiScript.actualHex = hex;
+            spraiScript.spraiColor = hex.HexColor;
+            hex.HexColor = 'W';
+            hex.SetColorTo(defaultTexture);
         }
 
-        Debug.Log(turretToBuild.cost + " " +MoneyManager.Pigment);
+        Debug.Log(turretToBuild.cost + " " + MoneyManager.Pigment);
+
+        //S'HA DE POSAR HEX.TURRET DESPRÉS DE TOT ELS IFS PERQUE S'ELIMINI EL COLOR QUAN PINTES
+        hex.turret = turret;
         turretToBuild = null;
     }
 
-	public void SelectTurretToBuild(TurretBlueprint turret)
+    public void SelectTurretToBuild(TurretBlueprint turret, Vector3 offset)
     {
         turretToBuild = turret;
+        offsetBuild = offset;
         
+    }
+
+
+    Color SetColor(char colorChar)
+    {
+        switch (colorChar)
+        {
+            case 'C': return Color.cyan;
+            case 'M': return Color.magenta;
+            case 'Y': return Color.yellow;
+        }
+        return Color.white;
     }
 
 }

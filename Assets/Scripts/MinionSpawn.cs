@@ -8,13 +8,15 @@ public class MinionSpawn : MonoBehaviour {
 
 	private int counter;
 
+    TutorialManager tutoInstance;
+
     //MINION PREFABS
     public GameObject minion1;
     public GameObject minion2;
     public GameObject minion3;
 
-    private int firstSpawnPoint = 0;
-	private int lastSpawnPoint = 6;
+    private int firstSpawnPoint;
+	private int lastSpawnPoint;
 
     //VARIABLES PEL CANVI DE COLOR
     int cyanQuantity;
@@ -61,37 +63,81 @@ public class MinionSpawn : MonoBehaviour {
     void Start()
     {
         StartCoroutine(SpawnManager1());
+        firstSpawnPoint = 0;
+        lastSpawnPoint = Map.height;
+        tutoInstance = GetComponent<TutorialManager>();
     }
 
     IEnumerator SpawnManager1()
     {
+
         for (int i = 0; i < waves.Length; i++)
         {
-            yield return new WaitForSeconds(waves[i].startTime);
+             Time.timeScale = 0;
+
             for (int j = 0; j < waves[i].minion.Length; j++)
             {
                 yield return new WaitForSeconds(waves[i].spawnRatio);
 
-                switch (waves[i].minion[j].behaviour)
+                if (j + 1 == waves[i].minion.Length)
                 {
+                    switch (waves[i].minion[j].behaviour)
+                    {
 
-                    case (Behaviour)0:
-                        SpawnMinionBehaviour1(waves[i].minion[j]);
-                        break;
-                    case (Behaviour)1:
-                        SpawnMinionBehaviour2(waves[i].minion[j]);
-                        break;
-                    case (Behaviour)2:
-                        SpawnMinionBehaviour3(waves[i].minion[j]);
-                        break;                
-                    default:
-                        SpawnMinionBehaviour1(waves[i].minion[j]);
-                        break;
+                        case (Behaviour)0:
+                            SpawnMinionBehaviour1(waves[i].minion[j], true);
+                            break;
+                        case (Behaviour)1:
+                            SpawnMinionBehaviour2(waves[i].minion[j], true);
+                            break;
+                        case (Behaviour)2:
+                            SpawnMinionBehaviour3(waves[i].minion[j], true);
+                            break;
+                        default:
+                            SpawnMinionBehaviour1(waves[i].minion[j], true);
+                            break;
+                    }
                 }
+                else
+                {
+                    switch (waves[i].minion[j].behaviour)
+                    {
+
+                        case (Behaviour)0:
+                            SpawnMinionBehaviour1(waves[i].minion[j],false);
+                            break;
+                        case (Behaviour)1:
+                            SpawnMinionBehaviour2(waves[i].minion[j], false);
+                            break;
+                        case (Behaviour)2:
+                            SpawnMinionBehaviour3(waves[i].minion[j], false);
+                            break;
+                        default:
+                            SpawnMinionBehaviour1(waves[i].minion[j], false);
+                            break;
+                    }
+                }
+
+                
             }
+            
         }
     }
 
+    void LoadTutoImages(int i)
+    {
+        switch (i)
+        {
+            case 1: tutoInstance.LoadNext();
+                break;
+            case 2: tutoInstance.LoadFirst(4);
+                break;
+            case 3: tutoInstance.LoadFirst(5);
+                break;
+            case 4: tutoInstance.LoadFirst(7);
+                break;
+        }
+    }
     void Update(){
 
 		
@@ -173,7 +219,7 @@ public class MinionSpawn : MonoBehaviour {
     
 
    //FORWARD MOVE
-	void SpawnMinionBehaviour1(Minion minion){
+	void SpawnMinionBehaviour1(Minion minion, bool isLastMinion){
 
         
         spawn1 = GameObject.Find("Hex_0_" + RandomInt(firstSpawnPoint, lastSpawnPoint));
@@ -183,6 +229,7 @@ public class MinionSpawn : MonoBehaviour {
         MinionMovement minionScript = minion1.GetComponent<MinionMovement> ();
         ColorComponents colorComponents = minion1.GetComponent<ColorComponents>();
 
+        colorComponents.lastMinionInWave = isLastMinion;
 		minionScript.ActualHex = spawn1Hex;
 
         BuildMinion(minion);
@@ -203,7 +250,7 @@ public class MinionSpawn : MonoBehaviour {
 	}
 
     //S MOVE
-	void SpawnMinionBehaviour2(Minion minion)
+	void SpawnMinionBehaviour2(Minion minion, bool isLastMinion)
     {
         //MATEIXA ESTRUCTURA QUE "FORWARD MOVE" PERO INSTANTIAN UN MINION AMB UN ALTRE COMPORTAMENT 
         spawn1 = GameObject.Find("Hex_0_" + RandomInt(firstSpawnPoint+1, lastSpawnPoint-1));
@@ -212,6 +259,7 @@ public class MinionSpawn : MonoBehaviour {
         MinionMovementS minionScript = minion2.GetComponent<MinionMovementS>();
         ColorComponents colorComponents = minion2.GetComponent<ColorComponents>();
 
+        colorComponents.lastMinionInWave = isLastMinion;
         minionScript.ActualHex = spawn1Hex;
 
         BuildMinion(minion);
@@ -230,7 +278,7 @@ public class MinionSpawn : MonoBehaviour {
     }
 
     //RANDOM MOVE
-	void SpawnMinionBehaviour3(Minion minion)
+	void SpawnMinionBehaviour3(Minion minion, bool isLastMinion)
     {
 
         //MATEIXA ESTRUCTURA QUE "FORWARD MOVE" PERO INSTANTIAN UN MINION AMB UN ALTRE COMPORTAMENT 
@@ -240,6 +288,7 @@ public class MinionSpawn : MonoBehaviour {
         MinionMovementRandom minionScript = minion3.GetComponent<MinionMovementRandom>();
         ColorComponents colorComponents = minion3.GetComponent<ColorComponents>();
 
+        colorComponents.lastMinionInWave = isLastMinion;
         minionScript.ActualHex = spawn1Hex;
 
         BuildMinion(minion);

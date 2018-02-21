@@ -5,6 +5,7 @@ using UnityEngine;
 public class ColorComponents : MonoBehaviour
 {
     public HexInfo actualHex;
+    public bool lastMinionInWave;
 
     public int cyanComponent;
     public int magentaComponent;

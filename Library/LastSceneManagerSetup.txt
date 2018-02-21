@@ -1,4 +1,4 @@
 sceneSetups:
-- path: "Assets/Mart\xEDProvesCamara.unity"
-  isLoaded: 0
-  isActive: 0
+- path: Assets/Scenes/Nil_Level.unity
+  isLoaded: 1
+  isActive: 1

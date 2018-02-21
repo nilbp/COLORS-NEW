@@ -42,7 +42,6 @@ public class HexInfo : MonoBehaviour {
             Debug.Log("Can't paint under a turret");
             return;
         }
-        Debug.Log("pintar");
         rend.material.mainTexture = defaultTexture;
     }
 

@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: 1b6787ed1f40e7c48b85e03dd6f3cc10
-timeCreated: 1518908057
-licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -15,17 +13,21 @@ ModelImporter:
     400004: joint3
     400006: M2
     400008: //RootNode
-    2100000: 'Material #4'
     4300000: M2
     7400000: SpraiShootAnim
     9500000: //RootNode
     13700000: M2
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #4'
+    second: {fileID: 2100000, guid: f89e55b5de3138647812b8e8ba6b3b3c, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -78,7 +80,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 20
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
@@ -91,8 +93,6 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    preserveHierarchy: 0
-    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88

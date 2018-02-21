@@ -16,8 +16,10 @@ public class Map : MonoBehaviour {
 	public static int width = 10;
 	public static int height = 4;
 
+
 	float xOffset = 0.858f;
 	float zOffset = 0.750f;
+
 
     [System.Serializable]
 

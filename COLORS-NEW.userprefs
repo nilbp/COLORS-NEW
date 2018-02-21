@@ -1,10 +1,8 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\popups.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Map.cs">
     <Files>
-      <File FileName="Assets\Scripts\Map.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MinionSpawn.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\popups.cs" Line="20" Column="28" />
+      <File FileName="Assets\Scripts\Map.cs" Line="19" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

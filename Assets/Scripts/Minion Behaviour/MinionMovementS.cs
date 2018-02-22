@@ -19,6 +19,9 @@ public class MinionMovementS : MonoBehaviour {
     private Color totalColor;
     public int minionColorQuantity;
 
+    public ParticleSystem particlesDead;
+    private Vector3 particlesOffset = new Vector3(0, 0.5f, 0);
+
     //COMPONTENTS DE COLORS PRIMARIS
     public int cyanQuantity = 0;
     public int magentaQuantity = 0;
@@ -106,6 +109,14 @@ public class MinionMovementS : MonoBehaviour {
         {
             MoneyManager.Pigment += minionValue;
             Destroy(gameObject);
+
+            if (ownColor.lastMinionInWave)
+            {
+                Debug.Log("lastminion dead");
+                TutorialManager.lastMinion = true;
+                return;
+            }
+            InstantiateParticles();
             return;
         }
 
@@ -125,7 +136,12 @@ public class MinionMovementS : MonoBehaviour {
         ownColor.actualHex = ActualHex;
     }
 
-	void ColorManager(){
+    void InstantiateParticles()
+    {
+        Instantiate(particlesDead, transform.position + particlesOffset, particlesDead.transform.rotation);
+    }
+
+    void ColorManager(){
 
         ConvineColors(cyanQuantity, magentaQuantity, yellowQuantity);
 

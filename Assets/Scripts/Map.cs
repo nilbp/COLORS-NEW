@@ -8,16 +8,20 @@ public class Map : MonoBehaviour {
 
 	//public HexInfo HexI;
 
-	public GameObject hexprefab;
-	//public Texture2D SandTexture;
-	//size of the map
+	public GameObject hexprefab1;
+    public GameObject hexprefab2;
+    public GameObject hexprefab3;
+    //public Texture2D SandTexture;
+    //size of the map
 
-	//Ha de ser parell (width i heith) SEMPRE!!
-	public static int width = 10;
+    //Ha de ser parell (width i heith) SEMPRE!!
+    public static int width = 10;
 	public static int height = 4;
+
 
 	float xOffset = 0.858f;
 	float zOffset = 0.750f;
+
 
     [System.Serializable]
 
@@ -39,6 +43,10 @@ public class Map : MonoBehaviour {
 		NumPositions,
 	}
 
+    int RandomInt(int from, int to)
+    {
+        return Random.Range(from, to);
+    }
 	void Start () {
 
 		createMap ();
@@ -67,12 +75,15 @@ public class Map : MonoBehaviour {
 					xPos += xOffset/2;
 				}
 
-				//Instantiate hex
-				GameObject Hex_go = (GameObject)Instantiate (hexprefab, new Vector3(xPos,0,y*zOffset), Quaternion.identity); 
+                //Instantiate hex
+               
+                GameObject Hex_go;
+                Hex_go = (GameObject)Instantiate(hexprefab3, new Vector3(xPos, 0, y * zOffset), Quaternion.identity);
+                
 
 
-				
-				HexInfo hexInfo = Hex_go.GetComponentInChildren<HexInfo> ();
+
+                HexInfo hexInfo = Hex_go.GetComponentInChildren<HexInfo> ();
 				hexInfo.x = x;
 				hexInfo.y = y;
 				hexInfo.Nucli = false;

@@ -13,10 +13,6 @@ public class MinionMovement : MonoBehaviour {
 
     ParticualsColor particuals;
     public ParticleSystem particlesDead;
-
-    public GameObject particlesCyan;
-    public GameObject particlesMagenta;
-    public GameObject particlesYellow;
     private Vector3 particlesOffset = new Vector3(0, 0.5f, 0);
 
     private float Size;
@@ -105,16 +101,23 @@ public class MinionMovement : MonoBehaviour {
 
 	void Update(){
 
+
         if (minionColorQuantity == 1)
             lastColor = totalColor;
 
         if (minionColorQuantity <= 0)
-        { 
-
+        {
+           
             MoneyManager.Pigment += minionValue;
             Destroy(gameObject);
 
-            InstantiateParticles(lastColor);
+            if (ownColor.lastMinionInWave)
+            {
+                Debug.Log("lastminion dead");
+                TutorialManager.lastMinion = true;
+                return;
+            }
+            InstantiateParticles();
             return;
         }
 
@@ -140,15 +143,9 @@ public class MinionMovement : MonoBehaviour {
 
     }
 
-    void InstantiateParticles(Color color)
+    void InstantiateParticles()
     {
-        Debug.Log("He entrat");
-        if (color == Color.cyan)
-            Instantiate(particlesCyan, transform.position + particlesOffset, particlesCyan.transform.rotation);
-        else if (color == Color.magenta)
-            Instantiate(particlesMagenta, transform.position + particlesOffset, particlesMagenta.transform.rotation);
-        else if (color == Color.yellow)
-            Instantiate(particlesYellow, transform.position + particlesOffset, particlesYellow.transform.rotation);
+            Instantiate(particlesDead, transform.position + particlesOffset, particlesDead.transform.rotation);     
     }
 
     void ColorManager(){

@@ -37,7 +37,7 @@ public class SpraiScript : MonoBehaviour {
         if (actualHex == null)
             return;
 
-        SetRadius();
+        //SetRadius();
     }
 
     void SetRadius()

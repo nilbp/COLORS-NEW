@@ -79,9 +79,8 @@ public class TubDePintura : MonoBehaviour {
 
 	void Update(){
 
-		if (target == null) 
-			return;
-		if (FireCountdown <= 0f) 
+		
+		if (FireCountdown <= 0f && target!=null) 
 		{
 			Shoot ();
 			FireCountdown = 1f / FireRatio;

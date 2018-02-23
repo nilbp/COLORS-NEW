@@ -79,7 +79,8 @@ public class SpraiScript : MonoBehaviour {
                 if (enemy.gameObject != null)
                 {
                     minion = enemy.GetComponentInParent<ColorComponents>();
-  
+
+                    Debug.Log(IsTheMinionShootable(minion));
                     if (IsTheMinionShootable(minion))
                     {
                         shortestDistance = distanceToEnemy;
@@ -124,8 +125,11 @@ public class SpraiScript : MonoBehaviour {
 
     void Update(){
 
-		if (target == null) 
-			return;
+        if (target == null)
+        {
+            FireCountdown = 0;
+            return;   
+        }
 		if (FireCountdown <= 0f) 
 		{
 			Shoot ();
@@ -138,7 +142,7 @@ public class SpraiScript : MonoBehaviour {
 
 	void Shoot(){
 	
-        anim.SetTrigger(shootAnimation);
+        //anim.SetTrigger(shootAnimation);
 
 		GameObject bulletGO = (GameObject)Instantiate (bulletPrefab, firePoint.position, firePoint.rotation);
 		Bullet bullet = bulletGO.GetComponent<Bullet> ();

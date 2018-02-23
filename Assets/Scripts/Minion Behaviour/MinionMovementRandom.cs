@@ -12,7 +12,6 @@ public class MinionMovementRandom : MonoBehaviour {
 	private float minDist = 0.3f;
 	private bool neutralHex = false;
 
-	public HexInfo Nucli;
 	public Texture DefaultTexture;
     private MeshRenderer minionRenderer;
     private ColorComponents ownColor;
@@ -36,8 +35,6 @@ public class MinionMovementRandom : MonoBehaviour {
     public int yellowQuantity = 0;
 
     // CARACTERISTIQUES
-    public int Life;
-	public char ColorIdentifier;
 	public float speed = 0.2f;
 
     //SIZE VARIABLE
@@ -201,7 +198,7 @@ public class MinionMovementRandom : MonoBehaviour {
 				} 
 				facingNordEast = false;
 			} 
-			else if (RandomInt (0, chanceToChangeDirection) == 1 && ActualHex.y < lastSpawnPoint) {
+			else if (RandomInt (0, chanceToChangeDirection) == 1 && ActualHex.y < lastSpawnPoint-1) {
 				
 				NextHex = ActualHex.neigbours [2];
 

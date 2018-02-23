@@ -6,13 +6,11 @@ public class MinionMovementS : MonoBehaviour {
 
 	public HexInfo ActualHex;
 	public HexInfo NextHex;
-	public HexInfo Nucli;
 
 	public Texture DefaultTexture;
     private MeshRenderer minionRenderer;
     private ColorComponents ownColor;
 
-    public int Life;
 	private float Size;
 
     //QUANTITAT TOTAL DEL MINION
@@ -109,7 +107,8 @@ public class MinionMovementS : MonoBehaviour {
         {
             MoneyManager.Pigment += minionValue;
             Destroy(gameObject);
-
+            
+            
             if (ownColor.lastMinionInWave)
             {
                 Debug.Log("lastminion dead");
@@ -118,6 +117,7 @@ public class MinionMovementS : MonoBehaviour {
             }
             InstantiateParticles();
             return;
+
         }
 
         if (ActualHex.HexColor == 'W' || !neutralHex) {

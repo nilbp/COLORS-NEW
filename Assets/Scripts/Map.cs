@@ -15,7 +15,7 @@ public class Map : MonoBehaviour {
     //size of the map
 
     //Ha de ser parell (width i heith) SEMPRE!!
-    public static int width = 10;
+    public static int width = 9;
 	public static int height = 4;
 
 

@@ -109,7 +109,9 @@ public class MinionMovement : MonoBehaviour {
         {
            
             MoneyManager.Pigment += minionValue;
+            InstantiateParticles();
             Destroy(gameObject);
+            return;
 
             if (ownColor.lastMinionInWave)
             {
@@ -117,8 +119,8 @@ public class MinionMovement : MonoBehaviour {
                 TutorialManager.lastMinion = true;
                 return;
             }
-            InstantiateParticles();
-            return;
+            
+            
         }
 
         if (ActualHex != null && ActualHex.HexColor == 'W' || ActualHex!= null && !neutralHex) {

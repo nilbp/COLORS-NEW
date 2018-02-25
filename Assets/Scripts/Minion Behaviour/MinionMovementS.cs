@@ -223,34 +223,46 @@ public class MinionMovementS : MonoBehaviour {
 
         if (ActualHex.HexColor == 'C')
         {
-            if (cyanQuantity > 0)
-                ownColor.cyanComponent--;
+			if (cyanQuantity > 0) {
+				ownColor.cyanComponent--;
 
+
+			}
             else if (cyanQuantity <= 0)
             {
                 ownColor.cyanComponent++;
+		
+
             }
             ResetHexagonColorValues(ActualHex);
         }
         else if (ActualHex.HexColor == 'M')
         {
-            if (magentaQuantity > 0)
-                ownColor.magentaComponent--;
+			if (magentaQuantity > 0) {
+				ownColor.magentaComponent--;
+			
 
+			}
             else if (magentaQuantity <= 0)
             {
                 ownColor.magentaComponent++;
+		
+
             }
             ResetHexagonColorValues(ActualHex);
         }
         else if (ActualHex.HexColor == 'Y')
         {
-            if (yellowQuantity > 0)
-                ownColor.yellowComponent--;
+			if (yellowQuantity > 0) {
+				ownColor.yellowComponent--;
+			
 
+			}
             else if (yellowQuantity <= 0)
             {
                 ownColor.yellowComponent++;
+			
+
             }
             ResetHexagonColorValues(ActualHex);
         }

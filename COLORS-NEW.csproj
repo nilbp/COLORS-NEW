@@ -287,6 +287,8 @@
   <ItemGroup>
     <Compile Include="Assets\DestroyParticles.cs" />
     <Compile Include="Assets\ParticualsColor.cs" />
+    <Compile Include="Assets\Resources\FloatingText.cs" />
+    <Compile Include="Assets\Resources\FloatingTextController.cs" />
     <Compile Include="Assets\Scripts\BuildManager.cs" />
     <Compile Include="Assets\Scripts\ColorComponents.cs" />
     <Compile Include="Assets\Scripts\ColorHUD.cs" />

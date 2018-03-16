@@ -1,10 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+
 
 public class MinionMovement : MonoBehaviour {
 
-	public HexInfo ActualHex;
+    private GameObject canvas;
+    public GameObject MoneyPopUp;
+
+    public HexInfo ActualHex;
 	public HexInfo NextHex;
 
 	public Texture DefaultTexture;
@@ -26,7 +32,15 @@ public class MinionMovement : MonoBehaviour {
     public int cyanQuantity=0;
     public int magentaQuantity=0;
     public int yellowQuantity=0;
-    
+
+    public GameObject cyanIndicator;
+    public GameObject magentaIndicator;
+    public GameObject yellowIndicator;
+
+    private float cyanIndicatorScale;
+    private float magentaIndicatorScale;
+    private float yellowIndicatorScale;
+
     Transform target;
 
 	public float speed = 0.2f;
@@ -42,12 +56,14 @@ public class MinionMovement : MonoBehaviour {
 	private bool neutralHex = false;
 
 	//Valor del mínon en funció de la dificultat de matar-lo
-	public int minionValue = 0;
+	private int minionValue = 0;
 
     //AQUESTA FUNCIÓ ES CRIDA DES DE L'SPAWN MANAGER DIENT LA QUANTITAT DE COLOR QUE TE EL MINION EX:(3,4,0) 3 CYANS I 4 MAGENTES
 
     void ConvineColors(int cyanQuantity , int magentaQuantity, int yellowQuantity)
     {
+        ColorIndicatorManager(cyanQuantity, magentaQuantity, yellowQuantity);
+
         if (cyanQuantity < 0 || magentaQuantity < 0 || yellowQuantity < 0)
             return;
 
@@ -77,9 +93,35 @@ public class MinionMovement : MonoBehaviour {
         {
             result += c;
         }
-        result /= aColors.Length;
+        result /= result.maxColorComponent;
 
         totalColor = result;
+    }
+
+    void ColorIndicatorManager(int cyanQuantity, int magentaQuantity, int yellowQuantity)
+    {
+        if (cyanQuantity <= 0)
+            cyanIndicator.SetActive(false);
+        else
+            cyanIndicator.SetActive(true);
+
+        if (magentaQuantity <= 0)
+            magentaIndicator.SetActive(false);
+        else
+            magentaIndicator.SetActive(true);
+
+        if (yellowQuantity <= 0)
+            yellowIndicator.SetActive(false);
+        else
+            yellowIndicator.SetActive(true);
+
+        cyanIndicatorScale = (cyanQuantity * 0.005f) + 0.05f;
+        magentaIndicatorScale = (magentaQuantity * 0.005f) + 0.05f;
+        yellowIndicatorScale = (yellowQuantity * 0.005f) + 0.05f;
+
+        cyanIndicator.transform.localScale = new Vector3(cyanIndicatorScale, cyanIndicatorScale, cyanIndicatorScale);
+        magentaIndicator.transform.localScale = new Vector3(magentaIndicatorScale, magentaIndicatorScale, magentaIndicatorScale);
+        yellowIndicator.transform.localScale = new Vector3(yellowIndicatorScale, yellowIndicatorScale, yellowIndicatorScale);
     }
 
     void Start () {
@@ -96,6 +138,8 @@ public class MinionMovement : MonoBehaviour {
 		NextHex = ActualHex.neigbours[3];
 		target = NextHex.gameObject.transform;
 		minionValue = minionColorQuantity * 10;
+
+        canvas = GameObject.FindGameObjectWithTag("Canvas");
 
 	}
 
@@ -134,20 +178,26 @@ public class MinionMovement : MonoBehaviour {
 
         if (ownColor == null)
             return;
-
-
+          
         //FER UPDATE DE LES VARIABLES DE L'SCRIPT "COLOR COMPONENTS"
         cyanQuantity = ownColor.cyanComponent;
         magentaQuantity = ownColor.magentaComponent;
         yellowQuantity = ownColor.yellowComponent;
         ownColor.actualHex = ActualHex;
-        
-
     }
 
     void InstantiateParticles()
     {
-            Instantiate(particlesDead, transform.position + particlesOffset, particlesDead.transform.rotation);     
+        Instantiate(particlesDead, transform.position + particlesOffset, particlesDead.transform.rotation);
+
+        Debug.Log(canvas);
+        GameObject instance = Instantiate(MoneyPopUp);
+        Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+        instance.transform.SetParent(canvas.transform, false);
+        instance.transform.position = screenPosition;
+        Text PopUpText = instance.GetComponentInChildren<Text>();
+        PopUpText.text = "+ " + minionValue;
+        PopUpText.color = lastColor;
     }
 
     void ColorManager(){
@@ -214,16 +264,10 @@ public class MinionMovement : MonoBehaviour {
         {
 			if (cyanQuantity > 0) {
 				ownColor.cyanComponent--;
-
-
-			
 			}
 			else if (cyanQuantity <= 0)
             {
                 ownColor.cyanComponent++;
-
-
-
             }
 
             ResetHexagonColorValues(ActualHex);
@@ -232,14 +276,10 @@ public class MinionMovement : MonoBehaviour {
         {
 			if (magentaQuantity > 0) {
 				ownColor.magentaComponent--;
-			
-
 			}
             else if (magentaQuantity <= 0)
             {
                 ownColor.magentaComponent++;
-			
-
             }
             ResetHexagonColorValues(ActualHex);
         }

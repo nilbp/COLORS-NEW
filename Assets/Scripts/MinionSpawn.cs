@@ -19,9 +19,9 @@ public class MinionSpawn : MonoBehaviour {
 	private int lastSpawnPoint;
 
     //VARIABLES PEL CANVI DE COLOR
-    int cyanQuantity;
-    int magentaQuantity;
-    int yellowQuantity;
+    public int cyanQuantity;
+    public int magentaQuantity;
+    public int yellowQuantity;
 
     [System.Serializable]
     public enum ColorComplexity {basic,medium,advanced,random};
@@ -44,6 +44,10 @@ public class MinionSpawn : MonoBehaviour {
 
         //1 = move forward, 2 = move S, 3 = move random, 4 = random
         public Behaviour behaviour;
+
+        public int cyanQuantity;
+        public int magentaQuantity;
+        public int yellowQuantity;
     }
 
     [System.Serializable]
@@ -73,7 +77,7 @@ public class MinionSpawn : MonoBehaviour {
 
         for (int i = 0; i < waves.Length; i++)
         {
-             Time.timeScale = 0;
+             Time.timeScale = 1;
 
             for (int j = 0; j < waves[i].minion.Length; j++)
             {
@@ -118,7 +122,9 @@ public class MinionSpawn : MonoBehaviour {
                     }
                 }
 
-                
+               
+
+
             }
             
         }
@@ -168,7 +174,6 @@ public class MinionSpawn : MonoBehaviour {
             case ColorComplexity.medium:
                 counter = RandomInt(1, minion.size); 
                 acum = RandomInt(1, 4);
-                Debug.Log(acum);
                 if (acum == 1)
                 {
                     cyanQuantity = counter;
@@ -214,9 +219,7 @@ public class MinionSpawn : MonoBehaviour {
                 BuildMinion(minion);
                 break;
         }
-    }
-
-    
+    } 
 
    //FORWARD MOVE
 	void SpawnMinionBehaviour1(Minion minion, bool isLastMinion){
@@ -232,12 +235,12 @@ public class MinionSpawn : MonoBehaviour {
         colorComponents.lastMinionInWave = isLastMinion;
 		minionScript.ActualHex = spawn1Hex;
 
-        BuildMinion(minion);
+        //BuildMinion(minion);
 
         //POSA LES VARIABLES DE COLOR EN FUNCIÓ DE "MINION.SIZE" I "MINION.COLORCOMPLEXITY"
-        colorComponents.cyanComponent = cyanQuantity;
-        colorComponents.magentaComponent = magentaQuantity;
-        colorComponents.yellowComponent = yellowQuantity;
+        colorComponents.cyanComponent = minion.cyanQuantity;
+        colorComponents.magentaComponent = minion.magentaQuantity;
+        colorComponents.yellowComponent = minion.yellowQuantity;
 
         //RESET DE LES VARIABLES GLOBALS DE COLOR
         cyanQuantity = 0;
@@ -262,7 +265,7 @@ public class MinionSpawn : MonoBehaviour {
         colorComponents.lastMinionInWave = isLastMinion;
         minionScript.ActualHex = spawn1Hex;
 
-        BuildMinion(minion);
+        //BuildMinion(minion);
         colorComponents.cyanComponent = cyanQuantity;
         colorComponents.magentaComponent = magentaQuantity;
         colorComponents.yellowComponent = yellowQuantity;
@@ -291,7 +294,7 @@ public class MinionSpawn : MonoBehaviour {
         colorComponents.lastMinionInWave = isLastMinion;
         minionScript.ActualHex = spawn1Hex;
 
-        BuildMinion(minion);
+        //BuildMinion(minion);
         colorComponents.cyanComponent = cyanQuantity;
         colorComponents.magentaComponent = magentaQuantity;
         colorComponents.yellowComponent = yellowQuantity;

@@ -25,6 +25,14 @@ public class MinionMovementS : MonoBehaviour {
     public int magentaQuantity = 0;
     public int yellowQuantity = 0;
 
+    public GameObject cyanIndicator;
+    public GameObject magentaIndicator;
+    public GameObject yellowIndicator;
+
+    private float cyanIndicatorScale;
+    private float magentaIndicatorScale;
+    private float yellowIndicatorScale;
+
     //SIZE VARIABLE
     float sizeIncreaseVariable = 0.15f;
 
@@ -46,6 +54,8 @@ public class MinionMovementS : MonoBehaviour {
 
     void ConvineColors(int cyanQuantity, int magentaQuantity, int yellowQuantity)
     {
+        ColorIndicatorManager(cyanQuantity, magentaQuantity, yellowQuantity);
+
         int totalSize = cyanQuantity + magentaQuantity + yellowQuantity;
         Color[] aColors = new Color[totalSize];
 
@@ -73,12 +83,38 @@ public class MinionMovementS : MonoBehaviour {
         {
             result += c;
         }
-        result /= aColors.Length;
+        result /= result.maxColorComponent;
 
         minionColorQuantity = totalSize;
 
         totalColor = result;
 
+    }
+
+    void ColorIndicatorManager(int cyanQuantity, int magentaQuantity, int yellowQuantity)
+    {
+        if (cyanQuantity <= 0)
+            cyanIndicator.SetActive(false);
+        else
+            cyanIndicator.SetActive(true);
+
+        if (magentaQuantity <= 0)
+            magentaIndicator.SetActive(false);
+        else
+            magentaIndicator.SetActive(true);
+
+        if (yellowQuantity <= 0)
+            yellowIndicator.SetActive(false);
+        else
+            yellowIndicator.SetActive(true);
+
+        cyanIndicatorScale = (cyanQuantity * 0.005f) + 0.05f;
+        magentaIndicatorScale = (magentaQuantity * 0.005f) + 0.05f;
+        yellowIndicatorScale = (yellowQuantity * 0.005f) + 0.05f;
+
+        cyanIndicator.transform.localScale = new Vector3(cyanIndicatorScale, cyanIndicatorScale, cyanIndicatorScale);
+        magentaIndicator.transform.localScale = new Vector3(magentaIndicatorScale, magentaIndicatorScale, magentaIndicatorScale);
+        yellowIndicator.transform.localScale = new Vector3(yellowIndicatorScale, yellowIndicatorScale, yellowIndicatorScale);
     }
 
     void Start () {

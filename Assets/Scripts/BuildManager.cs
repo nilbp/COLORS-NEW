@@ -64,7 +64,7 @@ public class BuildManager : MonoBehaviour {
             hex.SetColorTo(defaultTexture);
         }
 
-        Debug.Log(turretToBuild.cost + " " + MoneyManager.Pigment);
+
 
         //S'HA DE POSAR HEX.TURRET DESPRÉS DE TOT ELS IFS PERQUE S'ELIMINI EL COLOR QUAN PINTES
         hex.turret = turret;
@@ -74,8 +74,7 @@ public class BuildManager : MonoBehaviour {
     public void SelectTurretToBuild(TurretBlueprint turret, Vector3 offset)
     {
         turretToBuild = turret;
-        offsetBuild = offset;
-        
+        offsetBuild = offset;     
     }
 
 

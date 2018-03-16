@@ -59,10 +59,7 @@ public class MouseManager : MonoBehaviour {
 
             if (Input.GetMouseButtonDown(0))
             {
-                HexInfo hexInfoObject = ourHitObject.GetComponentInChildren<HexInfo>();
-                /*if (turret != null) {
-
-                }*/
+                HexInfo hexInfoObject = ourHitObject.GetComponentInChildren<HexInfo>();              
 
                 if (MoneyManager.Pigment > 0)
                 {

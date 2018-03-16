@@ -43,6 +43,8 @@ public class MinionMovement : MonoBehaviour {
 
     Transform target;
 
+    private float eatTurretTime= 5;
+
 	public float speed = 0.2f;
 
     //SIZE VARIABLE
@@ -143,19 +145,18 @@ public class MinionMovement : MonoBehaviour {
 
 	}
 
-	void Update(){
-
-
+    void Update()
+    {
         if (minionColorQuantity == 1)
             lastColor = totalColor;
 
         if (minionColorQuantity <= 0)
         {
-           
+
             MoneyManager.Pigment += minionValue;
-            
+
             Destroy(gameObject);
-            
+
 
             if (ownColor.lastMinionInWave)
             {
@@ -167,24 +168,35 @@ public class MinionMovement : MonoBehaviour {
             return;
         }
 
-        if (ActualHex != null && ActualHex.HexColor == 'W' || ActualHex!= null && !neutralHex) {
-			MovementRecte ();
-		} 
-		else {
-			Colision ();
-		}
+        ColorManager();
 
-		ColorManager ();
+        if (ActualHex.turret != null)
+        {
+            ActualHex.TurretDealDamage();
+            return;
+        }
+
+        if (ActualHex != null && ActualHex.HexColor == 'W' || ActualHex != null && !neutralHex)
+        {
+            MovementRecte();
+        }
+        else
+        {
+            Colision();
+        }
+
+        
 
         if (ownColor == null)
             return;
-          
+
         //FER UPDATE DE LES VARIABLES DE L'SCRIPT "COLOR COMPONENTS"
         cyanQuantity = ownColor.cyanComponent;
         magentaQuantity = ownColor.magentaComponent;
         yellowQuantity = ownColor.yellowComponent;
         ownColor.actualHex = ActualHex;
     }
+
 
     void InstantiateParticles()
     {

@@ -8,6 +8,8 @@ public class TubDePintura : MonoBehaviour {
 
 	public int tubRange = 3;
 
+    public float life = 5;
+
 	public float range = 1.2f;
 	private float FireRatio = 0.4f; //1 max!!
 	public float FireCountdown = 0f;
@@ -79,7 +81,9 @@ public class TubDePintura : MonoBehaviour {
 
 	void Update(){
 
-		
+        if (life <= 0)
+            Destroy(gameObject);
+
 		if (FireCountdown <= 0f && target!=null) 
 		{
 			Shoot ();

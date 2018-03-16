@@ -20,6 +20,7 @@ public class HexInfo : MonoBehaviour {
 
     [Header("Optional")]
 	public GameObject turret;
+    public float turretLife = 5;
 
 	public Color hoverColor;
 	private MeshRenderer rend;
@@ -43,6 +44,14 @@ public class HexInfo : MonoBehaviour {
             return;
         }
         rend.material.mainTexture = defaultTexture;
+    }
+
+    public void TurretDealDamage()
+    {
+        if (turretLife <= 0)
+            Destroy(turret);
+
+        turretLife -= Time.deltaTime;
     }
 
 	void OnMouseDown(){
@@ -74,6 +83,7 @@ public class HexInfo : MonoBehaviour {
 
 	
 	}
+
 	void OnMouseExit()
     {
 		//rend.material.color = startColor;

@@ -80,7 +80,7 @@ public class SpraiScript : MonoBehaviour {
                 {
                     minion = enemy.GetComponentInParent<ColorComponents>();
 
-                    Debug.Log(IsTheMinionShootable(minion));
+
                     if (IsTheMinionShootable(minion))
                     {
                         shortestDistance = distanceToEnemy;

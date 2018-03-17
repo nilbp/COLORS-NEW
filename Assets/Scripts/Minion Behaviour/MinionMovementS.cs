@@ -48,7 +48,7 @@ public class MinionMovementS : MonoBehaviour {
 	private bool neutralHex = false;
 
 	//Valor del mínon en funció de la dificultat de matar-lo
-	public int minionValue = 0;
+	private int minionValue = 0;
 
     //AQUESTA FUNCIÓ ES CRIDA DES DE L'SPAWN MANAGER DIENT LA QUANTITAT DE COLOR QUE TE EL MINION EX:(3,4,0) 3 CYANS I 4 MAGENTES
 
@@ -128,7 +128,7 @@ public class MinionMovementS : MonoBehaviour {
         yellowQuantity = ownColor.yellowComponent;
 
         ConvineColors(cyanQuantity, magentaQuantity, yellowQuantity);
-        minionValue = minionColorQuantity * 10;
+        minionValue = minionColorQuantity * 15;
 
         NextHex = ActualHex.neigbours[3];
 		target = NextHex.gameObject.transform;

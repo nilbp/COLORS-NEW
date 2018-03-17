@@ -6,7 +6,7 @@ public class TubDePintura : MonoBehaviour {
 
     [Header("Atributes")]
 
-	public int tubRange = 3;
+	private int tubRange = 8;
 
     public float life = 5;
 

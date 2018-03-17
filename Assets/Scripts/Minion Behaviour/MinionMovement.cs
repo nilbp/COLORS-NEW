@@ -139,7 +139,7 @@ public class MinionMovement : MonoBehaviour {
 
 		NextHex = ActualHex.neigbours[3];
 		target = NextHex.gameObject.transform;
-		minionValue = minionColorQuantity * 10;
+		minionValue = minionColorQuantity * 15;
 
         canvas = GameObject.FindGameObjectWithTag("Canvas");
 
@@ -147,6 +147,8 @@ public class MinionMovement : MonoBehaviour {
 
     void Update()
     {
+        UpdateColorVariables();
+
         if (minionColorQuantity == 1)
             lastColor = totalColor;
 
@@ -187,6 +189,11 @@ public class MinionMovement : MonoBehaviour {
 
         
 
+        
+    }
+
+    void UpdateColorVariables()
+    {
         if (ownColor == null)
             return;
 
@@ -196,7 +203,6 @@ public class MinionMovement : MonoBehaviour {
         yellowQuantity = ownColor.yellowComponent;
         ownColor.actualHex = ActualHex;
     }
-
 
     void InstantiateParticles()
     {

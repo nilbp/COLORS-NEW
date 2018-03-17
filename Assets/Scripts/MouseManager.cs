@@ -9,6 +9,8 @@ public class MouseManager : MonoBehaviour {
 	int xHexPos;
 	int yHexPos;
 
+	int costPigment = 10;
+
 	public Texture2D DefaultText;
 
 	public Texture2D CyanTex;
@@ -72,19 +74,19 @@ public class MouseManager : MonoBehaviour {
 
                             hexInfoObject.HexColor = 'C';
                             hexInfoObject.SetColorTo(CyanTex);
-                            MoneyManager.Pigment -= 5;
+							MoneyManager.Pigment -= costPigment;
                         }
                         else if (ColorInHand == 'M')
                         {
                             hexInfoObject.HexColor = 'M';
                             hexInfoObject.SetColorTo(MagentaTex);
-                            MoneyManager.Pigment -= 5;
+							MoneyManager.Pigment -= costPigment;
                         }
                         else if (ColorInHand == 'Y')
                         {
                             hexInfoObject.HexColor = 'Y';
                             hexInfoObject.SetColorTo(YellowTex);
-                            MoneyManager.Pigment -= 5;
+							MoneyManager.Pigment -= costPigment;
                         }
                     }
                 }

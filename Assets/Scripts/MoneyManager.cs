@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class MoneyManager : MonoBehaviour {
 
 	public static int Pigment ;
-    public int startPigment = 100;
+    public int startPigment = 40;
 	public Text text;
 
 	void Start()

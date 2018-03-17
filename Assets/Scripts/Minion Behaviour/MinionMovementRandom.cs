@@ -143,7 +143,7 @@ public class MinionMovementRandom : MonoBehaviour {
 
         NextHex = ActualHex.neigbours[3];
 		target = NextHex.gameObject.transform;
-        minionValue = minionColorQuantity * 10;
+        minionValue = minionColorQuantity * 15;
 
     }
 

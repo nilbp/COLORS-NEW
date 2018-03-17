@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Nil_Level 1.unity
+- path: Assets/Scenes/Nil_LevelTest.unity
   isLoaded: 1
   isActive: 1

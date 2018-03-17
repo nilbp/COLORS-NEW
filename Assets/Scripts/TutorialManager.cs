@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour {
 
+    public static bool gameOver;
+    public GameObject gameoverPanel;
+
     public static bool lastMinion;
     public GameObject[] panel;
     public int index = 0;
@@ -45,6 +48,19 @@ public class TutorialManager : MonoBehaviour {
             LoadNext();
             lastMinion = false;
         }
+
+        GameOver();
+    }
+
+
+    void GameOver()
+    {
+        if (gameOver)
+        {
+            gameoverPanel.SetActive(true);
+            Time.timeScale = 0;
+        }
+
     }
 
 

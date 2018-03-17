@@ -172,6 +172,11 @@ public class MinionMovement : MonoBehaviour {
 
         ColorManager();
 
+        if (ActualHex.x == 9)
+        {
+            TutorialManager.gameOver = true;
+        }
+
         if (ActualHex.turret != null)
         {
             ActualHex.TurretDealDamage();
@@ -186,10 +191,6 @@ public class MinionMovement : MonoBehaviour {
         {
             Colision();
         }
-
-        
-
-        
     }
 
     void UpdateColorVariables()
@@ -208,7 +209,6 @@ public class MinionMovement : MonoBehaviour {
     {
         Instantiate(particlesDead, transform.position + particlesOffset, particlesDead.transform.rotation);
 
-        Debug.Log(canvas);
         GameObject instance = Instantiate(MoneyPopUp);
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
         instance.transform.SetParent(canvas.transform, false);

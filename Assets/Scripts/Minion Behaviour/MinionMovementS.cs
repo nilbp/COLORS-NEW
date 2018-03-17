@@ -139,6 +139,8 @@ public class MinionMovementS : MonoBehaviour {
 
 	void Update(){
 
+        UpdateColorVariables();
+
         if (minionColorQuantity <= 0)
         {
             MoneyManager.Pigment += minionValue;
@@ -156,6 +158,19 @@ public class MinionMovementS : MonoBehaviour {
 
         }
 
+        ColorManager();
+
+        if (ActualHex.x == 9)
+        {
+            TutorialManager.gameOver = true;
+        }
+
+        if (ActualHex.turret != null)
+        {
+            ActualHex.TurretDealDamage();
+            return;
+        }
+
         if (ActualHex.HexColor == 'W' || !neutralHex) {
 			MovementS ();
 		} 
@@ -163,7 +178,19 @@ public class MinionMovementS : MonoBehaviour {
 			Colision ();
 		}
 
-		ColorManager ();
+		
+
+        //FER UPDATE DE LES VARIABLES DE L'SCRIPT "COLOR COMPONENTS"
+        cyanQuantity = ownColor.cyanComponent;
+        magentaQuantity = ownColor.magentaComponent;
+        yellowQuantity = ownColor.yellowComponent;
+        ownColor.actualHex = ActualHex;
+    }
+
+    void UpdateColorVariables()
+    {
+        if (ownColor == null)
+            return;
 
         //FER UPDATE DE LES VARIABLES DE L'SCRIPT "COLOR COMPONENTS"
         cyanQuantity = ownColor.cyanComponent;

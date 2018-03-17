@@ -42,6 +42,8 @@ public class MinionMovementRandom : MonoBehaviour {
     private float magentaIndicatorScale;
     private float yellowIndicatorScale;
 
+    int totalSize;
+
     // CARACTERISTIQUES
     public float speed = 0.2f;
 
@@ -67,7 +69,7 @@ public class MinionMovementRandom : MonoBehaviour {
         if (cyanQuantity < 0 || magentaQuantity < 0 || yellowQuantity < 0)
             return;
 
-        int totalSize = cyanQuantity + magentaQuantity + yellowQuantity;
+         totalSize = cyanQuantity + magentaQuantity + yellowQuantity;
         Color[] aColors = new Color[totalSize];
 
         for (int i = 0; i < minionColorQuantity; i++)
@@ -149,6 +151,8 @@ public class MinionMovementRandom : MonoBehaviour {
 
 	void Update(){
 
+        UpdateColorVariables();
+
         if (minionColorQuantity <= 0)
         {
             MoneyManager.Pigment += minionValue;
@@ -164,12 +168,37 @@ public class MinionMovementRandom : MonoBehaviour {
             return;
         }
 
-		if (ActualHex.HexColor == 'W' || !neutralHex) 
+        ColorManager();
+
+        if (ActualHex.x == 9)
+        {
+            TutorialManager.gameOver = true;
+        }
+
+        if (ActualHex.turret != null)
+        {
+            ActualHex.TurretDealDamage();
+            return;
+        }
+
+        if (ActualHex.HexColor == 'W' || !neutralHex) 
 			MovementRandom ();
 		else 
 			Colision ();
 
-		ColorManager();
+		
+
+        //FER UPDATE DE LES VARIABLES DE L'SCRIPT "COLOR COMPONENTS"
+        cyanQuantity = ownColor.cyanComponent;
+        magentaQuantity = ownColor.magentaComponent;
+        yellowQuantity = ownColor.yellowComponent;
+        ownColor.actualHex = ActualHex;
+    }
+
+    void UpdateColorVariables()
+    {
+        if (ownColor == null)
+            return;
 
         //FER UPDATE DE LES VARIABLES DE L'SCRIPT "COLOR COMPONENTS"
         cyanQuantity = ownColor.cyanComponent;

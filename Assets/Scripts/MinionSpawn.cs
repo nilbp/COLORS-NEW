@@ -144,10 +144,6 @@ public class MinionSpawn : MonoBehaviour {
                 break;
         }
     }
-    void Update(){
-
-		
-	}
 
 	int RandomInt(int from, int to)
 	{
@@ -266,9 +262,9 @@ public class MinionSpawn : MonoBehaviour {
         minionScript.ActualHex = spawn1Hex;
 
         //BuildMinion(minion);
-        colorComponents.cyanComponent = cyanQuantity;
-        colorComponents.magentaComponent = magentaQuantity;
-        colorComponents.yellowComponent = yellowQuantity;
+        colorComponents.cyanComponent = minion.cyanQuantity;
+        colorComponents.magentaComponent = minion.magentaQuantity;
+        colorComponents.yellowComponent = minion.yellowQuantity;
 
         cyanQuantity = 0;
         magentaQuantity = 0;
@@ -295,9 +291,9 @@ public class MinionSpawn : MonoBehaviour {
         minionScript.ActualHex = spawn1Hex;
 
         //BuildMinion(minion);
-        colorComponents.cyanComponent = cyanQuantity;
-        colorComponents.magentaComponent = magentaQuantity;
-        colorComponents.yellowComponent = yellowQuantity;
+        colorComponents.cyanComponent = minion.cyanQuantity;
+        colorComponents.magentaComponent = minion.magentaQuantity;
+        colorComponents.yellowComponent = minion.yellowQuantity;
 
         cyanQuantity = 0;
         magentaQuantity = 0;

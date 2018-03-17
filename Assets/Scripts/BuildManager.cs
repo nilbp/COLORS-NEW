@@ -64,8 +64,6 @@ public class BuildManager : MonoBehaviour {
             hex.SetColorTo(defaultTexture);
         }
 
-
-
         //S'HA DE POSAR HEX.TURRET DESPRÉS DE TOT ELS IFS PERQUE S'ELIMINI EL COLOR QUAN PINTES
         hex.turret = turret;
         turretToBuild = null;

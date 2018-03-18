@@ -26,19 +26,19 @@ public class MainMenu : MonoBehaviour {
 		SceneManager.LoadScene (lvlSelector);
 
 	}
-	public void mon1(string mon1){
+	public void mon1(string Nil_Level){
 
-		SceneManager.LoadScene (mon1);
-
-	}
-	public void mon2(string mon2){
-
-		SceneManager.LoadScene (mon2);
+		SceneManager.LoadScene (Nil_Level);
 
 	}
-	public void mon3(string mon3){
+	public void mon2(string Nil_Level1){
 
-		SceneManager.LoadScene (mon3);
+		SceneManager.LoadScene (Nil_Level1);
+
+	}
+	public void mon3(string Nil_Level2){
+
+		SceneManager.LoadScene (Nil_Level2);
 
 	}
 	public void mainMenu(string MainMenu){

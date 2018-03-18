@@ -74,10 +74,13 @@ public class MinionSpawn : MonoBehaviour {
 
     IEnumerator SpawnManager1()
     {
+		
 
         for (int i = 0; i < waves.Length; i++)
         {
              Time.timeScale = 1;
+
+			yield return new WaitForSeconds (waves[i].startTime);
 
             for (int j = 0; j < waves[i].minion.Length; j++)
             {

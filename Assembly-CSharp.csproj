@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\Map.cs" />
      <Compile Include="Assets\Scripts\menus\MainMenu.cs" />
      <Compile Include="Assets\Scripts\menus\monSelector.cs" />
+     <Compile Include="Assets\Scripts\menus\releasedLevel.cs" />
      <Compile Include="Assets\Scripts\menus\settingsMenu.cs" />
      <Compile Include="Assets\Scripts\Minion Behaviour\MinionMovement.cs" />
      <Compile Include="Assets\Scripts\Minion Behaviour\MinionMovementRandom.cs" />

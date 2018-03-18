@@ -6,30 +6,23 @@ using UnityEngine.UI;
 
 public class monSelector : MonoBehaviour {
 
-	public Button mon2btn;
-	public Button mon3btn;
-	public bool mon1clear = false;
-	public bool mon2clear=false;
+	public int level;
+	public Button[] levelButtons;
 
-	void Start () {
+	void Start () 
+	{
+		//int levelReached = PlayerPrefs.GetInt ("levelReached", 1);
 
-		enable ();
-
+		for (int i = 0; i < levelButtons.Length; i++) {
+			if (i + 1 > level)//levelReached)
+				levelButtons [i].interactable = false;
+		}
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		
-	}
-
-	void enable(){
-
-		if (mon1clear == true) {
-			mon2btn.GetComponent<Button> ().interactable = true;
-
-		} else if (mon2clear == true) {
-			mon3btn.GetComponent<Button> ().interactable = true;
-		}
 	}
 
 }

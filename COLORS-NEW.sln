@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2017
+# Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COLORS-NEW", "COLORS-NEW.csproj", "{ACFDB397-5F82-B166-CEE2-AFB18379E4FC}"
 EndProject
 Global

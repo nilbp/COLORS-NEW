@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour {
 
@@ -52,16 +53,18 @@ public class TutorialManager : MonoBehaviour {
         GameOver();
     }
 
-
     void GameOver()
     {
         if (gameOver)
         {
             gameoverPanel.SetActive(true);
-            Time.timeScale = 0;
-        }
 
+            Invoke("ChangeLevel", 3.0f);
+        }
     }
 
-
+    void ChangeLevel()
+    {
+        SceneManager.LoadScene("lvlSelector");
+    }
 }

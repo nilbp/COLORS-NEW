@@ -170,7 +170,7 @@ public class MinionMovementRandom : MonoBehaviour {
 
         ColorManager();
 
-        if (ActualHex.x == 9)
+        if (ActualHex.x == 8)
         {
             TutorialManager.gameOver = true;
         }

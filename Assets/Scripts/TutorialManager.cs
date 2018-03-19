@@ -58,13 +58,14 @@ public class TutorialManager : MonoBehaviour {
         if (gameOver)
         {
             gameoverPanel.SetActive(true);
-
+            
             Invoke("ChangeLevel", 3.0f);
         }
     }
 
     void ChangeLevel()
     {
+
         SceneManager.LoadScene("lvlSelector");
     }
 }

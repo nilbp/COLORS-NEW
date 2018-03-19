@@ -154,20 +154,7 @@ public class MinionMovement : MonoBehaviour {
 
         if (minionColorQuantity <= 0)
         {
-
-            MoneyManager.Pigment += minionValue;
-
-            Destroy(gameObject);
-
-
-            if (ownColor.lastMinionInWave)
-            {
-                Debug.Log("lastminion dead");
-                TutorialManager.lastMinion = true;
-                return;
-            }
-            InstantiateParticles();
-            return;
+			Die ();
         }
 
         ColorManager();
@@ -192,6 +179,24 @@ public class MinionMovement : MonoBehaviour {
             Colision();
         }
     }
+
+	void Die()
+	{
+
+		MoneyManager.Pigment += minionValue;
+		MoneyManager.Combo();
+		Destroy(gameObject);
+
+
+		if (ownColor.lastMinionInWave)
+		{
+			Debug.Log("lastminion dead");
+			TutorialManager.lastMinion = true;
+			return;
+		}
+		InstantiateParticles();
+		return;
+	}
 
     void UpdateColorVariables()
     {

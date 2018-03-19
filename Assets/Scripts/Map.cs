@@ -18,6 +18,7 @@ public class Map : MonoBehaviour {
     public static int width = 9;
 	public static int height = 4;
 
+	private float alfa=90;
 
 	float xOffset = 0.858f;
 	float zOffset = 0.750f;
@@ -78,10 +79,11 @@ public class Map : MonoBehaviour {
                 //Instantiate hex
                
                 GameObject Hex_go;
-                Hex_go = (GameObject)Instantiate(hexprefab3, new Vector3(xPos, 0, y * zOffset), Quaternion.identity);
-                
 
-
+				if (x >= 4)
+					Hex_go = (GameObject)Instantiate (hexprefab3, new Vector3 (xPos, 0, y * zOffset), Quaternion.identity);
+				else 
+					Hex_go = (GameObject)Instantiate (hexprefab1, new Vector3 (xPos, 0, y * zOffset), Quaternion.identity);
 
                 HexInfo hexInfo = Hex_go.GetComponentInChildren<HexInfo> ();
 				hexInfo.x = x;
@@ -92,23 +94,18 @@ public class Map : MonoBehaviour {
                 hexInfo.map = this;
 				hexInfo.HexColor = 'W';
 
+					hexLines [y].columns [x] = hexInfo;
 
-				if(hexInfo.x==9){
+					//Rename hexes with coordenate names
+					Hex_go.name = "Hex_" + x + "_" + y;
 
-					hexInfo.Nucli= true;
-					hexInfo.GetComponent<Renderer> ().material.color = Color.black;
-				}
-					
-                hexLines[y].columns[x] = hexInfo;
+					//Group hexes in a GameObject parent called "Hex"
+					Hex_go.transform.SetParent (this.transform);
 
-                //Rename hexes with coordenate names
-                Hex_go.name = "Hex_" + x + "_" + y;
+					Hex_go.isStatic = true;
 
-				//Group hexes in a GameObject parent called "Hex"
-				Hex_go.transform.SetParent (this.transform);
-
-				Hex_go.isStatic = true;
-
+				if (x < 4)
+					hexInfo.Clickable = false;
 
 			}
 		}

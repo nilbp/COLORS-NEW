@@ -66,7 +66,6 @@ public class TubDePintura : MonoBehaviour {
 			ListOfHexesInRange[i] = newHex.neigbours [0];
 			newHex = newHex.neigbours [0];
 
-			Debug.Log (ListOfHexesInRange [i].x);
 		}
 	}
 

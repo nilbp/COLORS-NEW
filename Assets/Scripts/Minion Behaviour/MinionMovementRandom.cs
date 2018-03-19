@@ -155,17 +155,7 @@ public class MinionMovementRandom : MonoBehaviour {
 
         if (minionColorQuantity <= 0)
         {
-            MoneyManager.Pigment += minionValue;
-            Destroy(gameObject);
-
-            if (ownColor.lastMinionInWave)
-            {
-                Debug.Log("lastminion dead");
-                TutorialManager.lastMinion = true;
-                return;
-            }
-            InstantiateParticles();
-            return;
+			Die ();
         }
 
         ColorManager();
@@ -194,6 +184,24 @@ public class MinionMovementRandom : MonoBehaviour {
         yellowQuantity = ownColor.yellowComponent;
         ownColor.actualHex = ActualHex;
     }
+
+	void Die()
+	{
+
+		MoneyManager.Pigment += minionValue;
+		MoneyManager.Combo();
+		Destroy(gameObject);
+
+
+		if (ownColor.lastMinionInWave)
+		{
+			Debug.Log("lastminion dead");
+			TutorialManager.lastMinion = true;
+			return;
+		}
+		InstantiateParticles();
+		return;
+	}
 
     void UpdateColorVariables()
     {

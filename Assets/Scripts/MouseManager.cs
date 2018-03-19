@@ -11,8 +11,6 @@ public class MouseManager : MonoBehaviour {
 
     private int colorCost=10;
 
-    private float colorCooldown = 0.8f;
-
 	int costPigment = 10;
 
 	public Texture2D DefaultText;
@@ -52,9 +50,6 @@ public class MouseManager : MonoBehaviour {
 
 	void Update () {
 
-        if (colorCooldown > 0)
-            colorCooldown -= Time.deltaTime;
-
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
@@ -68,42 +63,42 @@ public class MouseManager : MonoBehaviour {
             {
                 HexInfo hexInfoObject = ourHitObject.GetComponentInChildren<HexInfo>();              
 
+				if (!hexInfoObject.Clickable)
+					return;
+				
                 if (MoneyManager.Pigment > 0)
                 {
                     if (hexInfoObject!=null)
                     {
                         MeshRenderer mr = ourHitObject.GetComponentInChildren<MeshRenderer>();
 
-                        if (colorCooldown <= 0)
-                        {
                             if (ColorInHand == 'C')
                             {
 
                                 hexInfoObject.HexColor = 'C';
                                 hexInfoObject.SetColorTo(CyanTex);
                                 MoneyManager.Pigment -= colorCost;
-                                colorCooldown = 0.5f;
+                               
                             }
                             else if (ColorInHand == 'M')
                             {
                                 hexInfoObject.HexColor = 'M';
                                 hexInfoObject.SetColorTo(MagentaTex);
                                 MoneyManager.Pigment -= colorCost;
-                                colorCooldown = 0.5f;
+                              
                             }
                             else if (ColorInHand == 'Y')
                             {
                                 hexInfoObject.HexColor = 'Y';
                                 hexInfoObject.SetColorTo(YellowTex);
                                 MoneyManager.Pigment -= colorCost;
-                                colorCooldown = 0.5f;
                             }
                         }
                     }
                 }
             }
         }
-	}
-
 }
+
+
 

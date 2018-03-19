@@ -1,12 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-<<<<<<< Updated upstream
 - path: Assets/Scenes/Nil_LevelTest.unity
-=======
-- path: Assets/Scenes/Nil_Level.unity
->>>>>>> Stashed changes
-=======
-- path: Assets/Scenes/Nil_Level1.unity
->>>>>>> master
   isLoaded: 1
   isActive: 1

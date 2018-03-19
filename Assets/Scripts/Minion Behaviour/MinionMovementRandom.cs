@@ -44,6 +44,8 @@ public class MinionMovementRandom : MonoBehaviour {
 
     int totalSize;
 
+    private Color lastColor;
+
     // CARACTERISTIQUES
     public float speed = 0.2f;
 
@@ -153,6 +155,9 @@ public class MinionMovementRandom : MonoBehaviour {
 
         UpdateColorVariables();
 
+        if (minionColorQuantity == 1)
+            lastColor = totalColor;
+
         if (minionColorQuantity <= 0)
         {
 			Die ();
@@ -218,6 +223,8 @@ public class MinionMovementRandom : MonoBehaviour {
     void InstantiateParticles()
     {
         Instantiate(particlesDead, transform.position + particlesOffset, particlesDead.transform.rotation);
+
+        MoneyManager.PopUpText(transform, lastColor, minionValue);
     }
 
     void ColorManager(){

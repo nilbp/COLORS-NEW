@@ -7,9 +7,6 @@ using UnityEngine.UI;
 
 public class MinionMovement : MonoBehaviour {
 
-    private GameObject canvas;
-    public GameObject MoneyPopUp;
-
     public HexInfo ActualHex;
 	public HexInfo NextHex;
 
@@ -140,9 +137,6 @@ public class MinionMovement : MonoBehaviour {
 		NextHex = ActualHex.neigbours[3];
 		target = NextHex.gameObject.transform;
 		minionValue = minionColorQuantity * 15;
-
-        canvas = GameObject.FindGameObjectWithTag("Canvas");
-
 	}
 
     void Update()
@@ -194,7 +188,8 @@ public class MinionMovement : MonoBehaviour {
 			TutorialManager.lastMinion = true;
 			return;
 		}
-		InstantiateParticles();
+
+		InstantiateParticles(); //And Text
 		return;
 	}
 
@@ -214,13 +209,7 @@ public class MinionMovement : MonoBehaviour {
     {
         Instantiate(particlesDead, transform.position + particlesOffset, particlesDead.transform.rotation);
 
-        GameObject instance = Instantiate(MoneyPopUp);
-        Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-        instance.transform.SetParent(canvas.transform, false);
-        instance.transform.position = screenPosition;
-        Text PopUpText = instance.GetComponentInChildren<Text>();
-        PopUpText.text = "+ " + minionValue;
-        PopUpText.color = lastColor;
+        MoneyManager.PopUpText(transform, lastColor, minionValue);
     }
 
     void ColorManager(){

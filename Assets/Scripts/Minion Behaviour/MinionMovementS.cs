@@ -39,8 +39,9 @@ public class MinionMovementS : MonoBehaviour {
     private int counter = 0;
 
 	Transform target;
+    private Color lastColor;
 
-	public float speed = 0.2f;
+    public float speed = 0.2f;
 
 	//EVITA QUE DETECTI COLISIÓ DE COLOR DESPRÉS DE PASSAR PEL HEX
 	private float maxDist = 0.7f;
@@ -141,6 +142,9 @@ public class MinionMovementS : MonoBehaviour {
 
         UpdateColorVariables();
 
+        if (minionColorQuantity == 1)
+            lastColor = totalColor;
+
         if (minionColorQuantity <= 0)
         {
 			Die ();
@@ -206,6 +210,8 @@ public class MinionMovementS : MonoBehaviour {
     void InstantiateParticles()
     {
         Instantiate(particlesDead, transform.position + particlesOffset, particlesDead.transform.rotation);
+
+        MoneyManager.PopUpText(transform, lastColor, minionValue);
     }
 
     void ColorManager(){

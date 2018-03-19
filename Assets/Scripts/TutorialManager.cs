@@ -58,8 +58,8 @@ public class TutorialManager : MonoBehaviour {
         if (gameOver)
         {
             gameoverPanel.SetActive(true);
-            
-            Invoke("ChangeLevel", 3.0f);
+
+            Invoke("ChangeLevel", 4.5f);
         }
     }
 

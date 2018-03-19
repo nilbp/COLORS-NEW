@@ -1,7 +1,12 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COLORS-NEW", "COLORS-NEW.csproj", "{ACFDB397-5F82-B166-CEE2-AFB18379E4FC}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COLORS-NEW", "Assembly-CSharp.csproj", "{BC5AAADA-6D99-894A-B5B0-F18E42A27A5F}"
+<<<<<<< HEAD
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COLORS-NEW", "Assembly-CSharp-Editor.csproj", "{CD707A85-41D6-31D6-B53D-56711B261100}"
+=======
+>>>>>>> master
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,12 +14,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ACFDB397-5F82-B166-CEE2-AFB18379E4FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ACFDB397-5F82-B166-CEE2-AFB18379E4FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ACFDB397-5F82-B166-CEE2-AFB18379E4FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ACFDB397-5F82-B166-CEE2-AFB18379E4FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC5AAADA-6D99-894A-B5B0-F18E42A27A5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC5AAADA-6D99-894A-B5B0-F18E42A27A5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC5AAADA-6D99-894A-B5B0-F18E42A27A5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC5AAADA-6D99-894A-B5B0-F18E42A27A5F}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
+		{CD707A85-41D6-31D6-B53D-56711B261100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD707A85-41D6-31D6-B53D-56711B261100}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD707A85-41D6-31D6-B53D-56711B261100}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD707A85-41D6-31D6-B53D-56711B261100}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+>>>>>>> master
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal

@@ -5,12 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
-	// Use this for initialization
-	public void newGameBtn(string newlvl){
-	
-		SceneManager.LoadScene (newlvl);
 
-	}
 	public void ExitBtn(){
 
 		Application.Quit();
@@ -26,17 +21,17 @@ public class MainMenu : MonoBehaviour {
 		SceneManager.LoadScene (lvlSelector);
 
 	}
-	public void mon1(string Nil_Level){
+	public void tutorial(string Nil_Level){
 
 		SceneManager.LoadScene (Nil_Level);
 
 	}
-	public void mon2(string Nil_Level1){
+	public void lvl1(string Nil_Level1){
 
 		SceneManager.LoadScene (Nil_Level1);
 
 	}
-	public void mon3(string Nil_Level2){
+	public void lvl2(string Nil_Level2){
 
 		SceneManager.LoadScene (Nil_Level2);
 

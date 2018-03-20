@@ -14,6 +14,7 @@ public class TutorialManager : MonoBehaviour {
 
     TutorialManager tutorialManager;
 
+
     public void LoadNext()
     {
         panel[index].SetActive(false);
@@ -23,7 +24,7 @@ public class TutorialManager : MonoBehaviour {
     public void LoadLast()
     {
         panel[index].SetActive(false);
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
 
     }
 
@@ -44,7 +45,8 @@ public class TutorialManager : MonoBehaviour {
 
     private void Update()
     {
-        if (lastMinion)
+        
+		if (lastMinion)
         {
             LoadNext();
             lastMinion = false;
@@ -52,6 +54,7 @@ public class TutorialManager : MonoBehaviour {
 
         GameOver();
     }
+
 
     void GameOver()
     {

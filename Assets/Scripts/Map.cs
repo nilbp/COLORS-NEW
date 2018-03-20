@@ -80,7 +80,7 @@ public class Map : MonoBehaviour {
                
                 GameObject Hex_go;
 
-				if (x >= 4)
+				if (x >= 3)
 					Hex_go = (GameObject)Instantiate (hexprefab3, new Vector3 (xPos, 0, y * zOffset), Quaternion.identity);
 				else 
 					Hex_go = (GameObject)Instantiate (hexprefab1, new Vector3 (xPos, 0, y * zOffset), Quaternion.identity);
@@ -104,7 +104,7 @@ public class Map : MonoBehaviour {
 
 					Hex_go.isStatic = true;
 
-				if (x < 4)
+				if (x < 3)
 					hexInfo.Clickable = false;
 
 			}

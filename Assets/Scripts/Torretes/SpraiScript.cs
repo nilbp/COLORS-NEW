@@ -7,7 +7,7 @@ public class SpraiScript : MonoBehaviour {
 	[Header("Atributes")]
 
 	private float range = 1.4f; //distancia entre hex i hex
-	private float FireRatio = 0.2f; //3 = 3s ? 
+	private float FireRatio = 0.6f; //3 = 3s ? 
 	public float FireCountdown = 0f;
 
 	[Header("Unity Setup Fields")]

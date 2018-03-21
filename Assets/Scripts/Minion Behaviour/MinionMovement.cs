@@ -11,7 +11,7 @@ public class MinionMovement : MonoBehaviour {
 	public HexInfo NextHex;
 
 	public Texture DefaultTexture;
-    private MeshRenderer minionRenderer;
+    private SkinnedMeshRenderer minionRenderer;
     private ColorComponents ownColor;
 
     ParticualsColor particuals;
@@ -125,7 +125,7 @@ public class MinionMovement : MonoBehaviour {
 
     void Start () {
 
-        minionRenderer = GetComponentInChildren<MeshRenderer>();
+        minionRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         ownColor = GetComponent<ColorComponents>();
 
         cyanQuantity = ownColor.cyanComponent;

@@ -8,7 +8,7 @@ public class MinionMovementS : MonoBehaviour {
 	public HexInfo NextHex;
 
 	public Texture DefaultTexture;
-    private MeshRenderer minionRenderer;
+    private SkinnedMeshRenderer minionRenderer;
     private ColorComponents ownColor;
 
 	private float Size;
@@ -120,7 +120,7 @@ public class MinionMovementS : MonoBehaviour {
 
     void Start () {
 
-        minionRenderer = GetComponentInChildren<MeshRenderer>();
+        minionRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         ownColor = GetComponent<ColorComponents>();
 
         //INICIALITZAR ELS PROPIS COLORS

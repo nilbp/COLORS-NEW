@@ -13,7 +13,7 @@ public class MinionMovementRandom : MonoBehaviour {
 	private bool neutralHex = false;
 
 	public Texture DefaultTexture;
-    private MeshRenderer minionRenderer;
+    private SkinnedMeshRenderer minionRenderer;
     private ColorComponents ownColor;
 
     Transform target;
@@ -133,7 +133,7 @@ public class MinionMovementRandom : MonoBehaviour {
 
     void Start () {
 
-        minionRenderer = GetComponentInChildren<MeshRenderer>();
+		minionRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         ownColor = GetComponent<ColorComponents>();
         //INICIALITZAR ELS PROPIS COLORS
         cyanQuantity = ownColor.cyanComponent;

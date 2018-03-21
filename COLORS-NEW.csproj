@@ -295,6 +295,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AudioManager.cs" />
     <Compile Include="Assets\LowPolyWater_Pack\Scripts\LowPolyWater.cs" />
     <Compile Include="Assets\Scripts\BuildManager.cs" />
     <Compile Include="Assets\Scripts\ColorComponents.cs" />
@@ -317,6 +318,7 @@
     <Compile Include="Assets\Scripts\NON USED\RestesDeCodi.cs" />
     <Compile Include="Assets\Scripts\NON USED\spawner.cs" />
     <Compile Include="Assets\Scripts\ParticualsColor.cs" />
+    <Compile Include="Assets\Scripts\pauseMenu.cs" />
     <Compile Include="Assets\Scripts\PopUpText.cs" />
     <Compile Include="Assets\Scripts\shop\buy.cs" />
     <Compile Include="Assets\Scripts\SpinningCube.cs" />
@@ -326,6 +328,7 @@
     <Compile Include="Assets\Scripts\Torretes\TubDePintura.cs" />
     <Compile Include="Assets\Scripts\TurretBlueprint.cs" />
     <Compile Include="Assets\Scripts\TutorialManager.cs" />
+    <Compile Include="Assets\Sound.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />

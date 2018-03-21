@@ -1,6 +1,6 @@
 sceneSetups:
-<<<<<<< Updated upstream
 - path: Assets/Scenes/Nil_LevelTest.unity
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 - path: Assets/Scenes/Nil_Level1 - Savana.unity
@@ -8,5 +8,7 @@ sceneSetups:
 - path: Assets/Scenes/Nil_Level.unity
 >>>>>>> master
 >>>>>>> Stashed changes
+=======
+>>>>>>> master
   isLoaded: 1
   isActive: 1

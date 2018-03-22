@@ -297,6 +297,7 @@
   <ItemGroup>
     <Compile Include="Assets\AudioManager.cs" />
     <Compile Include="Assets\LowPolyWater_Pack\Scripts\LowPolyWater.cs" />
+    <Compile Include="Assets\Prefabs\Combos\ComboText.cs" />
     <Compile Include="Assets\Scripts\BuildManager.cs" />
     <Compile Include="Assets\Scripts\ColorComponents.cs" />
     <Compile Include="Assets\Scripts\ColorHUD.cs" />

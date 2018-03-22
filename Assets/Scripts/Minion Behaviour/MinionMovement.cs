@@ -178,7 +178,7 @@ public class MinionMovement : MonoBehaviour {
 	{
 
 		MoneyManager.Pigment += minionValue;
-		MoneyManager.Combo();
+		MoneyManager.Combo(transform, minionValue/15);
 		Destroy(gameObject);
 
 

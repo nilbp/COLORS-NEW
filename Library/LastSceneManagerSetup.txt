@@ -1,14 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Nil_LevelTest.unity
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-- path: Assets/Scenes/Nil_Level1 - Savana.unity
-=======
-- path: Assets/Scenes/Nil_Level.unity
->>>>>>> master
->>>>>>> Stashed changes
-=======
->>>>>>> master
+- path: Assets/Scenes/Nil_Level1.unity
   isLoaded: 1
   isActive: 1
